@@ -1,0 +1,12 @@
+.vs/
+bin/
+obj/
+appsettings.json
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.ds_store
+*.cache
+*.csproj.user
+*.vbproj.user

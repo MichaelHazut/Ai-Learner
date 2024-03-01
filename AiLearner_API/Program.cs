@@ -33,8 +33,7 @@ namespace AiLearner_API
 
             app.MapGet("/error", () =>
             {
-                var list = new List<string>();
-                var a = list[4];
+                throw new InvalidCastException("This is a test exception");
             });
 
 

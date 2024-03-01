@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\services\\exceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\services\\exceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\dataaccesslayer\\dbcontext\\ailearnerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|solutionrelative:dataaccesslayer\\dbcontext\\ailearnerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\mocklearningservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\mocklearningservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\dataaccesslayer\\dbcontext\\ailearnerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|solutionrelative:dataaccesslayer\\dbcontext\\ailearnerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 526,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,6 +50,32 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Program.cs",
+              "RelativeDocumentMoniker": "AiLearner_API\\Program.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Program.cs*",
+              "RelativeToolTip": "AiLearner_API\\Program.cs*",
+              "ViewState": "AQIAABcAAAAAAAAAAAAAACQAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T22:21:36.214Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ExceptionMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\ExceptionMiddleware.cs",
+              "RelativeDocumentMoniker": "AiLearner_API\\Services\\ExceptionMiddleware.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\ExceptionMiddleware.cs",
+              "RelativeToolTip": "AiLearner_API\\Services\\ExceptionMiddleware.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAWwCwAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T22:26:00.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "AiLearnerDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\dbContext\\AiLearnerDbContext.cs",
@@ -50,11 +84,12 @@
               "RelativeToolTip": "DataAccessLayer\\dbContext\\AiLearnerDbContext.cs",
               "ViewState": "AQIAAAEAAAAAAAAAAAAAAAUAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T15:04:22.283Z"
+              "WhenOpened": "2024-03-01T15:04:22.283Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\Program.cs",
               "RelativeDocumentMoniker": "TestMockService\\Program.cs",
@@ -62,11 +97,12 @@
               "RelativeToolTip": "TestMockService\\Program.cs",
               "ViewState": "AQIAADUAAAAAAAAAAAAAAB8AAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T14:38:02.131Z"
+              "WhenOpened": "2024-03-01T14:38:02.131Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "MockLearningService.cs",
               "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\MockLearningService.cs",
               "RelativeDocumentMoniker": "TestMockService\\MockLearningService.cs",
@@ -74,8 +110,7 @@
               "RelativeToolTip": "TestMockService\\MockLearningService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T14:36:52.527Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-01T14:36:52.527Z"
             }
           ]
         },

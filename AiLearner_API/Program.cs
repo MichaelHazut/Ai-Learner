@@ -1,4 +1,5 @@
-using DataAccessLayer.DbContext;
+using AiLearner_API.Services;
+using DataAccessLayer.dbContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace AiLearner_API
@@ -26,7 +27,19 @@ namespace AiLearner_API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            /**/
+            //add my ExceptionMiddleware
+            app.UseMiddleware<ExceptionMiddleware>();
 
+            app.MapGet("/error", () =>
+            {
+                var list = new List<string>();
+                var a = list[4];
+            });
+
+
+
+            /**/
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

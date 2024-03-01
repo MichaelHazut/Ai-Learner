@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace DataAccessLayer.DbContext
+namespace DataAccessLayer.dbContext
 {
     public class AiLearnerDbContext(DbContextOptions<AiLearnerDbContext> options) : IdentityDbContext<User>(options)
     {  

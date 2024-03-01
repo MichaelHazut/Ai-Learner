@@ -1,7 +1,7 @@
 .vs/
 bin/
 obj/
-appsettings.json
+AiLearner_API/appsettings.json
 *.user
 *.userosscache
 *.suo

@@ -1,4 +1,4 @@
-﻿using DataAccessLayer.DbContext;
+﻿using DataAccessLayer.dbContext;
 using DataAccessLayer.models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -33,7 +33,7 @@ namespace TestMockService
             await context.SaveChangesAsync();
             }catch(Exception e)
             {
-                Console.WriteLine("Exeption In Mock: ", e.Message);
+                await Console.Out.WriteLineAsync("Exeption In Mock: ["+ e.Message+"]");
             }
         }
     }
@@ -52,7 +52,7 @@ namespace TestMockService
                     Title = "Introduction to Mock Services",
                     Content = "This is a content placeholder for learning material about mock services.",
                     UploadDate = DateTime.UtcNow,
-                    Questions = new HashSet<Question>()
+                    Questions = []
             };
             context.Materials.Add(material);
             Console.WriteLine("material added");
@@ -70,7 +70,7 @@ namespace TestMockService
                 {
                     var question = new Question
                     {
-                        Answers = new HashSet<Answer>(),
+                        Answers = [],
                         MaterialId = material.MaterialId, // This will be assigned once the material is added to the context
                         Text = questionText,
                         CreateDate = DateTime.UtcNow

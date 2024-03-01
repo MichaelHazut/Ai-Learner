@@ -11,12 +11,8 @@
       "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\dataaccesslayer\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|solutionrelative:dataaccesslayer\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\dataaccesslayer\\models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|solutionrelative:dataaccesslayer\\models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\dataaccesslayer\\dbcontext\\ailearnerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|solutionrelative:dataaccesslayer\\dbcontext\\ailearnerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 526,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,16 +42,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MockLearningService.cs",
-              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\MockLearningService.cs",
-              "RelativeDocumentMoniker": "TestMockService\\MockLearningService.cs",
-              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\MockLearningService.cs",
-              "RelativeToolTip": "TestMockService\\MockLearningService.cs",
-              "ViewState": "AQIAACUAAAAAAAAAAAAkwFkAAAA1AAAA",
+              "DocumentIndex": 2,
+              "Title": "AiLearnerDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\dbContext\\AiLearnerDbContext.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\dbContext\\AiLearnerDbContext.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\dbContext\\AiLearnerDbContext.cs",
+              "RelativeToolTip": "DataAccessLayer\\dbContext\\AiLearnerDbContext.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAAUAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-29T20:08:35.171Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-01T15:04:22.283Z"
             },
             {
               "$type": "Document",
@@ -65,35 +60,21 @@
               "RelativeDocumentMoniker": "TestMockService\\Program.cs",
               "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\Program.cs",
               "RelativeToolTip": "TestMockService\\Program.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAAAA0AAAANAAAA",
+              "ViewState": "AQIAADUAAAAAAAAAAAAAAB8AAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-29T20:08:10.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-01T14:38:02.131Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Question.cs",
-              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\models\\Question.cs",
-              "RelativeDocumentMoniker": "DataAccessLayer\\models\\Question.cs",
-              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\models\\Question.cs",
-              "RelativeToolTip": "DataAccessLayer\\models\\Question.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAsAAAArAAAA",
+              "DocumentIndex": 0,
+              "Title": "MockLearningService.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\MockLearningService.cs",
+              "RelativeDocumentMoniker": "TestMockService\\MockLearningService.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\MockLearningService.cs",
+              "RelativeToolTip": "TestMockService\\MockLearningService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-29T19:40:08.806Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Answer.cs",
-              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\models\\Answer.cs",
-              "RelativeDocumentMoniker": "DataAccessLayer\\models\\Answer.cs",
-              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\models\\Answer.cs",
-              "RelativeToolTip": "DataAccessLayer\\models\\Answer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAgAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-29T19:42:16.219Z",
+              "WhenOpened": "2024-03-01T14:36:52.527Z",
               "EditorCaption": ""
             }
           ]

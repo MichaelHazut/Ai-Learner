@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\services\\exceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\services\\exceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\dataaccesslayer\\dbcontext\\ailearnerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 526,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,26 +50,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Program.cs",
               "RelativeDocumentMoniker": "AiLearner_API\\Program.cs",
-              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Program.cs*",
-              "RelativeToolTip": "AiLearner_API\\Program.cs*",
-              "ViewState": "AQIAABcAAAAAAAAAAAAAACQAAAAgAAAA",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Program.cs",
+              "RelativeToolTip": "AiLearner_API\\Program.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAAACMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-01T22:21:36.214Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ExceptionMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\ExceptionMiddleware.cs",
               "RelativeDocumentMoniker": "AiLearner_API\\Services\\ExceptionMiddleware.cs",
-              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\ExceptionMiddleware.cs",
-              "RelativeToolTip": "AiLearner_API\\Services\\ExceptionMiddleware.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAWwCwAAAAIAAAA",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\ExceptionMiddleware.cs*",
+              "RelativeToolTip": "AiLearner_API\\Services\\ExceptionMiddleware.cs*",
+              "ViewState": "AQIAAD0AAAAAAAAAAIAwwEQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-01T22:26:00.619Z",
               "EditorCaption": ""

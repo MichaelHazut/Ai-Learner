@@ -9,6 +9,12 @@ namespace AiLearner_API.Services
     {
         private readonly RequestDelegate _next = next;
         private readonly ILogger<ExceptionMiddleware> _logger = logger;
+        private readonly string _logFilePath = "logs/log.txt";
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new()
+        {
+            WriteIndented = true,
+            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        };
 
         public async Task InvokeAsync(HttpContext httpContext)
         {
@@ -21,7 +27,7 @@ namespace AiLearner_API.Services
                 _logger.LogError("A DbUpdateConcurrencyException was caught: {Exception}", ex);
                 await HandleExceptionAsync(httpContext, ex);
             }
-            catch(DbUpdateException ex)
+            catch (DbUpdateException ex)
             {
                 _logger.LogError("A DbUpdateException was caught: {Exception}", ex);
                 await HandleExceptionAsync(httpContext, ex);
@@ -31,7 +37,6 @@ namespace AiLearner_API.Services
                 _logger.LogError("A ValidationException was caught: {Exception}", ex);
                 await HandleExceptionAsync(httpContext, ex);
             }
-            
             catch (UnauthorizedAccessException ex)
             {
                 _logger.LogError("An UnauthorizedAccessException was caught: {Exception}", ex);
@@ -41,10 +46,10 @@ namespace AiLearner_API.Services
             {
                 _logger.LogError("Something went wrong: {Exception}", ex);
                 await HandleExceptionAsync(httpContext, ex);
-            }       
+            }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
@@ -56,8 +61,15 @@ namespace AiLearner_API.Services
                 stackTrace = exception.StackTrace
             };
 
-            var result = JsonSerializer.Serialize(errorDetails);
-            return context.Response.WriteAsync(result);
+            var result = JsonSerializer.Serialize(errorDetails, _jsonSerializerOptions);
+
+            result = result.Replace("\\r\\n", "\r\n");
+            result = result.Replace("\"stackTrace\": \"", "\"stackTrace\": \"\n");
+
+            var logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {result}{Environment.NewLine}{Environment.NewLine}";
+            await File.AppendAllTextAsync(_logFilePath, logEntry);
+
+            await context.Response.WriteAsync(result);
         }
     }
 }

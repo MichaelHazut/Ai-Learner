@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AE06AD85-B824-413B-8F3E-1388537B780A}|AiLearner_ClassLibrary\\AiLearner_ClassLibrary.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_classlibrary\\openai_service\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE06AD85-B824-413B-8F3E-1388537B780A}|AiLearner_ClassLibrary\\AiLearner_ClassLibrary.csproj|solutionrelative:ailearner_classlibrary\\openai_service\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\appsettings.json||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\appsettings.json||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE06AD85-B824-413B-8F3E-1388537B780A}|AiLearner_ClassLibrary\\AiLearner_ClassLibrary.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_classlibrary\\openai_service\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE06AD85-B824-413B-8F3E-1388537B780A}|AiLearner_ClassLibrary\\AiLearner_ClassLibrary.csproj|solutionrelative:ailearner_classlibrary\\openai_service\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\mocklearningservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\mocklearningservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\appsetting.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\appsetting.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\services\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,8 +30,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 526,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\appsettings.json",
+              "RelativeDocumentMoniker": "TestMockService\\appsettings.json",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\appsettings.json",
+              "RelativeToolTip": "TestMockService\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-03-04T13:07:19.428Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -43,19 +56,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-04T12:58:13.749Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "appsetting.json",
-              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\appsetting.json",
-              "RelativeDocumentMoniker": "TestMockService\\appsetting.json",
-              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\appsetting.json",
-              "RelativeToolTip": "TestMockService\\appsetting.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-03-04T12:58:01.5Z",
               "EditorCaption": ""
             },
             {
@@ -76,7 +76,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "OpenAiService.cs",
               "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_ClassLibrary\\OpenAi_Service\\OpenAiService.cs",
               "RelativeDocumentMoniker": "AiLearner_ClassLibrary\\OpenAi_Service\\OpenAiService.cs",
@@ -102,13 +102,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\Program.cs",
               "RelativeDocumentMoniker": "TestMockService\\Program.cs",
               "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\Program.cs",
               "RelativeToolTip": "TestMockService\\Program.cs",
-              "ViewState": "AQIAAEEAAAAAAAAAAAAqwFUAAAARAAAA",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAqwEkAAABbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-02T17:07:54.886Z",
               "EditorCaption": ""

@@ -1,0 +1,887 @@
+﻿```json
+{
+    "topic": "Astronomy - Lifecycle of a Star",
+    "summary": "Stars evolve from gas clouds into protostars, which eventually ignite nuclear fusion to become main-sequence stars. The mass of a star determines its lifespan and its evolutionary path, leading to outcomes such as red supergiants, supernovae, neutron stars, black holes, and white dwarfs.",
+    "questions": [
+        {
+            "question": "What is the initial stage in the lifecycle of a star?",
+            "options": {
+                "A": "Protostar formation in a nebula",
+                "B": "Main-sequence star birth",
+                "C": "Supernova explosion",
+                "D": "White dwarf formation"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "What process powers a main-sequence star, like our Sun?",
+            "options": {
+                "A": "Hydrogen fusion",
+                "B": "Helium fusion",
+                "C": "Carbon fusion",
+                "D": "Oxygen fusion"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "Which type of star has a longer lifespan: massive or less massive stars?",
+            "options": {
+                "A": "Massive stars",
+                "B": "Less massive stars"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What do massive stars evolve into after exhausting their fuel?",
+            "options": {
+                "A": "Red dwarfs",
+                "B": "Red giants",
+                "C": "Red supergiants",
+                "D": "Planetary nebulae"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What is left behind after a massive star undergoes a supernova explosion?",
+            "options": {
+                "A": "Red giant",
+                "B": "Neutron star",
+                "C": "White dwarf",
+                "D": "Red supergiant"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is the final evolutionary stage of less massive stars like our Sun?",
+            "options": {
+                "A": "Black hole",
+                "B": "Red giant",
+                "C": "Planetary nebula",
+                "D": "Red supergiant"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "Which stellar remnants have extremely high gravitational pull?",
+            "options": {
+                "A": "Neutron stars",
+                "B": "Black holes",
+                "C": "Red giants",
+                "D": "White dwarfs"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What happens to the outer layers of a less massive star before it becomes a white dwarf?",
+            "options": {
+                "A": "They form a black hole",
+                "B": "They dissipate into space",
+                "C": "They create a planetary nebula",
+                "D": "They collapse inward"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What marks the birth of a main-sequence star?",
+            "options": {
+                "A": "Protostar formation",
+                "B": "Supernova explosion",
+                "C": "Black hole creation",
+                "D": "Nuclear fusion ignition"
+            },
+            "answer": "D"
+        },
+        {
+            "question": "Why do stars of different masses have varied lifespans and evolutionary paths?",
+            "options": {
+                "A": "Due to differences in color",
+                "B": "Because they are further from Earth",
+                "C": "Based on the rate of nuclear fusion",
+                "D": "As a result of their gravitational pull"
+            },
+            "answer": "C"
+        }
+    ]
+}
+```
+
+```json
+{
+    "topic": "Industrial Revolution",
+    "summary": "The Industrial Revolution was a period of massive technological advancements in manufacturing during the late 18th to early 19th centuries. It led to urbanization, changes in living conditions, advancements in transportation, and altered social structures and labor laws.",
+    "questions": [
+        {
+            "question": "Which country is credited with being the starting point of the Industrial Revolution?",
+            "options": {
+                "A": "France",
+                "B": "Germany",
+                "C": "Britain",
+                "D": "Italy"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What were some of the key technological advancements during the Industrial Revolution?",
+            "options": {
+                "A": "Steam engines",
+                "B": "Textile machinery",
+                "C": "Iron-making techniques",
+                "D": "All of the above"
+            },
+            "answer": "D"
+        },
+        {
+            "question": "How did the Industrial Revolution impact urbanization?",
+            "options": {
+                "A": "It slowed down urban growth",
+                "B": "It led to widespread rural development",
+                "C": "It caused people to move to cities for factory work",
+                "D": "It eliminated the need for cities"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What major advancements in transportation were a result of the Industrial Revolution?",
+            "options": {
+                "A": "Railway",
+                "B": "Automobile",
+                "C": "Airplane",
+                "D": "Bicycle"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "How did the Industrial Revolution impact social structures?",
+            "options": {
+                "A": "It led to greater equality among social classes",
+                "B": "It maintained traditional social hierarchies",
+                "C": "It caused the complete breakdown of social structures",
+                "D": "It fostered the development of new social classes"
+            },
+            "answer": "D"
+        },
+        {
+            "question": "What were some of the cultural changes brought about by the Industrial Revolution?",
+            "options": {
+                "A": "Increased emphasis on rural life",
+                "B": "Shift towards more urban lifestyles",
+                "C": "A decline in technological innovation",
+                "D": "A resurgence of traditional art forms"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "In what ways did the Industrial Revolution impact labor laws?",
+            "options": {
+                "A": "It led to the abolition of labor laws",
+                "B": "It resulted in significant improvements in working conditions",
+                "C": "It had no impact on labor laws",
+                "D": "It only benefited factory owners"
+            },
+            "answer": "B"
+        }
+    ]
+}
+```
+2024-03-04 20:05:04 
+{
+  "topic": "Biology - Photosynthesis",
+  "summary": "Photosynthesis is a vital process that uses light energy to convert into chemical energy stored in glucose. It takes place in chloroplasts of plant cells and involves two main phases: light-dependent reactions and the Calvin cycle.",
+  "questions": [
+    {
+      "question": "In which organelle of plant cells does photosynthesis mainly occur?",
+      "options": {
+        "A": "Mitochondria",
+        "B": "Nucleus",
+        "C": "Chloroplast",
+        "D": "Endoplasmic Reticulum"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the primary function of chlorophyll in photosynthesis?",
+      "options": {
+        "A": "Capture sunlight",
+        "B": "Store glucose",
+        "C": "Produce oxygen",
+        "D": "Produce carbon dioxide"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which products are produced in the light-dependent reactions of photosynthesis?",
+      "options": {
+        "A": "Glucose and oxygen",
+        "B": "ATP and NADPH",
+        "C": "Carbon dioxide",
+        "D": "Water"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of the Calvin cycle in photosynthesis?",
+      "options": {
+        "A": "Capture sunlight",
+        "B": "Produce glucose",
+        "C": "Produce oxygen",
+        "D": "Produce carbon dioxide"
+      },
+      "answer": "B"
+  ]
+}
+
+2024-03-04 20:23:46 
+{
+  "topic": "Shakespeare's Works",
+  "summary": "William Shakespeare is celebrated for his wide range of plays exploring themes like love, betrayal, power, and existential angst through intricate plots and rich character development. His innovative use of language and ability to intertwine multiple plotlines have made his works timeless pieces of literature.",
+  "questions": [
+    {
+      "question": "In which categories are William Shakespeare's plays usually divided?",
+      "options": {
+        "A": "Tragedies, comedies, histories",
+        "B": "Dramas, romances, sonnets",
+        "C": "Epics, satires, epilogues"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What are some of the recurring themes found in Shakespeare's works?",
+      "options": {
+        "A": "Science fiction, horror, mystery",
+        "B": "Love, betrayal, power, existential angst",
+        "C": "Adventure, comedy, tragedy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a key aspect of Shakespeare's writing style that sets him apart from other playwrights?",
+      "options": {
+        "A": "Use of contemporary slang",
+        "B": "Mastery of meter and verse",
+        "C": "Short, concise dialogue"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Why are Shakespeare's works considered timeless pieces of literature?",
+      "options": {
+        "A": "Due to their use of modern technology",
+        "B": "For their intricate plots and rich character development",
+        "C": "Because they were written in multiple languages"
+      },
+      "answer": "B"
+  ]
+}
+
+2024-03-04 21:34:22 
+
+
+2024-03-04 22:03:06 
+```json
+{
+    "topic": "Environmental Science - Climate Change",
+    "summary": "Climate change refers to long-term changes in weather patterns caused by human activities such as burning fossil fuels, deforestation, and industrial processes, leading to an increase in greenhouse gases. This change has significant impacts on natural systems and human health.",
+    "questions": [
+        {
+            "question": "What is climate change?",
+            "options": {
+                "A": "A short-term change in weather patterns",
+                "B": "A significant, long-term change in weather patterns",
+                "C": "The normal variability of weather conditions",
+                "D": "A seasonal shift in temperatures"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is global warming often associated with?",
+            "options": {
+                "A": "Decrease in greenhouse gases",
+                "B": "Increase in fossil fuel consumption",
+                "C": "Deforestation",
+                "D": "Industrial development"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "Which activities contribute to the increase in greenhouse gases?",
+            "options": {
+                "A": "Burning fossil fuels",
+                "B": "Planting more trees",
+                "C": "Reducing industrial processes",
+                "D": "Conserving energy"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "What impact does climate change have on natural systems?",
+            "options": {
+                "A": "No impact",
+                "B": "Widespread impacts",
+                "C": "Only affects human-made systems",
+                "D": "Benefits natural systems"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What are some consequences of climate change for wildlife populations?",
+            "options": {
+                "A": "Stable habitats",
+                "B": "No changes",
+                "C": "Reduced populations",
+                "D": "Increased biodiversity"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "How does climate change affect human health?",
+            "options": {
+                "A": "Improves overall health",
+                "B": "Has no impact on health",
+                "C": "Leads to more diseases",
+                "D": "Reduces healthcare costs"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What can be a consequence of rising sea levels caused by climate change?",
+            "options": {
+                "A": "Decrease in coastal flooding",
+                "B": "Migration of marine species",
+                "C": "Displacement of coastal communities",
+                "D": "Increase in land availability"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "Which of the following contributes to climate change?",
+            "options": {
+                "A": "Sustainable farming practices",
+                "B": "Rapid industrialization",
+                "C": "Renewable energy sources",
+                "D": "Planting more trees"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "How do human activities impact the Earth's atmosphere?",
+            "options": {
+                "A": "Decrease in greenhouse gases",
+                "B": "Increase in pollution",
+                "C": "Enhance natural processes",
+                "D": "Promote climate stability"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is a primary driver of climate change according to the text?",
+            "options": {
+                "A": "Natural weather patterns",
+                "B": "Human activities",
+                "C": "Ozone layer depletion",
+                "D": "Active volcano eruptions"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What is a possible mitigation strategy for climate change?",
+            "options": {
+                "A": "Increased fossil fuel use",
+                "B": "Encouraging deforestation",
+                "C": "Implementing carbon capture technology",
+                "D": "Ignoring renewable energy sources"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "Why is climate change a concern for human livelihoods?",
+            "options": {
+                "A": "It promotes economic growth",
+                "B": "It has no impact on jobs",
+                "C": "It can disrupt food production",
+                "D": "It leads to increased employment opportunities"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "Which of the following is a result of climate change?",
+            "options": {
+                "A": "Decrease in extreme weather events",
+                "B": "Expansion of wildlife habitats",
+                "C": "Increase in natural resources",
+                "D": "More frequent and severe hurricanes"
+            },
+            "answer": "D"
+        },
+        {
+            "question": "How do greenhouse gases contribute to climate change?",
+            "options": {
+                "A": "Promote climate stabilization",
+                "B": "Absorb and trap heat in the atmosphere",
+                "C": "Result in global cooling",
+                "D": "Reduce the Earth's temperature"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What has been the trend in the Earth's average temperature due to climate change?",
+            "options": {
+                "A": "Decrease over the past decades",
+                "B": "Stagnant with no changes",
+                "C": "Consistent increase",
+                "D": "Fluctuating without any pattern"
+            },
+            "answer": "C"
+        }
+    ]
+}
+```
+
+2024-03-04 22:30:26 
+```json
+{
+  "topic": "Apollo 11 Moon Landing",
+  "summary": "The Apollo 11 mission successfully landed astronauts Neil Armstrong and Buzz Aldrin on the Moon on July 20, 1969, after launching from Kennedy Space Center. Armstrong's famous words during his first steps, 'That's one small step for [a] man, one giant leap for mankind,' symbolized human achievement and resilience, inspiring future generations to explore and discover.",
+  "questions": [
+    {
+      "question": "Who were the astronauts who landed on the Moon during the Apollo 11 mission?",
+      "options": {
+        "A": "Neil Armstrong and Buzz Aldrin",
+        "B": "Michael Collins and Buzz Aldrin",
+        "C": "Neil Armstrong and Michael Collins"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "On which date did the Apollo 11 mission successfully land on the Moon?",
+      "options": {
+        "A": "July 16, 1969",
+        "B": "July 19, 1969",
+        "C": "July 20, 1969"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How many days did it take for the astronauts to reach the Moon after launching from Kennedy Space Center?",
+      "options": {
+        "A": "Three days",
+        "B": "Four days",
+        "C": "Five days"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Who orbited above in the command module while Armstrong and Aldrin were on the lunar surface?",
+      "options": {
+        "A": "Neil Armstrong",
+        "B": "Buzz Aldrin",
+        "C": "Michael Collins"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Neil Armstrong's famous words during his first steps on the Moon were:",
+      "options": {
+        "A": "'This is one small step for a man, one giant leap for mankind.'",
+        "B": "'One small jump for me, one giant leap for humanity.'",
+        "C": "'A man's small step, a leap for all.'"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How many people were estimated to have watched Armstrong's first steps on the Moon worldwide?",
+      "options": {
+        "A": "300 million",
+        "B": "450 million",
+        "C": "600 million"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What type of rocket launched the Apollo 11 mission from Kennedy Space Center?",
+      "options": {
+        "A": "Atlas V",
+        "B": "Falcon 9",
+        "C": "Saturn V"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What did the Apollo 11 mission symbolize in terms of human achievement and resilience?",
+      "options": {
+        "A": "Failure and setback",
+        "B": "Limitation and stagnation",
+        "C": "Ingenuity and resilience"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Apart from its scientific significance, what else did the Moon landing inspire in future generations?",
+      "options": {
+        "A": "Isolation and retreat",
+        "B": "Fear and avoidance",
+        "C": "Exploration and discovery"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What elements were highlighted as keys to achieving seemingly impossible feats in the Apollo 11 mission text?",
+      "options": {
+        "A": "Competition, stagnation, inaction",
+        "B": "Collaboration, innovation, determination",
+        "C": "Opposition, fear, doubts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the Moon landing exemplify in terms of what humanity can achieve according to the Apollo 11 text?",
+      "options": {
+        "A": "Status quo",
+        "B": "Stagnation",
+        "C": "Reaching for the stars"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What continues to serve as a source of inspiration and a testament to human potential?",
+      "options": {
+        "A": "Journey to Mars",
+        "B": "Moon landing",
+        "C": "Deep sea exploration"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What did the Apollo 11 mission demonstrate in terms of what can be achieved through joint effort?",
+      "options": {
+        "A": "Isolation",
+        "B": "Innovation",
+        "C": "Collaboration"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What did the Apollo 11 mission highlight as valuable traits for achieving the impossible?",
+      "options": {
+        "A": "Doubt and fear",
+        "B": "Resilience and innovation",
+        "C": "Complacency and hesitation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How is the Moon landing described in terms of what it showed about humanity's capabilities?",
+      "options": {
+        "A": "Lack of potential",
+        "B": "Potential for greatness",
+        "C": "Disinterest in exploration"
+      },
+      "answer": "B"
+    }
+  ]
+}
+```
+
+
+2024-03-04 22:32:51 
+```json
+{
+    "topic": "Impressionism Art Movement",
+    "summary": "The Impressionist art movement emerged in the late 19th century in France, characterized by a focus on light, color, and everyday subjects. Artists like Claude Monet, Edgar Degas, and Pierre-Auguste Renoir revolutionized painting by capturing fleeting moments of life with loose brushwork and vibrant colors.",
+    "questions": [
+        {
+            "question": "Who were some of the notable artists associated with the Impressionist art movement?",
+            "options": {
+                "A": "Leonardo da Vinci and Michelangelo",
+                "B": "Claude Monet, Edgar Degas, and Pierre-Auguste Renoir",
+                "C": "Vincent van Gogh and Paul Cézanne",
+                "D": "Pablo Picasso and Frida Kahlo"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What were some characteristics that defined Impressionist art?",
+            "options": {
+                "A": "Heavy use of symmetry and geometric shapes",
+                "B": "Focus on light, color, and everyday subjects",
+                "C": "Strict adherence to academic painting rules",
+                "D": "Preference for dark and somber themes"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "How did Impressionist artists like to capture moments?",
+            "options": {
+                "A": "Through highly detailed and realistic compositions",
+                "B": "By using abstract shapes and patterns",
+                "C": "Emphasizing spontaneous, loose brushwork and vibrant colors",
+                "D": "Strictly limiting themselves to painting indoors"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "In which setting did Impressionist painters often work to capture the effects of light and atmosphere?",
+            "options": {
+                "A": "Art galleries",
+                "B": "Museums",
+                "C": "En plein air (outdoors)",
+                "D": "Studios with artificial lighting"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "How did traditional art institutions initially react to the Impressionist art movement?",
+            "options": {
+                "A": "Accepted and embraced it immediately",
+                "B": "Showed indifference",
+                "C": "Met with resistance due to the unconventional techniques",
+                "D": "Fully endorsed the radical changes"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "Which artistic movement was directly influenced by Impressionism and delved further into color, form, and emotional depth?",
+            "options": {
+                "A": "Cubism",
+                "B": "Surrealism",
+                "C": "Post-Impressionism",
+                "D": "Realism"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What did Impressionism ultimately achieve in the art world?",
+            "options": {
+                "A": "Maintained traditional painting beliefs",
+                "B": "Revolutionized painting by emphasizing light, color, and everyday subjects",
+                "C": "Focused solely on abstract art",
+                "D": "Ignored emotions and moments in art"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "Who is known for their vivid depictions of water lilies and serene gardens in the Impressionist style?",
+            "options": {
+                "A": "Vincent van Gogh",
+                "B": "Pierre-Auguste Renoir",
+                "C": "Edgar Degas",
+                "D": "Claude Monet"
+            },
+            "answer": "D"
+        },
+        {
+            "question": "How did Impressionism contribute to the landscape of modern art?",
+            "options": {
+                "A": "By following traditional academic painting techniques",
+                "B": "By showcasing the beauty of the ordinary and exploring light and color",
+                "C": "By rejecting color and focusing solely on form",
+                "D": "By ignoring the influence of light on art"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What did Post-Impressionism further explore, building upon the foundation of Impressionism?",
+            "options": {
+                "A": "Geometric shapes and symmetry",
+                "B": "Color, form, and emotional depth",
+                "C": "Minimalism",
+                "D": "Realism"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "How did Impressionism alter the course of art history?",
+            "options": {
+                "A": "By preserving traditional painting techniques",
+                "B": "By revolutionizing art with its unique approach to capturing moments and emotions",
+                "C": "By rejecting the use of color in painting",
+                "D": "By limiting the subject matter to only abstract themes"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "Why did Impressionism initially face resistance from traditional art institutions?",
+            "options": {
+                "A": "Due to a lack of color in the paintings",
+                "B": "Because artists used abstract shapes",
+                "C": "For defying the conventional rules of academic painting",
+                "D": "Due to the small size of the artworks"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What aspect of life did Impressionist artists seek to capture in their works?",
+            "options": {
+                "A": "Fantasy and mythology",
+                "B": "The harsh realities of war",
+                "C": "Fleeting moments and everyday scenes",
+                "D": "Industrial revolution themes"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "How did Impressionist artists differ from traditional academic painters in their style?",
+            "options": {
+                "A": "By using formal compositions and dark tones",
+                "B": "By emphasizing loose brushwork, vibrant colors, and spontaneity",
+                "C": "By never painting outdoors",
+                "D": "By avoiding the use of light effects"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "Which artist is known for his ballet dancers and racecourse paintings in the Impressionist style?",
+            "options": {
+                "A": "Paul Cézanne",
+                "B": "Edgar Degas",
+                "C": "Vincent van Gogh",
+                "D": "Pierre-Auguste Renoir"
+            },
+            "answer": "B"
+        }
+    ]
+}
+```
+
+2024-03-04 22:35:22 
+{
+    "topic": "World History (Industrial Revolution)",
+    "summary": "The Industrial Revolution was a period of significant technological advancements and societal changes in the late 18th to early 19th centuries, originating in Britain and spreading globally. It brought about the shift from manual to machine-based manufacturing, along with urbanization, transportation developments, and social reforms.",
+    "questions": [
+        {
+            "question": "What was a key feature of the Industrial Revolution?",
+            "options": {
+                "A": "Steam engines",
+                "B": "Windmills",
+                "C": "Horse-drawn carriages"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "Which country is credited with being the birthplace of the Industrial Revolution?",
+            "options": {
+                "A": "France",
+                "B": "Britain",
+                "C": "Germany"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What sector experienced a shift from manual to machine-based manufacturing during the Industrial Revolution?",
+            "options": {
+                "A": "Agriculture",
+                "B": "Healthcare",
+                "C": "Textiles"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "What technological innovation played a significant role in the Industrial Revolution?",
+            "options": {
+                "A": "Telegraph",
+                "B": "Steam engine",
+                "C": "Printing press"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What social phenomenon was fueled by the Industrial Revolution as people sought work in factories?",
+            "options": {
+                "A": "Rural expansion",
+                "B": "Urbanization",
+                "C": "Subsistence farming"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "Which industry benefitted greatly from advancements in iron-making techniques?",
+            "options": {
+                "A": "Agriculture",
+                "B": "Textiles",
+                "C": "Construction"
+            },
+            "answer": "C"
+        },
+        {
+            "question": "How did the Industrial Revolution impact transportation?",
+            "options": {
+                "A": "Introduced railway systems",
+                "B": "Developed canals",
+                "C": "Improved horse-drawn carriages"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "What communication innovation emerged during the Industrial Revolution?",
+            "options": {
+                "A": "Telephone",
+                "B": "Telegraph",
+                "C": "Radio"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What was one consequence of the Industrial Revolution on living conditions in urban areas?",
+            "options": {
+                "A": "Increased pollution",
+                "B": "Enhanced sanitation",
+                "C": "Expanded green spaces"
+            },
+            "answer": "A"
+        },
+        {
+            "question": "What changes did the Industrial Revolution bring to labor laws and regulations?",
+            "options": {
+                "A": "Intensified child labor",
+                "B": "Led to reform movements",
+                "C": "Ignored worker rights"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What impact did the Industrial Revolution have on societal structures?",
+            "options": {
+                "A": "Maintained traditional hierarchies",
+                "B": "Disrupted social classes",
+                "C": "Promoted equality"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "In what sector did the Industrial Revolution see significant advancements in machinery?",
+            "options": {
+                "A": "Healthcare",
+                "B": "Textiles",
+                "C": "Education"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "What new source of power became prevalent during the Industrial Revolution?",
+            "options": {
+                "A": "Hydroelectricity",
+                "B": "Coal",
+                "C": "Solar energy"
+            },
+            "answer": "B"
+        },
+        {
+            "question": "How did the Industrial Revolution impact the environment?",
+            "options": {
+                "A": "Promoted sustainability",
+                "B": "Caused pollution and deforestation",
+                "C": "Preserved natural habitats"
+            },
+            "answer": "B"
+        }
+        {
+            "question": "What significant changes occurred in cities due to the Industrial Revolution?",
+            "options": {
+                "A": "Decreased population density",
+                "B": "Increased access to healthcare",
+                "C": "Rapid urbanization and overcrowding"
+            },
+            "answer": "C"
+        }
+    ]
+}
+

@@ -75,3 +75,5 @@ C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\TestMockService\bin\Debug\
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\TestMockService\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\TestMockService\bin\Debug\net8.0\AiLearner_API.dll
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\TestMockService\bin\Debug\net8.0\AiLearner_API.pdb
+C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\TestMockService\bin\Debug\net8.0\AiLearner_ClassLibrary.dll
+C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\TestMockService\bin\Debug\net8.0\AiLearner_ClassLibrary.pdb

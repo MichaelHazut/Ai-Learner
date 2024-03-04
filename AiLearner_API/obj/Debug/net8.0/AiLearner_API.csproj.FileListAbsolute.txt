@@ -126,7 +126,6 @@ C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\ne
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\net8.0\AiLearner_API.AssemblyInfoInputs.cache
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\net8.0\AiLearner_API.AssemblyInfo.cs
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\net8.0\AiLearner_API.csproj.CoreCompileInputs.cache
-C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\net8.0\AiLearner_API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\net8.0\AiLearner_API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\net8.0\AiLearner_API.sourcelink.json
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\net8.0\staticwebassets.build.json
@@ -146,3 +145,5 @@ C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\ne
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\bin\Debug\net8.0\OpenAI_API.dll
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\bin\Debug\net8.0\Services\json.json
+C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\bin\Debug\net8.0\AiLearner_ClassLibrary.dll
+C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\bin\Debug\net8.0\AiLearner_ClassLibrary.pdb

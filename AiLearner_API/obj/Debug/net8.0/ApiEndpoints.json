@@ -2,7 +2,7 @@
   {
     "ContainingType": "AiLearner_API.Program\u002B\u003C\u003Ec",
     "Method": "\u003CMain\u003Eb__0_1",
-    "RelativePath": "error",
+    "RelativePath": "OpenAi",
     "HttpMethod": "GET",
     "IsController": false,
     "Order": 0,

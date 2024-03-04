@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AiLearner_API\AiLearner_API.csproj" />
+    <ProjectReference Include="..\AiLearner_ClassLibrary\AiLearner_ClassLibrary.csproj" />
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
   </ItemGroup>
 

@@ -143,3 +143,6 @@ C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\ne
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\net8.0\AiLearner_API.pdb
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\net8.0\AiLearner_API.genruntimeconfig.cache
 C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\obj\Debug\net8.0\ref\AiLearner_API.dll
+C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\bin\Debug\net8.0\OpenAI_API.dll
+C:\Users\Michael\Desktop\Learning\Projects\Ai Learner\AiLearner_API\bin\Debug\net8.0\Services\json.json

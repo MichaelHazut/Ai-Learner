@@ -3,6 +3,7 @@ bin/
 obj/
 AiLearner_API/appsettings.json
 AiLearner_API/logs
+**/appsettings.json
 *.user
 *.userosscache
 *.suo

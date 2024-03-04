@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\services\\exceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\services\\exceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AE06AD85-B824-413B-8F3E-1388537B780A}|AiLearner_ClassLibrary\\AiLearner_ClassLibrary.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_classlibrary\\openai_service\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE06AD85-B824-413B-8F3E-1388537B780A}|AiLearner_ClassLibrary\\AiLearner_ClassLibrary.csproj|solutionrelative:ailearner_classlibrary\\openai_service\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\dataaccesslayer\\dbcontext\\ailearnerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|solutionrelative:dataaccesslayer\\dbcontext\\ailearnerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\mocklearningservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\mocklearningservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\testmockservice\\appsetting.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}|TestMockService\\TestMockService.csproj|solutionrelative:testmockservice\\appsetting.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\services\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\services\\openaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,8 +30,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 526,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MockLearningService.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\MockLearningService.cs",
+              "RelativeDocumentMoniker": "TestMockService\\MockLearningService.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\MockLearningService.cs",
+              "RelativeToolTip": "TestMockService\\MockLearningService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-04T12:58:13.749Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsetting.json",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\appsetting.json",
+              "RelativeDocumentMoniker": "TestMockService\\appsetting.json",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\appsetting.json",
+              "RelativeToolTip": "TestMockService\\appsetting.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-03-04T12:58:01.5Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -50,67 +76,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Program.cs",
-              "RelativeDocumentMoniker": "AiLearner_API\\Program.cs",
-              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Program.cs",
-              "RelativeToolTip": "AiLearner_API\\Program.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAAACMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T22:21:36.214Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ExceptionMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\ExceptionMiddleware.cs",
-              "RelativeDocumentMoniker": "AiLearner_API\\Services\\ExceptionMiddleware.cs",
-              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\ExceptionMiddleware.cs*",
-              "RelativeToolTip": "AiLearner_API\\Services\\ExceptionMiddleware.cs*",
-              "ViewState": "AQIAAD0AAAAAAAAAAIAwwEQAAAAAAAAA",
+              "Title": "OpenAiService.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_ClassLibrary\\OpenAi_Service\\OpenAiService.cs",
+              "RelativeDocumentMoniker": "AiLearner_ClassLibrary\\OpenAi_Service\\OpenAiService.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_ClassLibrary\\OpenAi_Service\\OpenAiService.cs",
+              "RelativeToolTip": "AiLearner_ClassLibrary\\OpenAi_Service\\OpenAiService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T22:26:00.619Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AiLearnerDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\dbContext\\AiLearnerDbContext.cs",
-              "RelativeDocumentMoniker": "DataAccessLayer\\dbContext\\AiLearnerDbContext.cs",
-              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\dbContext\\AiLearnerDbContext.cs",
-              "RelativeToolTip": "DataAccessLayer\\dbContext\\AiLearnerDbContext.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAAAAUAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T15:04:22.283Z",
+              "WhenOpened": "2024-03-04T12:51:02.797Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "OpenAiService.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\OpenAiService.cs",
+              "RelativeDocumentMoniker": "AiLearner_API\\Services\\OpenAiService.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\OpenAiService.cs",
+              "RelativeToolTip": "AiLearner_API\\Services\\OpenAiService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-04T11:43:36.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\Program.cs",
               "RelativeDocumentMoniker": "TestMockService\\Program.cs",
               "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\Program.cs",
               "RelativeToolTip": "TestMockService\\Program.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAAAB8AAABFAAAA",
+              "ViewState": "AQIAAEEAAAAAAAAAAAAqwFUAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T14:38:02.131Z",
+              "WhenOpened": "2024-03-02T17:07:54.886Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MockLearningService.cs",
-              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\MockLearningService.cs",
-              "RelativeDocumentMoniker": "TestMockService\\MockLearningService.cs",
-              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\TestMockService\\MockLearningService.cs",
-              "RelativeToolTip": "TestMockService\\MockLearningService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T14:36:52.527Z"
             }
           ]
         },

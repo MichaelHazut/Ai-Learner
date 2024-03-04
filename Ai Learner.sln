@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLearner_ClassLibrary", "AiLearner_ClassLibrary\AiLearner_ClassLibrary.csproj", "{AE06AD85-B824-413B-8F3E-1388537B780A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE06AD85-B824-413B-8F3E-1388537B780A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE06AD85-B824-413B-8F3E-1388537B780A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE06AD85-B824-413B-8F3E-1388537B780A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE06AD85-B824-413B-8F3E-1388537B780A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

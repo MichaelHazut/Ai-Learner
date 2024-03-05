@@ -21,14 +21,10 @@ namespace TestMockService
     {
         public async Task AddUserAsync()
         {
-            User user = new()
-            {
-                Id = "MockUser"
-            };
+           
             try
             {
 
-            context.Users.Add(user);
 
             await context.SaveChangesAsync();
             }catch(Exception e)
@@ -49,7 +45,7 @@ namespace TestMockService
                 var material = new Material
                 {
                     UserId = "MockUser", // Replace with an actual user ID from your User table
-                    Title = "Introduction to Mock Services",
+                    Topic = "Introduction to Mock Services",
                     Content = "This is a content placeholder for learning material about mock services.",
                     UploadDate = DateTime.UtcNow,
                     Questions = []

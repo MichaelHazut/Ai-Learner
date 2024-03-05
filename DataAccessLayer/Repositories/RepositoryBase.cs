@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repositories
 {
-    internal abstract class RepositoryBase<T>(DbContext context) : IEntityDataAccess<T> where T : class
+    public abstract class RepositoryBase<T>(DbContext context) : IEntityDataAccess<T> where T : class
     {
-        protected readonly DbContext _context = context;
+        public readonly DbContext _context = context;
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {

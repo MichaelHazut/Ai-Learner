@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.dbContext
 {
-    public class AiLearnerDbContext(DbContextOptions<AiLearnerDbContext> options) : IdentityDbContext<User>(options)
+    public class AiLearnerDbContext(DbContextOptions options) : DbContext(options)
     {  
+        public DbSet<User> Users { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
@@ -41,10 +42,10 @@ namespace DataAccessLayer.dbContext
 /*
 
 To Create Migration Type In Packet Manager Console
-EntityFrameworkCore\Add-Migration InitialCreate -Project DataAccessLayer -StartupProject ExpenSage
+EntityFrameworkCore\Add-Migration InitialCreate -Project DataAccessLayer -StartupProject AiLearner_API
 
 To Update Database Type In Packet Manager Console
-EntityFrameworkCore\Update-Database -Project DataAccessLayer -StartupProject ExpenSage
+EntityFrameworkCore\Update-Database -Project DataAccessLayer -StartupProject AiLearner_API
 
 */
 

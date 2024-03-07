@@ -22,7 +22,7 @@ namespace DataAccessLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DataAccessLayer.models.Answer", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.Answer", b =>
                 {
                     b.Property<int>("AnswerId")
                         .ValueGeneratedOnAdd()
@@ -33,7 +33,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("bit");
 
-                    b.Property<int>("QuestionId")
+                    b.Property<int?>("QuestionId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -46,7 +46,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Material", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.Material", b =>
                 {
                     b.Property<int>("MaterialId")
                         .ValueGeneratedOnAdd()
@@ -76,7 +76,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Materials");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Question", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.Question", b =>
                 {
                     b.Property<int>("QuestionId")
                         .ValueGeneratedOnAdd()
@@ -100,10 +100,13 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.User", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -122,7 +125,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.UserAnswer", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.UserAnswer", b =>
                 {
                     b.Property<int>("UserAnswerId")
                         .ValueGeneratedOnAdd()
@@ -153,29 +156,27 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("UserAnswers");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Answer", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.Answer", b =>
                 {
-                    b.HasOne("DataAccessLayer.models.Question", "Question")
+                    b.HasOne("DataAccessLayer.models.Entities.Question", "Question")
                         .WithMany("Answers")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("QuestionId");
 
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Material", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.Material", b =>
                 {
-                    b.HasOne("DataAccessLayer.models.User", "User")
+                    b.HasOne("DataAccessLayer.models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Question", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.Question", b =>
                 {
-                    b.HasOne("DataAccessLayer.models.Material", "Material")
+                    b.HasOne("DataAccessLayer.models.Entities.Material", "Material")
                         .WithMany("Questions")
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -184,21 +185,21 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Material");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.UserAnswer", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.UserAnswer", b =>
                 {
-                    b.HasOne("DataAccessLayer.models.Answer", "Answer")
+                    b.HasOne("DataAccessLayer.models.Entities.Answer", "Answer")
                         .WithMany()
                         .HasForeignKey("AnswerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("DataAccessLayer.models.Question", "Question")
+                    b.HasOne("DataAccessLayer.models.Entities.Question", "Question")
                         .WithMany()
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("DataAccessLayer.models.User", "User")
+                    b.HasOne("DataAccessLayer.models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -210,12 +211,12 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Material", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.Material", b =>
                 {
                     b.Navigation("Questions");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Question", b =>
+            modelBuilder.Entity("DataAccessLayer.models.Entities.Question", b =>
                 {
                     b.Navigation("Answers");
                 });

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using System.Reflection;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
 
-namespace AiLearner_ClassLibrary.OpenAi_Service.Models
+namespace DataAccessLayer.models
 {
+
+    //StudyMaterial class is not an entity,
+    //it is a model class that represents the study material that will be used to create a new study material in the database
     public class StudyMaterial
     {
         public string? Topic { get; set; }
+        public string Content { get; set; } = "Placeholder";
         public string? Summary { get; set; }
         public List<Questions>? Questions { get; set; }
 
@@ -61,7 +58,7 @@ namespace AiLearner_ClassLibrary.OpenAi_Service.Models
 
                     //Get the Dictionary and validate it
                     var optionsDict = property.GetValue(question) as Dictionary<string, string>;
-                    if(ValidateOptions(optionsDict) is not true) return false;
+                    if (ValidateOptions(optionsDict) is not true) return false;
                 }
 
             }
@@ -78,11 +75,5 @@ namespace AiLearner_ClassLibrary.OpenAi_Service.Models
             }
             return true;
         }
-
-
     }
 }
-
-
-
-

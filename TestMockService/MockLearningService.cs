@@ -1,5 +1,5 @@
 ﻿using DataAccessLayer.dbContext;
-using DataAccessLayer.models;
+using DataAccessLayer.models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -78,7 +78,6 @@ namespace TestMockService
                         {
                             QuestionId = question.QuestionId, // This will be assigned once the question is added to the context
                             Text = answerTexts[j],
-                            IsCorrect = j == correctAnswerIndex
                         };
                         question.Answers.Add(answer);
                     }

@@ -1,4 +1,6 @@
 ﻿
+using Newtonsoft.Json;
+
 namespace AiLearner_ClassLibrary.OpenAi_Service
 {
     public static class JsonService
@@ -15,6 +17,18 @@ namespace AiLearner_ClassLibrary.OpenAi_Service
             //extract all content between the brackets
             string cleanedContent = new string(charContent, startIndex, endIndex - startIndex + 1);
             return cleanedContent;
+        
+        }
+        public static T? DeserializeJson<T>(string content) where T : class
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(content);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static string FixMissingBracket(string json)

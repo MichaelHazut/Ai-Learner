@@ -1,6 +1,4 @@
-﻿using AiLearner_ClassLibrary.OpenAi_Service.Models;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
 using OpenAI_API;
 using OpenAI_API.Models;
 
@@ -32,18 +30,6 @@ namespace AiLearner_ClassLibrary.OpenAi_Service
             chat.AppendUserInput(message + $"\n generate {numberOfQuestion} question base on this study material");
 
             return await chat.GetResponseFromChatbotAsync();
-        }
-       public void ResponseToStudyMaterial(string response)
-        {
-            try
-            {
-                StudyMaterial? stItem = JsonConvert.DeserializeObject<StudyMaterial>(response);
-
-            }
-            catch
-            {
-                string cleanedJson = string.Empty; 
-            }
         }
     }
 }

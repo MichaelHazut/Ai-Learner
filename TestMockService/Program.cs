@@ -1,17 +1,23 @@
 ﻿using AiLearner_ClassLibrary.OpenAi_Service;
-using AiLearner_ClassLibrary.OpenAi_Service.Models;
 using Azure;
 using DataAccessLayer.dbContext;
 using DataAccessLayer.models;
+using DataAccessLayer.models.Entities;
+using DataAccessLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Threading.Channels;
+using System.Transactions;
 
 namespace TestMockService
 {
     internal class Program
     {
+        public static DbContextOptionsBuilder<AiLearnerDbContext> optionsBuilder2 = new DbContextOptionsBuilder<AiLearnerDbContext>().UseSqlServer("Server=MICHAELZENBOOK;Database=AiLearnerDb;Trusted_Connection=True;TrustServerCertificate=true");
+        public static AiLearnerDbContext AiLearnerDbContext = new(optionsBuilder2.Options);
         static async Task Main()
         {
             var optionsBuilder = new DbContextOptionsBuilder<AiLearnerDbContext>();
@@ -27,6 +33,7 @@ namespace TestMockService
                 Console.WriteLine("press 5 for FixBracket Json service");
                 Console.WriteLine("press 6 for ValidateStudyMaterial");
                 Console.WriteLine("press 7 for user testing");
+                Console.WriteLine("press 8 for CleanJson");
                 Console.WriteLine("press 0 exit");
                 userInput = int.Parse(Console.ReadLine() ?? "10");
 
@@ -52,6 +59,9 @@ namespace TestMockService
                         break;
                     case 7:
                         MockUserTester();
+                        break;
+                    case 8:
+                        await CleanJson();
                         break;
                 }
             }
@@ -244,6 +254,19 @@ namespace TestMockService
         {
             //User us = new User("abcd1234");
             //Console.WriteLine(us);
+        }
+        public async static Task CleanJson()
+        {
+            StudyMaterial? st = JsonService.DeserializeJson<StudyMaterial>(studyMaterialString);
+            UserRepo userRepo = new(AiLearnerDbContext);
+            MaterialRepo materialRepo = new(AiLearnerDbContext);
+            QuestionRepo questionRepo = new(AiLearnerDbContext);
+            AnswerRepo answerRepo = new(AiLearnerDbContext);
+
+            User user = await userRepo.NewUser("Michael1mic1@gmail.com", "abcd1234");
+            Material material = await materialRepo.CreateMaterial(user.Id, st.Topic, st.Content, st.Summary);
+            List<Question> questions = await questionRepo.CreateQuestion(material.MaterialId, st.Questions);
+            await answerRepo.CreateAnswer(questions, st.Questions);
         }
 
         public static string studyMaterialString = "{ \"topic\": \"The History and Impact of the Internet\", \"summary\": \"The Internet has a rich history that began with ARPANET in the 1960s and expanded in the 1970s and 1980s with the development of TCP/IP. The 1990s saw the introduction of the World Wide Web, leading to massive growth in internet usage. Today, the Internet is a vital part of global infrastructure, shaping various aspects of society.\", \"questions\": [ { \"question\": \"Which U.S. Department funded the project that laid the groundwork for the modern Internet?\", \"options\": { \"A\": \"Department of Defense\", \"B\": \"Department of Energy\", \"C\": \"Department of Commerce\", \"D\": \"Department of Homeland Security\" }, \"answer\": \"A\" }, { \"question\": \"What pivotal set of rules allowed diverse computer networks to communicate seamlessly in the 1970s and 1980s?\", \"options\": { \"A\": \"Transmission Control Protocol/Internet Protocol (TCP/IP)\", \"B\": \"Hypertext Transfer Protocol (HTTP)\", \"C\": \"File Transfer Protocol (FTP)\", \"D\": \"Simple Mail Transfer Protocol (SMTP)\" }, \"answer\": \"A\" }, { \"question\": \"Who conceptualized the World Wide Web in the 1990s?\", \"options\": { \"A\": \"Steve Jobs\", \"B\": \"Bill Gates\", \"C\": \"Tim Berners-Lee\", \"D\": \"Larry Page\" }, \"answer\": \"C\" }, { \"question\": \"What technology introduced in the 1990s led to an explosion in Internet usage by providing a user-friendly interface to access information?\", \"options\": { \"A\": \"Social Media\", \"B\": \"Web Browsers\", \"C\": \"Search Engines\", \"D\": \"Cloud Technology\" }, \"answer\": \"B\" }, { \"question\": \"Which emerging technology promises to redefine our digital future by enabling new possibilities on the Internet?\", \"options\": { \"A\": \"Artificial Intelligence\", \"B\": \"Blockchain\", \"C\": \"Internet of Things (IoT)\", \"D\": \"Virtual Reality (VR)\" }, \"answer\": \"C\" }, { \"question\": \"What was the name of the project in the 1960s that laid the groundwork for the development of the Internet?\", \"options\": { \"A\": \"ARPA-Net\", \"B\": \"ARPNET\", \"C\": \"ARPANET\", \"D\": \"ARPANetwork\" }, \"answer\": \"C\" }, { \"question\": \"Who funded the development of ARPANET in the 1960s?\", \"options\": { \"A\": \"National Science Foundation\", \"B\": \"Central Intelligence Agency\", \"C\": \"Department of Defense\", \"D\": \"National Aeronautics and Space Administration\" }, \"answer\": \"C\" }, { \"question\": \"What significant event occurred in the 1990s that led to massive growth in Internet usage?\", \"options\": { \"A\": \"Launch of the first satellite internet\", \"B\": \"Introduction of the World Wide Web\", \"C\": \"Creation of the first online shopping platform\", \"D\": \"Development of the first search engine\" }, \"answer\": \"B\" }, { \"question\": \"Which technology has reshaped the digital landscape by allowing people to access vast amounts of information online?\", \"options\": { \"A\": \"Artificial Intelligence\", \"B\": \"Cloud Technology\", \"C\": \"Virtual Reality (VR)\", \"D\": \"Search Engines\" }, \"answer\": \"D\" }, { \"question\": \"Which individual played a key role in the development of the World Wide Web?\", \"options\": { \"A\": \"Steve Jobs\", \"B\": \"Bill Gates\", \"C\": \"Tim Berners-Lee\", \"D\": \"Larry Page\" }, \"answer\": \"C\" }, { \"question\": \"What technology established a set of rules in the 1970s and 1980s for different computer networks to communicate effectively?\", \"options\": { \"A\": \"World Wide Web (WWW)\", \"B\": \"Transmission Control Protocol/Internet Protocol (TCP/IP)\", \"C\": \"File Transfer Protocol (FTP)\", \"D\": \"Hypertext Transfer Protocol (HTTP)\" }, \"answer\": \"B\" }, { \"question\": \"Which technology introduced in the 1990s made it easier for users to navigate and access information on the Internet?\", \"options\": { \"A\": \"Web Browsers\", \"B\": \"Social Media\", \"C\": \"Cloud Technology\", \"D\": \"Search Engines\" }, \"answer\": \"A\" }, { \"question\": \"What term is used to describe the platform connecting billions of people worldwide and democratizing information?\", \"options\": { \"A\": \"Global Web\", \"B\": \"Interweb\", \"C\": \"Internet\", \"D\": \"Digital Network\" }, \"answer\": \"C\" }, { \"question\": \"Which technology has the potential to revolutionize the way objects interact and communicate over the Internet?\", \"options\": { \"A\": \"Augmented Reality\", \"B\": \"Virtual Reality\", \"C\": \"Internet of Things (IoT)\", \"D\": \"Blockchain\" }, \"answer\": \"C\" }, { \"question\": \"What key protocol was instrumental in allowing different computer networks to exchange data in the 1970s and 1980s?\", \"options\": { \"A\": \"Hypertext Transfer Protocol (HTTP)\", \"B\": \"Simple Mail Transfer Protocol (SMTP)\", \"C\": \"Transmission Control Protocol/Internet Protocol (TCP/IP)\", \"D\": \"File Transfer Protocol (FTP)\" }, \"answer\": \"C\" } ] }";

@@ -1,12 +1,14 @@
 using AiLearner_API.Services;
+using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AiLearner_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController() : ControllerBase
+    public class WeatherForecastController(UserRepo userRepo) : ControllerBase
     {
+        private readonly UserRepo _userRepo = userRepo;
         private static readonly string[] Summaries =
         [
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"

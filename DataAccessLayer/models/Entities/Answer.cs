@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.models
+namespace DataAccessLayer.models.Entities
 {
     public class Answer
     {
         public int AnswerId { get; set; }
-        public int QuestionId { get; set; }
+        public int ?QuestionId { get; set; }
         public string? Text { get; set; }
         public bool IsCorrect { get; set; }
 

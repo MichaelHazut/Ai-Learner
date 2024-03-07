@@ -18,7 +18,7 @@ namespace AiLearner_API
             // Add services to the container.
             builder.Services.AddDbContext<AiLearnerDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("AiLearnerConnection")));
-
+            builder.Services.AddScoped<UserRepo>();
 
             //builder.Services.AddIdentity<User, IdentityRole>()
             //                .AddUserStore<UserRepo>()
@@ -49,9 +49,9 @@ namespace AiLearner_API
             //add my ExceptionMiddleware
             app.UseMiddleware<ExceptionMiddleware>();
 
-            app.MapGet("/OpenAi", async (OpenAIService openAIService) =>
+            app.MapGet("/OpenAi", (OpenAIService openAIService) =>
             {
-                
+
                 return Results.Ok();
             });
 

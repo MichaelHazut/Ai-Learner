@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.models.Entities
+namespace DataAccessLayer.Models.Entities
 {
     public class Material
     {

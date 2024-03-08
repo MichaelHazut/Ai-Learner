@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.models
+namespace DataAccessLayer.Models
 {
     //Questions class is not an entity
     //It is used to create questions and answers

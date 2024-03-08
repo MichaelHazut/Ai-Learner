@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Reflection;
 
-namespace DataAccessLayer.models
+namespace DataAccessLayer.Models
 {
 
     //StudyMaterial class is not an entity,

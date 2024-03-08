@@ -3,7 +3,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace DataAccessLayer.models.Entities
+namespace DataAccessLayer.Models.Entities
 {
     public class User
     {

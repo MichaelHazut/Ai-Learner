@@ -1,11 +1,12 @@
 ﻿using DataAccessLayer.dbContext;
-using DataAccessLayer.models.Entities;
+using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models.Entities;
 using System.Runtime.InteropServices;
 
 
 namespace DataAccessLayer.Repositories
 {
-    public class MaterialRepo(AiLearnerDbContext context) : RepositoryBase<Material>(context)
+    public class MaterialRepo(AiLearnerDbContext context) : RepositoryBase<Material>(context), IMaterialRepo
     {
         public async Task<Material> CreateMaterial(string userId, string topic, string content, string summery)
         {
@@ -18,6 +19,8 @@ namespace DataAccessLayer.Repositories
                 UploadDate = DateTime.Now
             };
 
+            _context.Add(material);
+            await Console.Out.WriteLineAsync((char)material.MaterialId);
             await this.CreateAsync(material);
 
             return material;

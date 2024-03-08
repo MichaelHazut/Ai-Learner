@@ -1,6 +1,6 @@
 ﻿using AiLearner_ClassLibrary.OpenAi_Service;
 
-using DataAccessLayer.models;
+using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Repositories
 {

@@ -1,8 +1,10 @@
 using AiLearner_API.Services;
 using AiLearner_ClassLibrary.OpenAi_Service;
 using DataAccessLayer.dbContext;
-using DataAccessLayer.models;
+using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
+using DataAccessLayer.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,17 +18,22 @@ namespace AiLearner_API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            //Add DbContext
             builder.Services.AddDbContext<AiLearnerDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("AiLearnerConnection")));
-            builder.Services.AddScoped<UserRepo>();
+            
+            
+            //Add interfaces and their implementations
+            builder.Services.AddScoped<IUserRepo, UserRepo>();
+            builder.Services.AddScoped<IMaterialRepo, MaterialRepo>();
+            builder.Services.AddScoped<IQuestionRepo, QuestionRepo>();
+            builder.Services.AddScoped<IAnswerRepo, AnswerRepo>();
+            builder.Services.AddScoped<IUsersAnswersRepo, UsersAnswersRepo>();
+            
+            //Add UnitOfWork 
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            //builder.Services.AddIdentity<User, IdentityRole>()
-            //                .AddUserStore<UserRepo>()
-            //                .AddDefaultTokenProviders();
-            //builder.Services.AddIdentity<User, IdentityRole>(options =>
-            //{
-                
-            //});
+            
 
             builder.Services.AddSingleton<OpenAIService>();
 

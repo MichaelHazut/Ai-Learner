@@ -15,10 +15,10 @@ namespace DataAccessLayer.Repositories
             string response = await _openAIService.CallChatGPTAsync(content, numOfQuestions);
             string cleanJson = JsonService.CleanJson(response);
             
-            //Deserialize Json to StudyMaterial object
-            var material = JsonService.DeserializeJson<StudyMaterial>(cleanJson);
-            if (material == null) throw new Exception("Failed to create material");
-            
+            //Deserialize Json to StudyMaterial object and check if it is null
+            var material = JsonService.DeserializeJson<StudyMaterial>(cleanJson)
+                ?? throw new Exception("Failed to create material");
+
             //validate the StudyMaterial
             bool isValid = material.ValidateStudyMaterial();
             if (!isValid) throw new Exception("Invalid Study Material");

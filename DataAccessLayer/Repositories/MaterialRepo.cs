@@ -19,9 +19,7 @@ namespace DataAccessLayer.Repositories
                 UploadDate = DateTime.Now
             };
 
-            _context.Add(material);
-            await Console.Out.WriteLineAsync((char)material.MaterialId);
-            await this.CreateAsync(material);
+            await _context.AddAsync(material);
 
             return material;
         }

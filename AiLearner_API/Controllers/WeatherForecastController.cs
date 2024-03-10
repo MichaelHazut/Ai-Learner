@@ -7,9 +7,8 @@ namespace AiLearner_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController(IUnitOfWork unitOfWork) : ControllerBase
+    public class WeatherForecastController : ControllerBase
     {
-        private readonly IUnitOfWork UnitOfWork= unitOfWork;
         private static readonly string[] Summaries =
         [
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"

@@ -52,8 +52,9 @@ namespace AiLearner_API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
             /**/
-            //add my ExceptionMiddleware
+            //Add my ExceptionMiddleware
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.MapGet("/OpenAi", (OpenAIService openAIService) =>

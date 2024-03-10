@@ -8,10 +8,10 @@ namespace DataAccessLayer.Models
     //it is a model class that represents the study material that will be used to create a new study material in the database
     public class StudyMaterial
     {
-        public string? Topic { get; set; }
+        public required string Topic { get; set; } = "";
         public string Content { get; set; } = "Placeholder";
-        public string? Summary { get; set; }
-        public List<Questions>? Questions { get; set; }
+        public required string Summary { get; set; } = "";
+        public required List<Questions> Questions { get; set; }
 
         public bool ValidateStudyMaterial()
         {
@@ -65,7 +65,7 @@ namespace DataAccessLayer.Models
             return true;
         }
 
-        private bool ValidateOptions(Dictionary<string, string>? optionsDict)
+        private static bool ValidateOptions(Dictionary<string, string>? optionsDict)
         {
             if (optionsDict == null) return false;
             foreach (var keyValuePair in optionsDict!)

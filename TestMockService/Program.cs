@@ -30,7 +30,6 @@ namespace TestMockService
                 Console.WriteLine("press 2 for learing mock service");
                 Console.WriteLine("press 3 for learing OpenAi service");
                 Console.WriteLine("press 4 for Clean Json service");
-                Console.WriteLine("press 5 for FixBracket Json service");
                 Console.WriteLine("press 6 for ValidateStudyMaterial");
                 Console.WriteLine("press 7 for user testing");
                 Console.WriteLine("press 8 for CleanJson");
@@ -51,17 +50,13 @@ namespace TestMockService
                     case 4:
                         MockTestJsonCleaner();
                         break;
-                    case 5:
-                        MockFixMissingBracket();
-                        break;
                     case 6:
                         ValidateStudyMaterial();
                         break;
                     case 7:
-                        MockUserTester();
                         break;
                     case 8:
-                        await CleanJson();
+                        CleanJson();
                         break;
                 }
             }
@@ -106,7 +101,7 @@ namespace TestMockService
                 OpenAIService openAIService = new(configuration);
                 await Console.Out.WriteLineAsync("type number of questions");
                 int numberOfQuestions = int.Parse(Console.ReadLine() ?? "5");
-                List<StudyMaterial> stList = new();
+                List<StudyMaterial> stList = [];
                 for (int i = 0; i < 50; i++)
                 {
                     string response = string.Empty;
@@ -116,16 +111,17 @@ namespace TestMockService
                         string message = contentArray[random.Next(contentArray.Length)];
 
                         response = await openAIService.CallChatGPTAsync(message, numberOfQuestions);
-                        StudyMaterial stItem = JsonConvert.DeserializeObject<StudyMaterial>(response);
+                        StudyMaterial? stItem = JsonConvert.DeserializeObject<StudyMaterial>(response);
                         await File.AppendAllTextAsync("../../../logs/material_Log.txt", response + ",\n");
-                        stList.Add(stItem);
+                        stList.Add(stItem!);
                         await Console.Out.WriteLineAsync(i + 1 + " completed");
                     }
                     catch (Exception e)
                     {
+                        Console.WriteLine(e);
                         await Console.Out.WriteLineAsync("Attemting Json Clean");
                         await File.AppendAllTextAsync("../../../logs/failed_material_Log.txt", $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} \n" + response + "\n\n");
-                        StudyMaterial stItem = new StudyMaterial();
+                        StudyMaterial? stItem = new() { Topic = "dasd", Summary = "dsad", Questions = [] };
                         string cleanedJson = JsonService.CleanJson(response);
                         try
                         {
@@ -136,16 +132,16 @@ namespace TestMockService
                         }
                         catch (Exception ex)
                         {
-
+                            await Console.Out.WriteLineAsync(ex.Message);
                         }
-                        
+
 
                         await Console.Out.WriteLineAsync("Json Is An Object");
-                        stList.Add(stItem);
+                        stList.Add(stItem!);
 
                     }
                 }
-                List<bool> boolist = new List<bool>();
+                List<bool> boolist = [];
                 stList.ForEach(x => boolist.Add(IsStudyMaterialValid(x)));
                 boolist.ForEach(x => Console.WriteLine(x));
                 Console.ReadLine();
@@ -164,7 +160,7 @@ namespace TestMockService
                 {
                     Console.WriteLine("Json Cleaner");
                     string cleanJson = JsonService.CleanJson(dirtyJson);
-                    StudyMaterial stItem = JsonConvert.DeserializeObject<StudyMaterial>(cleanJson);
+                    StudyMaterial? stItem = JsonConvert.DeserializeObject<StudyMaterial>(cleanJson);
                     Console.WriteLine(cleanJson + "\n press any button");
                     Console.ReadLine();
 
@@ -172,16 +168,9 @@ namespace TestMockService
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
 
-        }
-        public static void MockFixMissingBracket()
-        {
-            string res = JsonService.FixMissingBracket(jsonWithMissingBracket);
-            Console.WriteLine("After Fix Attemt:");
-            Console.WriteLine(res + "\n\n");
-            StudyMaterial st = JsonConvert.DeserializeObject<StudyMaterial>(res);
         }
 
         public static bool IsStudyMaterialValid(StudyMaterial material)
@@ -244,31 +233,36 @@ namespace TestMockService
         }
         public static void ValidateStudyMaterial()
         {
-            StudyMaterial st = JsonConvert.DeserializeObject<StudyMaterial>(studyMaterialString);
-            bool ans = st.ValidateStudyMaterial();
+            StudyMaterial? st = JsonConvert.DeserializeObject<StudyMaterial>(studyMaterialString);
+            bool ans = st!.ValidateStudyMaterial();
             Console.WriteLine(ans);
 
         }
 
-        public static void MockUserTester()
-        {
-            //User us = new User("abcd1234");
-            //Console.WriteLine(us);
-        }
-        public async static Task CleanJson()
+
+        public async static void CleanJson()
         {
             StudyMaterial? st = JsonService.DeserializeJson<StudyMaterial>(studyMaterialString);
-            //UserRepo userRepo = new(AiLearnerDbContext);
-            //MaterialRepo materialRepo = new(AiLearnerDbContext);
-            //QuestionRepo questionRepo = new(AiLearnerDbContext);
-            //AnswerRepo answerRepo = new(AiLearnerDbContext);
+            UserRepo userRepo = new(AiLearnerDbContext);
+            MaterialRepo materialRepo = new(AiLearnerDbContext);
+            QuestionRepo questionRepo = new(AiLearnerDbContext);
+            AnswerRepo answerRepo = new(AiLearnerDbContext);
             UsersAnswersRepo usersAnswersRepo = new(AiLearnerDbContext);
+
+
+
+            User? user = await userRepo.NewUser("Michael1mic1@gmail.com", "abcd1234");
+
+#pragma warning disable CS8604 // Possible null reference argument.
+            Material material = await materialRepo.CreateMaterial(user!.Id, st!.Topic, st.Content, st.Summary);
+#pragma warning restore CS8604 // Possible null reference argument.
+
+            List<Question> questions = await questionRepo.CreateQuestion(material.MaterialId, st.Questions);
+
+            await answerRepo.CreateAnswer(questions, st.Questions);
+
             var res = await usersAnswersRepo.CreateUsersAnswers("71c724b2-5947-459d-98ac-241b08af9085", 3, 11);
-            int hey = 5;
-            //User user = await userRepo.NewUser("Michael1mic1@gmail.com", "abcd1234");
-            //Material material = await materialRepo.CreateMaterial(user.Id, st.Topic, st.Content, st.Summary);
-            //List<Question> questions = await questionRepo.CreateQuestion(material.MaterialId, st.Questions);
-            //await answerRepo.CreateAnswer(questions, st.Questions);
+            Console.WriteLine(res);
         }
 
         public static string studyMaterialString = "{ \"topic\": \"The History and Impact of the Internet\", \"summary\": \"The Internet has a rich history that began with ARPANET in the 1960s and expanded in the 1970s and 1980s with the development of TCP/IP. The 1990s saw the introduction of the World Wide Web, leading to massive growth in internet usage. Today, the Internet is a vital part of global infrastructure, shaping various aspects of society.\", \"questions\": [ { \"question\": \"Which U.S. Department funded the project that laid the groundwork for the modern Internet?\", \"options\": { \"A\": \"Department of Defense\", \"B\": \"Department of Energy\", \"C\": \"Department of Commerce\", \"D\": \"Department of Homeland Security\" }, \"answer\": \"A\" }, { \"question\": \"What pivotal set of rules allowed diverse computer networks to communicate seamlessly in the 1970s and 1980s?\", \"options\": { \"A\": \"Transmission Control Protocol/Internet Protocol (TCP/IP)\", \"B\": \"Hypertext Transfer Protocol (HTTP)\", \"C\": \"File Transfer Protocol (FTP)\", \"D\": \"Simple Mail Transfer Protocol (SMTP)\" }, \"answer\": \"A\" }, { \"question\": \"Who conceptualized the World Wide Web in the 1990s?\", \"options\": { \"A\": \"Steve Jobs\", \"B\": \"Bill Gates\", \"C\": \"Tim Berners-Lee\", \"D\": \"Larry Page\" }, \"answer\": \"C\" }, { \"question\": \"What technology introduced in the 1990s led to an explosion in Internet usage by providing a user-friendly interface to access information?\", \"options\": { \"A\": \"Social Media\", \"B\": \"Web Browsers\", \"C\": \"Search Engines\", \"D\": \"Cloud Technology\" }, \"answer\": \"B\" }, { \"question\": \"Which emerging technology promises to redefine our digital future by enabling new possibilities on the Internet?\", \"options\": { \"A\": \"Artificial Intelligence\", \"B\": \"Blockchain\", \"C\": \"Internet of Things (IoT)\", \"D\": \"Virtual Reality (VR)\" }, \"answer\": \"C\" }, { \"question\": \"What was the name of the project in the 1960s that laid the groundwork for the development of the Internet?\", \"options\": { \"A\": \"ARPA-Net\", \"B\": \"ARPNET\", \"C\": \"ARPANET\", \"D\": \"ARPANetwork\" }, \"answer\": \"C\" }, { \"question\": \"Who funded the development of ARPANET in the 1960s?\", \"options\": { \"A\": \"National Science Foundation\", \"B\": \"Central Intelligence Agency\", \"C\": \"Department of Defense\", \"D\": \"National Aeronautics and Space Administration\" }, \"answer\": \"C\" }, { \"question\": \"What significant event occurred in the 1990s that led to massive growth in Internet usage?\", \"options\": { \"A\": \"Launch of the first satellite internet\", \"B\": \"Introduction of the World Wide Web\", \"C\": \"Creation of the first online shopping platform\", \"D\": \"Development of the first search engine\" }, \"answer\": \"B\" }, { \"question\": \"Which technology has reshaped the digital landscape by allowing people to access vast amounts of information online?\", \"options\": { \"A\": \"Artificial Intelligence\", \"B\": \"Cloud Technology\", \"C\": \"Virtual Reality (VR)\", \"D\": \"Search Engines\" }, \"answer\": \"D\" }, { \"question\": \"Which individual played a key role in the development of the World Wide Web?\", \"options\": { \"A\": \"Steve Jobs\", \"B\": \"Bill Gates\", \"C\": \"Tim Berners-Lee\", \"D\": \"Larry Page\" }, \"answer\": \"C\" }, { \"question\": \"What technology established a set of rules in the 1970s and 1980s for different computer networks to communicate effectively?\", \"options\": { \"A\": \"World Wide Web (WWW)\", \"B\": \"Transmission Control Protocol/Internet Protocol (TCP/IP)\", \"C\": \"File Transfer Protocol (FTP)\", \"D\": \"Hypertext Transfer Protocol (HTTP)\" }, \"answer\": \"B\" }, { \"question\": \"Which technology introduced in the 1990s made it easier for users to navigate and access information on the Internet?\", \"options\": { \"A\": \"Web Browsers\", \"B\": \"Social Media\", \"C\": \"Cloud Technology\", \"D\": \"Search Engines\" }, \"answer\": \"A\" }, { \"question\": \"What term is used to describe the platform connecting billions of people worldwide and democratizing information?\", \"options\": { \"A\": \"Global Web\", \"B\": \"Interweb\", \"C\": \"Internet\", \"D\": \"Digital Network\" }, \"answer\": \"C\" }, { \"question\": \"Which technology has the potential to revolutionize the way objects interact and communicate over the Internet?\", \"options\": { \"A\": \"Augmented Reality\", \"B\": \"Virtual Reality\", \"C\": \"Internet of Things (IoT)\", \"D\": \"Blockchain\" }, \"answer\": \"C\" }, { \"question\": \"What key protocol was instrumental in allowing different computer networks to exchange data in the 1970s and 1980s?\", \"options\": { \"A\": \"Hypertext Transfer Protocol (HTTP)\", \"B\": \"Simple Mail Transfer Protocol (SMTP)\", \"C\": \"Transmission Control Protocol/Internet Protocol (TCP/IP)\", \"D\": \"File Transfer Protocol (FTP)\" }, \"answer\": \"C\" } ] }";

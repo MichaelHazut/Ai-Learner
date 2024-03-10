@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace DataAccessLayer.UnitOfWork
         IQuestionRepo Questions { get; }
         IAnswerRepo Answers { get; }
         IUsersAnswersRepo UserAnswers { get; }
+
+
         Task<int> CompleteAsync();
+        Task<bool> DeleteUserAsync(string userId);
+        Task<bool> CreateMaterialWithQuestionsAndAnswers(string userId, StudyMaterial material);
+        Task<bool> DeleteMaterialAsync(int materialId);
+        Task<bool> DeleteQuestionAsync(int questionId);
     }
 }

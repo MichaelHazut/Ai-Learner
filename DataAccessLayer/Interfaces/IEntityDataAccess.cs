@@ -6,8 +6,8 @@ namespace DataAccessLayer.Interfaces
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync<TKey>(TKey id);
         Task CreateAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        void Update(T entity);
+        void Delete(T entity);
 
     }
 }

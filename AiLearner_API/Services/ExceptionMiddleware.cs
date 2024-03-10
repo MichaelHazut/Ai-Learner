@@ -42,6 +42,11 @@ namespace AiLearner_API.Services
                 _logger.LogError("An UnauthorizedAccessException was caught: {Exception}", ex);
                 await HandleExceptionAsync(httpContext, ex);
             }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogError("An InvalidOperationException was caught: {Exception}", ex);
+                await HandleExceptionAsync(httpContext, ex);
+            } 
             catch (Exception ex)
             {
                 _logger.LogError("Something went wrong: {Exception}", ex);
@@ -56,9 +61,9 @@ namespace AiLearner_API.Services
 
             var errorDetails = new
             {
-                errorType = exception.GetType().Name,
-                errorMessage = exception.Message,
-                stackTrace = exception.StackTrace
+                ErrorType = exception.GetType().Name,
+                ErrorMessage = exception.Message,
+                exception.StackTrace
             };
 
             var result = JsonSerializer.Serialize(errorDetails, _jsonSerializerOptions);
@@ -69,7 +74,14 @@ namespace AiLearner_API.Services
             var logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {result}{Environment.NewLine}{Environment.NewLine}";
             await File.AppendAllTextAsync(_logFilePath, logEntry);
 
-            await context.Response.WriteAsync(result);
+
+            var responseResult = JsonSerializer.Serialize(new
+            {
+                errorDetails.ErrorType,
+                errorDetails.ErrorMessage
+            }, _jsonSerializerOptions);
+
+            await context.Response.WriteAsync(responseResult);
         }
     }
 }

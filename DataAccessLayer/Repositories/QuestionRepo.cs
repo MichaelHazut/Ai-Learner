@@ -10,7 +10,7 @@ namespace DataAccessLayer.Repositories
     {
         public async Task<List<Question>> CreateQuestion(int materialId, List<Questions> questions)
         {
-            List<Question> questionEntities = new List<Question>();
+            List<Question> questionEntities = [];
 
             //Interate through the questions and create the question's entities
             foreach (var question in questions)
@@ -24,7 +24,6 @@ namespace DataAccessLayer.Repositories
 
             }
             await _context.AddRangeAsync(questionEntities);
-            await _context.SaveChangesAsync();
 
             return questionEntities;
         }

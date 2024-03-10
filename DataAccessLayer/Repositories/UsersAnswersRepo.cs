@@ -9,7 +9,7 @@ namespace DataAccessLayer.Repositories
     {
         public async Task<UserAnswer> CreateUsersAnswers(string userId, int questionId, int answerId)
         {
-            UserAnswer userAnswer = new UserAnswer()
+            UserAnswer userAnswer = new()
             {
                 UserId = userId,
                 QuestionId = questionId,

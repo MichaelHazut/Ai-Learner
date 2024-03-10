@@ -14,26 +14,20 @@ namespace DataAccessLayer.Repositories
 
         public async Task<T> GetByIdAsync<TKey>(TKey id)
         {
-            var entity =  await _context.Set<T>().FindAsync(id);
-            if(entity is null)
-            {
-                throw new KeyNotFoundException($"Entity of type '{typeof(T).Name}' with ID {id} was not found.");
-            }
-            return entity;
+            var entity = await _context.Set<T>().FindAsync(id);
+            return entity!;
         }
 
         public async Task CreateAsync(T entity)
         {
-            _context.Set<T>().Add(entity);
-            await _context.SaveChangesAsync();
+            await _context.Set<T>().AddAsync(entity);
         }
-        public async Task DeleteAsync(T entity)
+        public void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(T entity)
+        public void Update(T entity)
         {
             if (_context.Entry(entity).State == EntityState.Detached)
             {
@@ -42,7 +36,6 @@ namespace DataAccessLayer.Repositories
 
             _context.Entry(entity).State = EntityState.Modified;
 
-            await _context.SaveChangesAsync();
         }
 
     }

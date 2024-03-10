@@ -15,53 +15,13 @@ namespace AiLearner_ClassLibrary.OpenAi_Service
             int endIndex = Array.LastIndexOf(charContent, '}');
 
             //extract all content between the brackets
-            string cleanedContent = new string(charContent, startIndex, endIndex - startIndex + 1);
+            string cleanedContent = new(charContent, startIndex, endIndex - startIndex + 1);
             return cleanedContent;
-        
+
         }
         public static T? DeserializeJson<T>(string content) where T : class
         {
-            try
-            {
-                return JsonConvert.DeserializeObject<T>(content);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public static string FixMissingBracket(string json)
-        {
-            // Find the last occurrence of "answer"
-            int lastAnswerIndex = json.LastIndexOf("\"answer\"");
-            if (lastAnswerIndex == -1)
-            {
-                // "answer" not found, return the original json
-                return json;
-            }
-
-            // Find the index of the colon after the last occurrence of "answer"
-            int lastColonIndex = json.IndexOf(":", lastAnswerIndex);
-            if (lastColonIndex == -1)
-            {
-                // Colon not found, return the original json
-                return json;
-            }
-
-            // Find the index of the last comma or closing bracket after the last colon, which marks the end of the answer value
-            int nextCommaIndex = json.IndexOf(",", lastColonIndex);
-            int nextBracketIndex = json.IndexOf("]", lastColonIndex);
-            int insertIndex = (nextCommaIndex == -1) ? nextBracketIndex : Math.Min(nextCommaIndex, nextBracketIndex);
-
-            if (insertIndex == -1)
-            {
-                // Neither a comma nor a closing bracket was found, return the original json
-                return json;
-            }
-
-            // Insert the closing brace before the comma or the closing bracket
-            return json.Substring(0, insertIndex) + "}" + json.Substring(insertIndex);
+            return JsonConvert.DeserializeObject<T>(content);
         }
     }
 }

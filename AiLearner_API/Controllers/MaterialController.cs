@@ -1,19 +1,35 @@
 ﻿using AiLearner_ClassLibrary.OpenAi_Service;
 using DataAccessLayer.DTO;
 using DataAccessLayer.Models;
+using DataAccessLayer.Models.Entities;
 using DataAccessLayer.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace AiLearner_API.Controllers
 {
-    public class StudyMaterialController(IUnitOfWork unitOfWork, OpenAIService aIService) : ControllerBase
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MaterialController(IUnitOfWork unitOfWork, OpenAIService aIService) : ControllerBase
     {
         private readonly IUnitOfWork UnitOfWork = unitOfWork;
         private readonly OpenAIService OpenAIService = aIService;
 
 
-        [HttpPost("materials")]
-        public async Task<IActionResult> CreateMaterials([FromBody] MaterialRequestDto requestDto)
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetMaterials(string userId)
+        {
+            List<Material> materials = await UnitOfWork.GetMaterials(userId);
+
+            if (materials == null || materials.Count == 0) return NotFound("No Materials Found");
+
+            var returnJson = JsonConvert.SerializeObject(materials);
+
+            return Ok(returnJson);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateMaterial([FromBody] MaterialRequestDto requestDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -46,12 +62,13 @@ namespace AiLearner_API.Controllers
         }
 
 
-        [HttpDelete("materials")]
-        public async Task<IActionResult> DeleteMaterial([FromBody] int materialId)
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMaterial(int id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            bool isDeleted = await UnitOfWork.DeleteMaterialAsync(materialId);
+            bool isDeleted = await UnitOfWork.DeleteMaterialAsync(id);
 
             return isDeleted ? Ok("Material Deleted Successfully") : NotFound("Material Not Found");
         }

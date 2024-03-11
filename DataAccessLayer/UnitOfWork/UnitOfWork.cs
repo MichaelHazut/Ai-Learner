@@ -9,7 +9,7 @@ namespace DataAccessLayer.UnitOfWork
 {
     // The UnitOfWork class is responsible for managing the repositories and the database context.
     // It implements the IUnitOfWork interface and provides the implementation for the repositories.
-    public class UnitOfWork(AiLearnerDbContext context, IUserRepo userRepo, IMaterialRepo materialRepo, IQuestionRepo questionRepo, IAnswerRepo answerRepo, IUsersAnswersRepo usersAnswersRepo) : IUnitOfWork
+    public class UnitOfWork(AiLearnerDbContext context, IUserRepo userRepo, IMaterialRepo materialRepo, IQuestionRepo questionRepo, IAnswerRepo answerRepo, IUsersAnswersRepo usersAnswersRepo, IRefreshTokenRepo refreshTokenRepo) : IUnitOfWork
     {
         // The UnitOfWork class has a constructor that takes the database context and the repositories as parameters.
         public IUserRepo Users { get; private set; } = userRepo;
@@ -17,6 +17,7 @@ namespace DataAccessLayer.UnitOfWork
         public IQuestionRepo Questions { get; private set; } = questionRepo;
         public IAnswerRepo Answers { get; private set; } = answerRepo;
         public IUsersAnswersRepo UserAnswers { get; private set; } = usersAnswersRepo;
+        public IRefreshTokenRepo RefreshToken { get; private set; } = refreshTokenRepo;
 
         private readonly AiLearnerDbContext Context = context;
 
@@ -37,6 +38,13 @@ namespace DataAccessLayer.UnitOfWork
             //save the changes and return true if the number of changes are greater than 0
             int changes = await CompleteAsync();
             return changes > 0;
+        }
+
+        
+        public async Task<List<Material>> GetMaterials(string userId)
+        {
+            //Get the materials by the user id
+            return await Context.Materials.Where(material => material.UserId == userId).ToListAsync();
         }
 
 

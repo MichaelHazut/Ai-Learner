@@ -10,20 +10,19 @@ namespace DataAccessLayer.Repositories
 {
     public class UserRepo(AiLearnerDbContext context) : RepositoryBase<User>(context), IUserRepo
     {
-        private async Task<bool> CheckIfExist(string email)
+        private async Task<User?> CheckIfExist(string email)
         {
             User? user = await _context.Set<User>().FirstOrDefaultAsync(u => u.Email == email);
 
-            if (user is null) return false;
-
-            return true;
+            return user;
         }
 
         public async Task<User> NewUser(string email, string password)
         {
-            if (await CheckIfExist(email) is true) throw new InvalidOperationException("User already exists");
+            User? user = await CheckIfExist(email);
+            if (user is not null) return user;
 
-            User user = new()
+            user = new()
             {
                 Id = Guid.NewGuid().ToString(),
                 Email = email,
@@ -36,13 +35,15 @@ namespace DataAccessLayer.Repositories
             return user;
         }
 
-        public async Task<bool> LogIn(string email, string password)
+        public async Task<User?> LogIn(string email, string password)
         {
-            if (await CheckIfExist(email) is false) throw new InvalidOperationException($"{email} is not a registered user");
+            User? user = await CheckIfExist(email);
+            if(user is null) return false;
+            
+            bool isVerified = PasswordService.VerifyPassword(password, user!.HashedPassword!);
+            if(isVerified is false) return null;
 
-            User? user = await _context.Set<User>().FirstOrDefaultAsync(u => u.Email == email);
-
-            return PasswordService.VerifyPassword(password, user!.HashedPassword!);
+            return user;
         }
 
         

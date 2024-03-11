@@ -5,8 +5,11 @@ using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using DataAccessLayer.UnitOfWork;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 
 namespace AiLearner_API
@@ -29,13 +32,32 @@ namespace AiLearner_API
             builder.Services.AddScoped<IQuestionRepo, QuestionRepo>();
             builder.Services.AddScoped<IAnswerRepo, AnswerRepo>();
             builder.Services.AddScoped<IUsersAnswersRepo, UsersAnswersRepo>();
+            builder.Services.AddScoped<IRefreshTokenRepo, RefreshTokenRepo>();
             
             //Add UnitOfWork 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            
-
+            builder.Services.AddScoped<JwtTokenService>();
             builder.Services.AddSingleton<OpenAIService>();
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"]
+                };
+            });
+
 
 
 
@@ -66,6 +88,7 @@ namespace AiLearner_API
             /**/
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

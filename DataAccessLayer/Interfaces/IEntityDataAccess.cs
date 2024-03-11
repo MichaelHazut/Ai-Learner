@@ -1,4 +1,6 @@
 ﻿
+using DataAccessLayer.Models.Entities;
+
 namespace DataAccessLayer.Interfaces
 {
     public interface IEntityDataAccess<T> where T : class
@@ -8,6 +10,5 @@ namespace DataAccessLayer.Interfaces
         Task CreateAsync(T entity);
         void Update(T entity);
         void Delete(T entity);
-
     }
 }

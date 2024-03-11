@@ -12,7 +12,7 @@ namespace DataAccessLayer.Models.Entities
         public string? UserId { get; set; }
         public string? Topic { get; set; }
         public string? Content { get; set; }
-        public string? summery { get; set; }
+        public string? Summery { get; set; }
         public DateTime UploadDate { get; set; }
 
         public virtual User? User { get; set; }

@@ -15,7 +15,7 @@ namespace DataAccessLayer.Repositories
                 UserId = userId,
                 Topic = topic,
                 Content = content,
-                summery = summery,
+                Summery = summery,
                 UploadDate = DateTime.Now
             };
 

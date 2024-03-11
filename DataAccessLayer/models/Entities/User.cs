@@ -13,6 +13,11 @@ namespace DataAccessLayer.Models.Entities
         public string? PhoneNumber { get; set; }
         public string? HashedPassword { get; set; }
         public DateTime CreateDate { get; set; }
+
+        public static implicit operator User(bool v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

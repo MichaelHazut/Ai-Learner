@@ -3,6 +3,7 @@ using DataAccessLayer.DTO;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Entities;
 using DataAccessLayer.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -10,6 +11,7 @@ namespace AiLearner_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MaterialController(IUnitOfWork unitOfWork, OpenAIService aIService) : ControllerBase
     {
         private readonly IUnitOfWork UnitOfWork = unitOfWork;
@@ -21,17 +23,17 @@ namespace AiLearner_API.Controllers
         {
             List<Material> materials = await UnitOfWork.GetMaterials(userId);
 
-            if (materials == null || materials.Count == 0) return NotFound("No Materials Found");
+            if (materials == null || materials.Count == 0) 
+                return NotFound("No Materials Found");
 
-            var returnJson = JsonConvert.SerializeObject(materials);
-
-            return Ok(returnJson);
+            return Ok(materials);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateMaterial([FromBody] MaterialRequestDto requestDto)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid) 
+                return BadRequest(ModelState);
 
             StudyMaterial? material = null;
             bool isValid = false;
@@ -41,12 +43,14 @@ namespace AiLearner_API.Controllers
             {
                 // Call the OpenAI service to generate a study material
                 var res = await OpenAIService.CallChatGPTAsync(requestDto.Content, requestDto.NumOfQuestions);
-                if (res == null) continue;
+                if (res == null) 
+                    continue;
 
                 // Clean the JSON response and deserialize it into a StudyMaterial object
                 string cleanJson = JsonService.CleanJson(res);
                 material = JsonService.DeserializeJson<StudyMaterial>(cleanJson);
-                if (material == null) continue;
+                if (material == null) 
+                    continue;
 
                 // Set the content of the study material and validate it
                 material.Content = requestDto.Content;

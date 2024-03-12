@@ -4,6 +4,7 @@ using DataAccessLayer.Models.Entities;
 using DataAccessLayer.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NuGet.Common;
 using System.Reflection.Metadata.Ecma335;
 
 namespace AiLearner_API.Controllers
@@ -28,7 +29,7 @@ namespace AiLearner_API.Controllers
             return changes > 0 ? Ok("User Registered Successfully") : BadRequest("User Registration Failed");
         }
 
-        
+
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromBody] UserDto userData)
         {
@@ -38,13 +39,29 @@ namespace AiLearner_API.Controllers
             if (user is null) return Unauthorized("Invalid credentials");
 
             var jwtToken = _jwtTokenService.GenerateJwtToken(user);
-            var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id);
+            var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id!);
 
-            return Ok(new
+
+            //add jwtToken and refreshToken to HttpOnly cookies
+            Response.Cookies.Append("AccessToken", jwtToken, new CookieOptions
             {
-                Token = jwtToken,
-                RefreshToken = refreshToken.Token
+                HttpOnly = true,
+                Expires = DateTime.UtcNow.AddHours(1),
+                Secure = true,
+                SameSite = SameSiteMode.None,
+
             });
+
+            Response.Cookies.Append("refreshToken", refreshToken.Token!, new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = refreshToken.Expiration,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+            }) ;
+
+            return Ok();
+
         }
 
 

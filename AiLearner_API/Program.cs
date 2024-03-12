@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using Microsoft.OpenApi.Models;
 
 
 namespace AiLearner_API
@@ -24,8 +25,8 @@ namespace AiLearner_API
             //Add DbContext
             builder.Services.AddDbContext<AiLearnerDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("AiLearnerConnection")));
-            
-            
+
+
             //Add interfaces and their implementations
             builder.Services.AddScoped<IUserRepo, UserRepo>();
             builder.Services.AddScoped<IMaterialRepo, MaterialRepo>();
@@ -33,7 +34,7 @@ namespace AiLearner_API
             builder.Services.AddScoped<IAnswerRepo, AnswerRepo>();
             builder.Services.AddScoped<IUsersAnswersRepo, UsersAnswersRepo>();
             builder.Services.AddScoped<IRefreshTokenRepo, RefreshTokenRepo>();
-            
+
             //Add UnitOfWork 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -44,6 +45,7 @@ namespace AiLearner_API
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
             })
             .AddJwtBearer(options =>
             {
@@ -54,25 +56,87 @@ namespace AiLearner_API
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                    ValidAudience = builder.Configuration["Jwt:Audience"]
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    ClockSkew = TimeSpan.Zero
                 };
+            });
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = ".MyAppAuth";
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SameSite = SameSiteMode.None;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            });
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowMyOrigin",
+                    builder => builder.WithOrigins("https://localhost:7089")
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader()
+                                        .AllowCredentials());
+            });
+
+
+            builder.Services.AddControllers();
+
+
+
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+                // Define the BearerAuth scheme that's in use
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token.",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                // Make sure swagger UI requires a Bearer token to be specified
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        new List<string>()
+                    }
+                });
             });
 
 
 
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
             var app = builder.Build();
+
+
+            app.UseCors("AllowMyOrigin");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                });
             }
 
             /**/

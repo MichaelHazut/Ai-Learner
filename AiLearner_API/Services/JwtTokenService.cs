@@ -42,7 +42,7 @@ namespace AiLearner_API.Services
             {
                 UserId = userId,
                 Token = GenerateRefreshTokenString(),
-                Expiration = DateTime.UtcNow.AddDays(7),
+                Expiration = DateTime.UtcNow.AddDays(1),
                 Created = DateTime.UtcNow,
                 Revoked = false
             };

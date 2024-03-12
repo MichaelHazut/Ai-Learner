@@ -1,7 +1,9 @@
-﻿using DataAccessLayer.dbContext;
+﻿using Azure;
+using DataAccessLayer.dbContext;
 using DataAccessLayer.Models.Entities;
 using DataAccessLayer.UnitOfWork;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -47,8 +49,7 @@ namespace AiLearner_API.Services
                 Revoked = false
             };
 
-            _unitOfWork.RefreshToken.Add(refreshToken);
-            await _unitOfWork.CompleteAsync();
+            await _unitOfWork.RefreshToken.CreateRefreshToken(refreshToken);
 
             return refreshToken;
         }
@@ -60,6 +61,26 @@ namespace AiLearner_API.Services
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);
         }
+
+        public void AppendCookie(HttpResponse response, string token, RefreshToken refreshToken)
+        {
+            response.Cookies.Append("AccessToken", token, new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = DateTime.UtcNow.AddHours(1),
+                Secure = true,
+                SameSite = SameSiteMode.None,
+
+            });
+
+            response.Cookies.Append("refreshToken", refreshToken.Token!, new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = refreshToken.Expiration,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+            });
+        }   
 
     }
 }

@@ -40,12 +40,6 @@ namespace DataAccessLayer.UnitOfWork
             return changes > 0;
         }
 
-        
-        public async Task<List<Material>> GetMaterials(string userId)
-        {
-            //Get the materials by the user id
-            return await Context.Materials.Where(material => material.UserId == userId).ToListAsync();
-        }
 
 
         // The DeleteUserAsync method deletes a user and all the materials associated with the user.

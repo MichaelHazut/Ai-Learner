@@ -2,12 +2,19 @@
 using DataAccessLayer.Models.Entities;
 using DataAccessLayer.Models;
 using DataAccessLayer.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repositories
 {
     //This class is responsible for creating an answer entity
     public class AnswerRepo(AiLearnerDbContext context) : RepositoryBase<Answer>(context), IAnswerRepo
     {
+
+        public IQueryable<Answer> GetAnswers(int questionId)
+        {
+            return _context.Set<Answer>().Where(answers => answers.QuestionId == questionId);
+        }
+
         public async Task<List<Answer>> CreateAnswer(List<Question> idList, List<Questions> textList)
         {
             List<Answer> answerEntities = [];

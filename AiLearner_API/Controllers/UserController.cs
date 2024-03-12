@@ -35,30 +35,19 @@ namespace AiLearner_API.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            //get user from db and verify credentials
             User? user = await _unitOfWork.Users.LogIn(userData.Email, userData.Password);
             if (user is null) return Unauthorized("Invalid credentials");
 
+            //generate jwtToken and refreshToken
             var jwtToken = _jwtTokenService.GenerateJwtToken(user);
             var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id!);
 
+            await _unitOfWork.CompleteAsync();
 
             //add jwtToken and refreshToken to HttpOnly cookies
-            Response.Cookies.Append("AccessToken", jwtToken, new CookieOptions
-            {
-                HttpOnly = true,
-                Expires = DateTime.UtcNow.AddHours(1),
-                Secure = true,
-                SameSite = SameSiteMode.None,
-
-            });
-
-            Response.Cookies.Append("refreshToken", refreshToken.Token!, new CookieOptions
-            {
-                HttpOnly = true,
-                Expires = refreshToken.Expiration,
-                Secure = true,
-                SameSite = SameSiteMode.None,
-            }) ;
+            _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);
+            
 
             return Ok();
 

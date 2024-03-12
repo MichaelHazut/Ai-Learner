@@ -5,6 +5,7 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IQuestionRepo : IEntityDataAccess<Question>
     {
+        Task<List<Question>> GetQuestions(int materialId);
         Task<List<Question>> CreateQuestion(int materialId, List<Questions> questions);
     }
 }

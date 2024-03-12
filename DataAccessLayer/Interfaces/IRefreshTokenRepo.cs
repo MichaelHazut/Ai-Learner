@@ -5,6 +5,8 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IRefreshTokenRepo : IEntityDataAccess<RefreshToken>
     {
-        void Add(RefreshToken refreshToken);
+        Task<RefreshToken?> GetRefreshToken(string token);
+        Task CreateRefreshToken(RefreshToken refreshToken);
+        Task<RefreshToken?> VarifyRefreshToken(string refreshToken);
     }
 }

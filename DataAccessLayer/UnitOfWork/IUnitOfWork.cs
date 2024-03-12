@@ -22,7 +22,6 @@ namespace DataAccessLayer.UnitOfWork
         Task<int> CompleteAsync();
         Task<bool> DeleteUserAsync(string userId);
         Task<bool> CreateMaterialWithQuestionsAndAnswers(string userId, StudyMaterial material);
-        Task<List<Material>> GetMaterials(string userId);
         Task<bool> DeleteMaterialAsync(int materialId);
         Task<bool> DeleteQuestionAsync(int questionId);
     }

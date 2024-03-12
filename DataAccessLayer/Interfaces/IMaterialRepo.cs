@@ -9,6 +9,7 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IMaterialRepo : IEntityDataAccess<Material>
     {
+        Task<List<Material>> GetMaterials(string userId);
         Task<Material> CreateMaterial(string userId, string topic, string content, string summery);
     }
 }

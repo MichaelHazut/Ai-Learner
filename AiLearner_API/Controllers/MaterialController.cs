@@ -23,18 +23,18 @@ namespace AiLearner_API.Controllers
         {
             List<Material> materials = await _unitOfWork.Materials.GetMaterials(userId);
 
-            if (materials == null || materials.Count == 0) 
+            if (materials == null || materials.Count == 0)
                 return NotFound("No Materials Found");
-            
+
             List<MaterialDTO> materialDTOs = materials.Select(MaterialDTO.FromMaterial).ToList();
-            
+
             return Ok(materialDTOs);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateMaterial([FromBody] MaterialRequestDto requestDto)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             StudyMaterial? material = null;
@@ -45,13 +45,13 @@ namespace AiLearner_API.Controllers
             {
                 // Call the OpenAI service to generate a study material
                 var res = await _openAIService.CallChatGPTAsync(requestDto.Content, requestDto.NumOfQuestions);
-                if (res == null) 
+                if (res == null)
                     continue;
 
                 // Clean the JSON response and deserialize it into a StudyMaterial object
                 string cleanJson = JsonService.CleanJson(res);
                 material = JsonService.DeserializeJson<StudyMaterial>(cleanJson);
-                if (material == null) 
+                if (material == null)
                     continue;
 
                 // Set the content of the study material and validate it

@@ -30,13 +30,16 @@ namespace AiLearner_API.Controllers
 
             //add new token and refresh token to HttpOnly cookies
 
+            int changes = await _unitOfWork.CompleteAsync();
+            if (changes <= 0)
+                return BadRequest("Token Refresh Failed");
 
             //update old refresh token to include new token id and revoke it
             refreshToken.ReplacedByTokenId = newRefreshToken.Id;
             refreshToken.Revoked = true;
             _unitOfWork.RefreshToken.Update(refreshToken);
-            int changes = await _unitOfWork.CompleteAsync();
-
+            
+            changes = await _unitOfWork.CompleteAsync();
             if(changes <= 0) 
                 return BadRequest("Token Refresh Failed");
 

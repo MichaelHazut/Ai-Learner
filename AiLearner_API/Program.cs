@@ -39,6 +39,7 @@ namespace AiLearner_API
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddScoped<JwtTokenService>();
+            builder.Services.AddScoped<CachingService>();
             builder.Services.AddSingleton<OpenAIService>();
 
             builder.Services.AddAuthentication(options =>
@@ -79,6 +80,8 @@ namespace AiLearner_API
             });
 
 
+
+            builder.Services.AddMemoryCache();
             builder.Services.AddControllers();
 
 
@@ -146,7 +149,6 @@ namespace AiLearner_API
             app.MapGet("/OpenAi", (OpenAIService openAIService) =>
             {
 
-                return Results.Ok();
             });
 
             /**/

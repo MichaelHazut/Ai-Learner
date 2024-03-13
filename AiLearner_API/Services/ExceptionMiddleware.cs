@@ -63,7 +63,11 @@ namespace AiLearner_API.Services
             {
                 ErrorType = exception.GetType().Name,
                 ErrorMessage = exception.Message,
-                exception.StackTrace
+                InnerException = exception.InnerException?.Message,
+                exception.StackTrace,
+                context.Request.Path,
+                context.Request.Method,
+                context.Request.QueryString, 
             };
 
             var result = JsonSerializer.Serialize(errorDetails, _jsonSerializerOptions);

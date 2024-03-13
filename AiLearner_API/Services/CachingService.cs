@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace AiLearner_API.Services
 {
@@ -28,8 +29,15 @@ namespace AiLearner_API.Services
             _memoryCache.Set(uniuqKey, value, cacheEntryOptions);
         }
 
-        // Construct a unique cache key based on the user id and the type of the object
-        private string ConstructCacheKey(string userId, Type type)
+        public void RemoveCachedItem<T>(string key)
+        {
+            string uniuqKey = ConstructCacheKey(key, typeof(T));
+            _memoryCache.Remove(uniuqKey);
+        }
+
+
+        // Construct a unique cache key based on the key and the type of the object
+        private static string ConstructCacheKey(string key, Type type)
         {
             string typeName = type.Name;
 
@@ -39,7 +47,7 @@ namespace AiLearner_API.Services
                 var genericTypeDefinition = type.GetGenericTypeDefinition().Name;
                 
                 // Clean up the name by removing the `1, `2 etc.
-                genericTypeDefinition = genericTypeDefinition.Substring(0, genericTypeDefinition.IndexOf('`'));
+                genericTypeDefinition = genericTypeDefinition[..genericTypeDefinition.IndexOf('`')];
 
                 // Get the generic arguments (Material, Question...)
                 var genericArguments = type.GetGenericArguments().Select(t => t.Name).ToArray();
@@ -48,7 +56,7 @@ namespace AiLearner_API.Services
                 typeName = $"{genericTypeDefinition}<{string.Join(", ", genericArguments)}>";
             }
 
-            return $"{userId}{{{typeName}}}";
+            return $"{key}{{{typeName}}}";
         }
     }
 }

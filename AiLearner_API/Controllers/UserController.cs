@@ -11,22 +11,30 @@ namespace AiLearner_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(IUnitOfWork unitOfWork, JwtTokenService jwtTokenService) : ControllerBase
+    public class UserController(IUnitOfWork unitOfWork, JwtTokenService jwtTokenService, CachingService cachingService) : ControllerBase
     {
 
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly JwtTokenService _jwtTokenService = jwtTokenService;
-
+        private readonly CachingService _cachingService = cachingService;
 
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] UserDto userData)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            await _unitOfWork.Users.NewUser(userData.Email, userData.Password);
+            //check if user already exists
+            User user = await _unitOfWork.Users.NewUser(userData.Email, userData.Password);
+            
+            //change is 0 if user already exists
             int changes = await _unitOfWork.CompleteAsync();
+            if (changes <= 0)
+                return BadRequest("User Registration Failed");
 
-            return changes > 0 ? Ok("User Registered Successfully") : BadRequest("User Registration Failed");
+            //cache user in memory
+            _cachingService.CacheItem(user.Email!, user);
+
+            return Ok("User Registered Successfully");
         }
 
 
@@ -35,15 +43,23 @@ namespace AiLearner_API.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            //check if user is already cached in memory 
+            bool isCached = _cachingService.TryGetCachedItem(userData.Email, out User? user);
+            if (isCached is true)            
+                return Ok(user);
+            
             //get user from db and verify credentials
-            User? user = await _unitOfWork.Users.LogIn(userData.Email, userData.Password);
-            if (user is null) return Unauthorized("Invalid credentials");
+            user = await _unitOfWork.Users.LogIn(userData.Email, userData.Password);
+            if (user is null) 
+                return Unauthorized("Invalid credentials");
 
+            
             //generate jwtToken and refreshToken
             var jwtToken = _jwtTokenService.GenerateJwtToken(user);
             var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id!);
 
-            await _unitOfWork.CompleteAsync();
+            //cache user in memory
+            _cachingService.CacheItem(user.Email!, user);
 
             //add jwtToken and refreshToken to HttpOnly cookies
             _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);

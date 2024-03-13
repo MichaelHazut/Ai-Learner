@@ -1,33 +1,43 @@
-﻿using AiLearner_ClassLibrary.OpenAi_Service;
+﻿using AiLearner_API.Services;
+using AiLearner_ClassLibrary.OpenAi_Service;
 using DataAccessLayer.DTO;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Entities;
 using DataAccessLayer.UnitOfWork;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+
 
 namespace AiLearner_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
-    public class MaterialController(IUnitOfWork unitOfWork, OpenAIService openAIService) : ControllerBase
+    //[Authorize]
+    public class MaterialController(IUnitOfWork unitOfWork, OpenAIService openAIService, CachingService cachingService) : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly OpenAIService _openAIService = openAIService;
-
+        private readonly CachingService _cachingService = cachingService;
 
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetMaterials(string userId)
         {
-            List<Material> materials = await _unitOfWork.Materials.GetMaterials(userId);
+            // Try to get the cached item and assign it to the materials variable
+            bool isCached = _cachingService.TryGetCachedItem(userId, out List<Material>? materials);
 
-            if (materials == null || materials.Count == 0)
-                return NotFound("No Materials Found");
+            // If the item is not cached, get the materials from the database
+            if (isCached is false)
+            {
+                // Get the materials from the database
+                materials = await _unitOfWork.Materials.GetMaterials(userId);
+                if (materials == null || materials.Count == 0)
+                    return NotFound("No Materials Found");
 
-            List<MaterialDTO> materialDTOs = materials.Select(MaterialDTO.FromMaterial).ToList();
+                // Cache the materials
+                _cachingService.CacheItem(userId, materials);
+            }
 
+            // Convert the materials to MaterialDTOs and return them
+            List<MaterialDTO> materialDTOs = materials!.Select(MaterialDTO.FromMaterial).ToList();
             return Ok(materialDTOs);
         }
 
@@ -74,9 +84,17 @@ namespace AiLearner_API.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            // Try to delete the material from the database and return a bool response
             bool isDeleted = await _unitOfWork.DeleteMaterialAsync(id);
+            if (isDeleted is false) 
+                return NotFound("Material Not Found");
 
-            return isDeleted ? Ok("Material Deleted Successfully") : NotFound("Material Not Found");
+            // Clear the cached items related to the material
+            _cachingService.RemoveCachedItem<List<Material>>(id.ToString());
+            _cachingService.RemoveCachedItem<List<Question>>(id.ToString());
+            _cachingService.RemoveCachedItem<List<Answer>>(id.ToString());
+
+            return Ok("Material Deleted Successfully");
         }
     }
 }

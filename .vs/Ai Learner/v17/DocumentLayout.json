@@ -1,0 +1,182 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\controllers\\questioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\controllers\\questioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\controllers\\useranswercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\controllers\\useranswercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\controllers\\answercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\controllers\\answercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\controllers\\materialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\ailearner_api\\services\\cachingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}|AiLearner_API\\AiLearner_API.csproj|solutionrelative:ailearner_api\\services\\cachingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\dataaccesslayer\\repositories\\userrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|solutionrelative:dataaccesslayer\\repositories\\userrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|c:\\users\\michael\\desktop\\learning\\projects\\ai learner\\dataaccesslayer\\repositories\\questionrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED519615-F6EE-40C4-B681-A7DD05D53EFA}|DataAccessLayer\\DataAccessLayer.csproj|solutionrelative:dataaccesslayer\\repositories\\questionrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 483,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "AiLearner_API\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Controllers\\UserController.cs",
+              "RelativeToolTip": "AiLearner_API\\Controllers\\UserController.cs",
+              "ViewState": "AQIAACAAAAAAAAAAAAAAACMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T13:39:19.956Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MaterialController.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Controllers\\MaterialController.cs",
+              "RelativeDocumentMoniker": "AiLearner_API\\Controllers\\MaterialController.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Controllers\\MaterialController.cs",
+              "RelativeToolTip": "AiLearner_API\\Controllers\\MaterialController.cs",
+              "ViewState": "AQIAADgAAAAAAAAAAAAAABgAAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T13:57:34.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "QuestionController.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Controllers\\QuestionController.cs",
+              "RelativeDocumentMoniker": "AiLearner_API\\Controllers\\QuestionController.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Controllers\\QuestionController.cs",
+              "RelativeToolTip": "AiLearner_API\\Controllers\\QuestionController.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAAABAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T13:56:58.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AnswerController.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Controllers\\AnswerController.cs",
+              "RelativeDocumentMoniker": "AiLearner_API\\Controllers\\AnswerController.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Controllers\\AnswerController.cs",
+              "RelativeToolTip": "AiLearner_API\\Controllers\\AnswerController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAABKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T15:36:53.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserAnswerController.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Controllers\\UserAnswerController.cs",
+              "RelativeDocumentMoniker": "AiLearner_API\\Controllers\\UserAnswerController.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Controllers\\UserAnswerController.cs",
+              "RelativeToolTip": "AiLearner_API\\Controllers\\UserAnswerController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T15:39:22.772Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 433,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CachingService.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\CachingService.cs",
+              "RelativeDocumentMoniker": "AiLearner_API\\Services\\CachingService.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\AiLearner_API\\Services\\CachingService.cs",
+              "RelativeToolTip": "AiLearner_API\\Services\\CachingService.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAAABMAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T13:47:25.965Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserRepo.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\Repositories\\UserRepo.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Repositories\\UserRepo.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\Repositories\\UserRepo.cs",
+              "RelativeToolTip": "DataAccessLayer\\Repositories\\UserRepo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T13:40:27.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "QuestionRepo.cs",
+              "DocumentMoniker": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\Repositories\\QuestionRepo.cs",
+              "RelativeDocumentMoniker": "DataAccessLayer\\Repositories\\QuestionRepo.cs",
+              "ToolTip": "C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\DataAccessLayer\\Repositories\\QuestionRepo.cs",
+              "RelativeToolTip": "DataAccessLayer\\Repositories\\QuestionRepo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T13:57:21.441Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "BuildIncremental": {
+    "Enabled": false
+  },
+  "ExcludedItems": [
+    ".git",
+    ".vs",
+    ".vscode"
+  ],
+  "Indexing": {
+    "Enabled": true
+  },
+  "Logger": {
+    "EnableVsLogging": false,
+    "LoggingLevel": "Info"
+  }
+}

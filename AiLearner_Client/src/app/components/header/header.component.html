@@ -1,0 +1,14 @@
+<div class="flex h-12 bg-slate-400 items-center justify-between">
+    <div class="flex items-center">
+        <img src="../../../assets/Images/Logo-Placeholder.png" alt="Logo" class="h-12 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer" />
+        <div class="flex gap-4 px-3">
+            <p *ngFor="let item of navArray" class="relative hover:text-white  nav-item hover:shadow-sm cursor-pointer transition duration-300 transform hover:scale-110">{{item}}</p>
+        </div>
+    </div>
+    <div class="flex items-center gap-4 mx-3">
+        <!-- <img src="./../../assets/Images/profile_Picture_Placeholder.jpg" alt="Logo" class="h-9 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer rounded-full"> -->
+        <p class="cursor-pointer hover:scale-105 duration-300 ">Sign in</p>
+        <p class="cursor-pointer p-item p-1 border rounded-lg border-gray-300 hover:border-black hover:scale-105 transition duration-300">Sign Up</p>
+    </div>
+</div>
+

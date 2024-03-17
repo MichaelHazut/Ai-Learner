@@ -10,4 +10,9 @@ import { NgForOf } from '@angular/common';
 })
 export class HeaderComponent {
   navArray : string[] = ['Home', 'About', 'Contact'];
+  showSidebar : boolean = false;
+
+  toggleSidebar() {
+    this.showSidebar = !this.showSidebar;
+  }
 }

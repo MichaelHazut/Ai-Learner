@@ -1,5 +1,5 @@
 <!-- This is the main container for the header. It uses flexbox for layout and has a specific height and background color. -->
-<div class="flex h-14 bg-slate-400 items-center justify-between">
+<div class="flex h-14 bg-gray-800 items-center justify-between">
   <!-- This button is for toggling the sidebar. It is only visible on small screens. -->
   <button class="p-4 sm:hidden" (click)="toggleSidebar()">
     <img
@@ -10,13 +10,11 @@
   </button>
 
   <!-- This is the logo of the website. -->
-  <div class="flex items-center mx-auto sm:mx-0">
     <img
       src="../../../assets/Images/Logo-Placeholder.png"
       alt="Logo"
-      class="h-14 sm:h-12 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer"
+      class="h-14 sm:h-12 ml-5 sm:ml-1 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer"
     />
-  </div>
 
   <!-- This is the navigation menu. It is hidden on small screens and becomes visible on larger screens. -->
   <div class="hidden sm:flex sm:mr-auto gap-4 px-3 items-center">
@@ -36,7 +34,7 @@
   <!-- This is the sign up button. It has a specific styling. -->
   <button>
     <p
-      class="text-sm sm:text-lg mr-2 font-bold whitespace-nowrap cursor-pointer p-item p-1 px-1.5 border rounded-md border-gray-300 hover:border-black hover:scale-105 transition duration-300"
+      class="text-sm text-white sm:text-lg mr-2 font-bold whitespace-nowrap cursor-pointer p-item p-1 px-1.5 border rounded-md border-gray-300  hover:scale-105 transition duration-300"
     >
       Sign Up
     </p>

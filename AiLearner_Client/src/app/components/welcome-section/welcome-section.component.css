@@ -1,3 +1,66 @@
 .mix-blend-mode {
-    mix-blend-mode: multiply;
+  mix-blend-mode: multiply;
+}
+
+@keyframes fadeInFromRight {
+  0% {
+    transform: translateX(10px);
+    opacity: 0;
   }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutToRight {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInFromLeft{
+  0% {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutToLeft {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+}
+
+.arrowImg1 {
+  animation: fadeInFromRight 0.5s linear forwards;
+}
+
+button:hover .arrowImg1 {
+  animation: fadeOutToRight 0.5s linear forwards;
+}
+
+.arrowImg2{
+  opacity: 0;
+  position: absolute;
+  animation: fadeOutToLeft 0.5s linear forwards;
+}
+
+button:hover .arrowImg2 {
+  animation: fadeInFromLeft 0.5s linear forwards;
+}
+.animated{
+  animation: fadeInFromRight 1s linear forwards;
+}

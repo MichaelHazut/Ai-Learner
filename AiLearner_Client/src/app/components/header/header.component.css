@@ -19,3 +19,19 @@
 .custom-drop-shadow:hover {
     filter: drop-shadow(0 10px 10px rgba(0,0,0,0.25));
   }
+
+@keyframes topToButtom {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+}
+
+.animated{
+    animation: topToButtom 0.5s linear forwards;
+}

@@ -9,3 +9,9 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Zabal';
+    src: url('assets/Fonts/Zabal/ZabalDEMO-SemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}

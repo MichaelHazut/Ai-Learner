@@ -1,0 +1,5 @@
+@media (max-width: 640px) { /* Adjust this breakpoint as needed */
+    .mobile-bg-position {
+      object-position: 50% 20%; /* This centers the image and positions it 20% down from the top. Adjust as needed. */
+    }
+  }

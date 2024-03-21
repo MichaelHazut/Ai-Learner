@@ -1,0 +1,19 @@
+
+@supports (animation-timeline: view()) {
+  .parallax {
+    opacity: 0;
+    animation: fadeIn linear forwards;
+    animation-timeline: view();
+    animation-range-start: cover;
+    animation-range-end: 300px;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-100px);
+  }
+}

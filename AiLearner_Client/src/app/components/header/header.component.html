@@ -1,73 +1,71 @@
 <!-- This is the main container for the header. It uses flexbox for layout and has a specific height and background color. -->
-<div class="bg-gray-800">
-  <div class="flex h-14  items-center animated justify-between">
-    <!-- This button is for toggling the sidebar. It is only visible on small screens. -->
-    <button class="p-4 sm:hidden" (click)="toggleSidebar()">
-      <img
-        src="../../../assets/SVG/hamburger-icon.svg"
-        alt="hamburger-icon"
-        class="h-6 m-0 p-0 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer"
-      />
-    </button>
-
-    <!-- This is the logo of the website. -->
+<div class="flex h-14 bg-white sticky z-10 top-0 bg-opacity-35 items-center animated justify-between">
+  <!-- This button is for toggling the sidebar. It is only visible on small screens. -->
+  <button class="p-4 sm:hidden" (click)="toggleSidebar()">
     <img
-      src="../../../assets/Images/Logo-Placeholder.png"
-      alt="Logo"
-      class="h-14 sm:h-12 ml-5 sm:ml-1 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer"
+      src="../../../assets/SVG/hamburger-icon.svg"
+      alt="hamburger-icon"
+      class="h-6 m-0 p-0 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer"
     />
+  </button>
 
-    <!-- This is the navigation menu. It is hidden on small screens and becomes visible on larger screens. -->
-    <div class="hidden sm:flex sm:mr-auto gap-4 px-3 items-center">
+  <!-- This is the logo of the website. -->
+  <img
+    src="../../../assets/Images/Logo-Placeholder.png"
+    alt="Logo"
+    class="h-14 sm:h-12 ml-5 sm:ml-1 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer"
+  />
+
+  <!-- This is the navigation menu. It is hidden on small screens and becomes visible on larger screens. -->
+  <div class="hidden sm:flex sm:mr-auto gap-4 px-3 items-center">
+    <p
+      *ngFor="let item of navArray"
+      class="text-sm sm:text-lg relative hover:text-white nav-item hover:shadow-sm cursor-pointer transition duration-300 transform hover:scale-110"
+    >
+      {{ item }}
+    </p>
+  </div>
+
+  <!-- This is the sign in text. It is hidden on small screens and becomes visible on larger screens. -->
+  <div class="hidden sm:flex items-center gap-4 mx-3">
+    <p class="text-lg cursor-pointer hover:scale-105 duration-300">Sign in</p>
+  </div>
+
+  <!-- This is the sign up button. It has a specific styling. -->
+  <button>
+    <p
+      class="text-sm text-white sm:text-lg mr-2 font-bold whitespace-nowrap cursor-pointer p-item p-1 px-1.5 border rounded-md border-gray-300 hover:scale-105 transition duration-300"
+    >
+      Sign Up
+    </p>
+  </button>
+
+  <!-- This is the sidebar for small screens. It is hidden by default and becomes visible when the hamburger button is clicked. -->
+  <div
+    class="absolute left-0 top-14 bg-white transform -translate-x-full sm:hidden transition-transform duration-300 ease-in-out"
+    [class.translate-x-0]="showSidebar"
+    [class.-translate-x-full]="!showSidebar"
+  >
+    <div class="flex flex-col gap-4 p-4 bg-slate-300 h-auto">
       <p
         *ngFor="let item of navArray"
-        class="text-sm sm:text-lg relative hover:text-white nav-item hover:shadow-sm cursor-pointer transition duration-300 transform hover:scale-110"
+        class="text-lg cursor-pointer hover:text-white transition duration-300"
+        (click)="toggleSidebar()"
       >
         {{ item }}
       </p>
-    </div>
-
-    <!-- This is the sign in text. It is hidden on small screens and becomes visible on larger screens. -->
-    <div class="hidden sm:flex items-center gap-4 mx-3">
-      <p class="text-lg cursor-pointer hover:scale-105 duration-300">Sign in</p>
-    </div>
-
-    <!-- This is the sign up button. It has a specific styling. -->
-    <button>
       <p
-        class="text-sm text-white sm:text-lg mr-2 font-bold whitespace-nowrap cursor-pointer p-item p-1 px-1.5 border rounded-md border-gray-300 hover:scale-105 transition duration-300"
+        class="text-lg cursor-pointer hover:scale-105 duration-300"
+        (click)="toggleSidebar()"
+      >
+        Sign in
+      </p>
+      <p
+        class="text-lg font-bold cursor-pointer hover:scale-105 duration-300"
+        (click)="toggleSidebar()"
       >
         Sign Up
       </p>
-    </button>
-
-    <!-- This is the sidebar for small screens. It is hidden by default and becomes visible when the hamburger button is clicked. -->
-    <div
-      class="absolute top-14 left-0 bottom-0 transform -translate-x-full sm:hidden transition-transform duration-300 ease-in-out"
-      [class.translate-x-0]="showSidebar"
-      [class.-translate-x-full]="!showSidebar"
-    >
-      <div class="flex flex-col gap-4 p-4 bg-slate-300 h-full">
-        <p
-          *ngFor="let item of navArray"
-          class="text-lg cursor-pointer hover:text-white transition duration-300"
-          (click)="toggleSidebar()"
-        >
-          {{ item }}
-        </p>
-        <p
-          class="text-lg cursor-pointer hover:scale-105 duration-300"
-          (click)="toggleSidebar()"
-        >
-          Sign in
-        </p>
-        <p
-          class="text-lg font-bold cursor-pointer hover:scale-105 duration-300"
-          (click)="toggleSidebar()"
-        >
-          Sign Up
-        </p>
-      </div>
     </div>
   </div>
 </div>

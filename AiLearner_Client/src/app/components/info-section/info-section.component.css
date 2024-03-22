@@ -5,7 +5,7 @@
     animation: fadeIn linear forwards;
     animation-timeline: view();
     animation-range-start: cover;
-    animation-range-end: 300px;
+    animation-range-end: 500px;
   }
 }
 @keyframes fadeIn {

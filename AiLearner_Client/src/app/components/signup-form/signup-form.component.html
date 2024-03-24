@@ -1,0 +1,39 @@
+<div
+  class="h-96 w-11/12 mx-auto mt-10 md:max-w-2xl md:mx-auto bg-gray-400/[.1] rounded-3xl"
+>
+  <form #loginForm="ngForm" (submit)="onSubmit($event)" class="flex flex-col items-center">
+    <label for="email">Email:</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="userEmail"
+      #email="ngModel"
+      required
+      email
+    />
+    <div *ngIf="email.invalid && email.touched">
+      <p *ngIf="email.errors?.['required']">Email is required.</p>
+      <p *ngIf="email.errors?.['email']">Please enter a valid email.</p>
+    </div>
+
+    <label for="password">Password:</label>
+    <input
+     type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="userPassword"
+      #password="ngModel"
+      required
+      minlength="8"
+    />
+    <div *ngIf="password.invalid && password.touched">
+        <p *ngIf="password.errors?.['required']">Password is required.</p>
+        <p *ngIf="password.errors?.['minlength']">
+            Password must be at least 8 characters long.
+        </p>
+    </div>
+
+    <button type="submit" class="px-6 py-2 rounded-3xl bg-gray-500">Submit</button>
+  </form>
+</div>

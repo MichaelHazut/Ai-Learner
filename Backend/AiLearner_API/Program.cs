@@ -73,7 +73,7 @@ namespace AiLearner_API
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowMyOrigin",
-                    builder => builder.WithOrigins("https://localhost:7089")
+                    builder => builder.WithOrigins("http://localhost:4200")
                                         .AllowAnyMethod()
                                         .AllowAnyHeader()
                                         .AllowCredentials());
@@ -135,21 +135,18 @@ namespace AiLearner_API
             if (app.Environment.IsDevelopment())
             {
 
+            }
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 });
-            }
 
             /**/
             //Add my ExceptionMiddleware
             app.UseMiddleware<ExceptionMiddleware>();
 
-            app.MapGet("/OpenAi", (OpenAIService openAIService) =>
-            {
-
-            });
+            app.MapGet("/test",() => "Hello World!");
 
             /**/
             app.UseHttpsRedirection();

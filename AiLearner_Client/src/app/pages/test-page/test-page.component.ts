@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-test-page',
@@ -9,4 +10,11 @@ import { Component } from '@angular/core';
 })
 export class TestPageComponent {
 
+  constructor(private userService: UserService) { }
+
+  getUsers() {
+    this.userService.getUsers().subscribe((data) => {
+      console.log(data);
+    });
+  }
 }

@@ -1,17 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 @font-face {
-    font-family: 'Zabal';
-    src: url('assets/Fonts/Zabal/ZabalDEMO-SemiBold.otf') format('opentype');
-    font-weight: 600;
-    font-style: normal;
+  font-family: "Zabal";
+  src: url("assets/Fonts/Zabal/ZabalDEMO-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

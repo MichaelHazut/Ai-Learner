@@ -1,5 +1,7 @@
 <!-- This is the main container for the header. It uses flexbox for layout and has a specific height and background color. -->
-<div class="flex h-14 bg-white sticky z-10 top-0 bg-opacity-35 items-center animated justify-between">
+<div
+  class="flex h-14 bg-white sticky z-10 top-0 bg-opacity-35 items-center animated justify-between"
+>
   <!-- This button is for toggling the sidebar. It is only visible on small screens. -->
   <button class="p-4 sm:hidden" (click)="toggleSidebar()">
     <img
@@ -11,6 +13,7 @@
 
   <!-- This is the logo of the website. -->
   <img
+    routerLink="/"
     src="../../../assets/Images/Logo-Placeholder.png"
     alt="Logo"
     class="h-14 sm:h-12 ml-5 sm:ml-1 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer"
@@ -26,13 +29,13 @@
     </p>
   </div>
 
-  <!-- This is the sign in text. It is hidden on small screens and becomes visible on larger screens. -->
-  <div class="hidden sm:flex items-center gap-4 mx-3">
-    <p class="text-lg cursor-pointer hover:scale-105 duration-300">Sign in</p>
+  <!-- This is the Login text. It is hidden on small screens and becomes visible on larger screens. -->
+  <div routerLink="/login" class="hidden sm:flex items-center gap-4 mx-3">
+    <p class="text-lg cursor-pointer hover:scale-105 duration-300">Login</p>
   </div>
 
   <!-- This is the sign up button. It has a specific styling. -->
-  <button>
+  <button routerLink="signup">
     <p
       class="text-sm text-white sm:text-lg mr-2 font-bold whitespace-nowrap cursor-pointer p-item p-1 px-1.5 border rounded-md border-gray-300 hover:scale-105 transition duration-300"
     >
@@ -55,12 +58,14 @@
         {{ item }}
       </p>
       <p
+        routerLink="/login"
         class="text-lg cursor-pointer hover:scale-105 duration-300"
         (click)="toggleSidebar()"
       >
-        Sign in
+        Login
       </p>
       <p
+      routerLink="/signup"
         class="text-lg font-bold cursor-pointer hover:scale-105 duration-300"
         (click)="toggleSidebar()"
       >

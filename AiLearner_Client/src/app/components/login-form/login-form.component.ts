@@ -1,27 +1,26 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-
 import { UserDTO } from '../../models/UserDTO';
-import { UserService } from '../../services/user.service';
-import { HttpResponse } from '@angular/common/http';
-import { tap } from 'rxjs';
 
 @Component({
-  selector: 'app-signup-form',
+  selector: 'app-login-form',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './signup-form.component.html',
-  styleUrl: './signup-form.component.css',
+  templateUrl: './login-form.component.html',
+  styleUrl: './login-form.component.css',
 })
-export class SignupFormComponent {
+export class LoginFormComponent {
   userEmail: string = '';
   userPassword: string = '';
   isError = false;
-  hide: boolean = true;
+  hide : boolean = true;
 
   constructor(private userService: UserService, private router: Router) {}
+
+
 
   onSubmit(event: Event) {
     event.preventDefault();
@@ -42,7 +41,7 @@ export class SignupFormComponent {
       error: (error) => {
         console.error('Error registering user', error);
         this.isError = true;
-      }
+      },
     });
   }
 }

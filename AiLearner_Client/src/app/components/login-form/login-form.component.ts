@@ -30,10 +30,10 @@ export class LoginFormComponent {
       password: this.userPassword,
     };
 
-    this.userService.registerUser(user).subscribe({
+    this.userService.loginUser(user).subscribe({
       next: (response) => {
         console.log(response);
-        if (response.status === 201) {
+        if (response.status === 200) {
           console.log('succssfully registered user');
           this.router.navigate(['/test']);
         }

@@ -22,6 +22,18 @@ export class UserService {
     );
   }
 
+  loginUser(user: UserDTO): Observable<any> {
+    return this.http.post(this.baseUrl + 'login', user, {
+      headers: new HttpHeaders({'Content-Type': 'application/json'}),
+      observe: 'response',
+      withCredentials: true
+    }).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
   getUsers(): Observable<string> {
     return this.http.get<string>('https://localhost:7089/test');
   }

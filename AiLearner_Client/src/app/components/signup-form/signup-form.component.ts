@@ -36,7 +36,7 @@ export class SignupFormComponent {
         console.log(response);
         if (response.status === 201) {
           console.log('succssfully registered user');
-          this.router.navigate(['/test']);
+          this.router.navigate(['/login']);
         }
       },
       error: (error) => {

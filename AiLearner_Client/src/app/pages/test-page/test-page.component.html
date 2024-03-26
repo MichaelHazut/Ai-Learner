@@ -5,3 +5,12 @@
 
 <button (click)="getUsers()" class="p-3 bg-slate-700">Test Api Connection</button>
 <button (click)="signUp()" class="p-3 bg-slate-700">Test user signup</button>
+<button (click)="loginUser()" class="p-3 bg-slate-700">Test user Login</button>
+
+<div *ngIf="userId; else notLoggedIn">
+    Welcome, your user ID is: {{ userId }}
+  </div>
+  
+  <ng-template #notLoggedIn>
+    Please log in.
+  </ng-template>

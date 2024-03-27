@@ -11,6 +11,10 @@
   font-weight: 600;
   font-style: normal;
 }
+textarea {
+  resize: none !important;
+}
+
 
 @tailwind base;
 @tailwind components;

@@ -1,16 +1,16 @@
 <div
   class="h-96 w-11/12 mx-auto mt-10 md:max-w-2xl md:mx-auto bg-gray-400/[.1] rounded-3xl"
 >
-  <h1 class="text-2xl font-bold text-white text-center p-5">Sign up</h1>
+  <h1 class="p-5 text-2xl font-bold text-center text-white">Sign up</h1>
   
   <form
     #loginForm="ngForm"
     (submit)="onSubmit($event)"
     class="flex flex-col items-center"
   >
-    <label for="email" class="w-11/12 mx-auto text-white text-center">Email:</label>
+    <label for="email" class="w-11/12 mx-auto text-center text-white">Email:</label>
     <input
-      class="w-11/12 md:w-3/4 p-2 rounded-2xl border-2 border-gray-500 text-center text-lg"
+      class="w-11/12 p-2 text-lg text-center border-2 border-gray-500 md:w-3/4 rounded-2xl"
       type="email"
       id="email"
       name="email"
@@ -24,10 +24,10 @@
       <p *ngIf="email.errors?.['email']">Please enter a valid email.</p>
     </div>
 
-    <label for="password" class="mt-2 w-11/12 mx-auto text-white text-center">Password:</label>
-    <div class="relative w-11/12 md:w-3/4 mx-auto">
+    <label for="password" class="w-11/12 mx-auto mt-2 text-center text-white">Password:</label>
+    <div class="relative w-11/12 mx-auto md:w-3/4">
         <input
-            class="w-full p-2 rounded-2xl border-2 border-gray-500 text-lg"
+            class="w-full p-2 text-lg border-2 border-gray-500 rounded-2xl"
             [type]="hide ? 'password' : 'text'"
             id="password"
             name="password"
@@ -38,10 +38,10 @@
         />
         <button
           type="button"
-          class="absolute inset-y-0 right-0 mr-6 flex items-center justify-center"
+          class="absolute inset-y-0 right-0 flex items-center justify-center mr-6"
           (click)="hide = !hide"
         >
-          <i [ngClass]="hide ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+          <i class="w-5 h-5" [ngClass]="hide ? 'icon-[mdi--eye-off-outline]' : 'icon-[nimbus--eye]'"></i>
         </button>
     </div>
  
@@ -53,7 +53,7 @@
     </div>
 
 
-    <button type="submit" class="px-6 py-2 mt-2 rounded-3xl bg-gray-400 shadow-2xl">
+    <button type="submit" class="px-6 py-2 mt-2 bg-gray-400 shadow-2xl rounded-3xl">
       Submit
     </button>
     <div *ngIf="isError" class="items-center p-5">

@@ -43,8 +43,8 @@
         class="absolute inset-y-0 right-0 flex items-center justify-center mr-6"
         (click)="hide = !hide"
       >
-        <i [ngClass]="hide ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-      </button>
+      <i class="w-5 h-5" [ngClass]="hide ? 'icon-[mdi--eye-off-outline]' : 'icon-[nimbus--eye]'"></i>
+    </button>
     </div>
 
     <div *ngIf="password.invalid && password.touched">

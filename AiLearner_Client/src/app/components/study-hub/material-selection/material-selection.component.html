@@ -1,0 +1,17 @@
+<div class="flex flex-col justify-center gap-3 p-3 mx-auto sm:flex-row">
+  <div
+    (click)="newMaterial()"
+    class="flex items-center justify-center w-10/12 h-32 gap-1 mx-auto font-semibold transition bg-gray-600 shadow-xl cursor-pointer sm:h-72 sm:mx-0 sm:w-1/3 rounded-xl hover:scale-105 sm:flex-col"
+  >
+    <span class="icon-[mdi--file-plus-outline] w-9 h-9"></span>
+    <h3 >Upload New Material</h3>
+  </div>
+
+  <div
+    (click)="existingMaterial()"
+    class="flex items-center justify-center w-10/12 h-32 gap-1 mx-auto font-semibold transition bg-gray-600 shadow-xl cursor-pointer sm:h-72 sm:mx-0 sm:w-1/3 rounded-xl hover:scale-105 sm:flex-col"
+  >
+    <span class="icon-[ph--archive] w-9 h-9"></span>
+    <h3>Use Existing Material</h3>
+  </div>
+</div>

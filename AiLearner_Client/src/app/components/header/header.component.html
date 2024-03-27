@@ -1,13 +1,13 @@
 <!-- This is the main container for the header. It uses flexbox for layout and has a specific height and background color. -->
 <div
-  class="flex h-14 bg-white sticky z-10 top-0 bg-opacity-35 items-center animated justify-between"
+  class="sticky top-0 z-10 flex items-center justify-between bg-white h-14 bg-opacity-35 animated"
 >
   <!-- This button is for toggling the sidebar. It is only visible on small screens. -->
   <button class="p-4 sm:hidden" (click)="toggleSidebar()">
     <img
       src="../../../assets/SVG/hamburger-icon.svg"
       alt="hamburger-icon"
-      class="h-6 m-0 p-0 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer"
+      class="h-6 p-0 m-0 transition duration-300 transform cursor-pointer hover:scale-110 custom-drop-shadow"
     />
   </button>
 
@@ -16,23 +16,23 @@
     routerLink="/"
     src="../../../assets/Images/Logo-Placeholder.png"
     alt="Logo"
-    class="h-14 sm:h-12 ml-5 sm:ml-1 transition duration-300 transform hover:scale-110 custom-drop-shadow cursor-pointer"
+    class="ml-5 transition duration-300 transform cursor-pointer h-14 sm:h-12 sm:ml-1 hover:scale-110 custom-drop-shadow"
   />
 
   <!-- This is the navigation menu. It is hidden on small screens and becomes visible on larger screens. -->
-  <div class="hidden sm:flex sm:mr-auto gap-4 px-3 items-center">
+  <div class="items-center hidden gap-4 px-3 sm:flex sm:mr-auto">
     <p
       routerLink="/{{ item | replaceSpace }}"
       *ngFor="let item of navArray"
-      class="text-sm sm:text-lg relative hover:text-white nav-item hover:shadow-sm cursor-pointer transition duration-300 transform hover:scale-110"
+      class="relative text-sm transition duration-300 transform cursor-pointer sm:text-lg hover:text-white nav-item hover:shadow-sm hover:scale-110"
     >
       {{ item }}
     </p>
   </div>
 
   <!-- This is the Login text. It is hidden on small screens and becomes visible on larger screens. -->
-  <div routerLink="/login" class="hidden sm:flex items-center gap-4 mx-3">
-    <p class="text-lg cursor-pointer hover:scale-105 duration-300">Login</p>
+  <div routerLink="/login" class="items-center hidden gap-4 mx-3 sm:flex">
+    <p class="text-lg duration-300 cursor-pointer hover:scale-105">Login</p>
   </div>
 
   <!-- This is the sign up button. It has a specific styling. -->
@@ -46,29 +46,29 @@
 
   <!-- This is the sidebar for small screens. It is hidden by default and becomes visible when the hamburger button is clicked. -->
   <div
-    class="absolute left-0 top-14 bg-white transform -translate-x-full sm:hidden transition-transform duration-300 ease-in-out"
+    class="absolute left-0 transition-transform duration-300 ease-in-out transform -translate-x-full bg-white top-14 sm:hidden"
     [class.translate-x-0]="showSidebar"
     [class.-translate-x-full]="!showSidebar"
   >
-    <div class="flex flex-col gap-4 p-4 bg-slate-300 h-auto">
+    <div class="flex flex-col h-auto gap-4 p-4 bg-slate-300">
       <p
         *ngFor="let item of navArray"
         routerLink="/{{ item | replaceSpace }}"
-        class="text-lg cursor-pointer hover:text-white transition duration-300"
+        class="text-lg transition duration-300 cursor-pointer hover:text-white"
         (click)="toggleSidebar()"
       >
         {{ item }}
       </p>
       <p
         routerLink="/login"
-        class="text-lg cursor-pointer hover:scale-105 duration-300"
+        class="text-lg duration-300 cursor-pointer hover:scale-105"
         (click)="toggleSidebar()"
       >
         Login
       </p>
       <p
         routerLink="/signup"
-        class="text-lg font-bold cursor-pointer hover:scale-105 duration-300"
+        class="text-lg font-bold duration-300 cursor-pointer hover:scale-105"
         (click)="toggleSidebar()"
       >
         Sign Up

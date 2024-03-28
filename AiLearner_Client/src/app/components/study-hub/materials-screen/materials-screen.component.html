@@ -1,1 +1,13 @@
-<p>materials-screen works!</p>
+<div *ngFor="let material of materials" class="min-h-48 bg-gray-600 my-2 rounded-lg p-3">
+    <div class="flex justify-center gap-5 items-center">
+        <h3 class="text-white text-xl">{{material.topic}}</h3>
+        <span>{{material.uploadeDate}}</span>
+    </div>
+    <h4 class="text-white text-lg">Summery:</h4>
+    <p class="text-white">{{material.summery}}</p>
+    
+    <h4 class="text-white mt-2 text-lg">Content:</h4>
+    <div class="rounded-md bg-gray-400 p-1">
+        <p>{{material.content}}</p>
+    </div>
+</div>

@@ -1,28 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MaterialDTO } from '../../../models/MaterialDTO';
 import { MaterialService } from '../../../services/material.service';
+import { CommonModule } from '@angular/common';
+import { UserService } from '../../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-materials-screen',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './materials-screen.component.html',
-  styleUrl: './materials-screen.component.css'
+  styleUrl: './materials-screen.component.css',
 })
-export class MaterialsScreenComponent {
+export class MaterialsScreenComponent implements OnDestroy {
+  userId: string | null = null;
+  private subscription: Subscription;
 
-    
-  constructor(private materialService: MaterialService) {}
-  
+  materials: MaterialDTO[] = [];
+  constructor(
+    private materialService: MaterialService,
+    private userService: UserService
+  ) {
+    this.subscription = this.userService.userId$.subscribe((id) => {
+      this.userId = id;
+      console.log(this.userId);
+    });
+  }
+
   ngOnInit(): void {
-    const userId = '525c8c8d-a799-439e-9a3a-e8fc1665f923';
-    this.materialService.getMaterials(userId).subscribe({
-      next: (materials: MaterialDTO[]) => {
-        console.log(materials);
-      },
-      error: (error) => {
-        console.error('There was an error!', error);
+    this.subscription = this.userService.userId$.subscribe((id) => {
+      this.userId = id;
+      if (this.userId) {
+        this.loadMaterials();
       }
     });
+  }
+
+  loadMaterials(): void {
+    this.materialService.getMaterials(this.userId!).subscribe({
+      next: (materials: MaterialDTO[]) => {
+        this.materials = materials;
+      },
+      error: (error) => {
+        console.error('There was an error fetching materials!', error);
+      },
+    });
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -5,7 +5,7 @@
 </div> -->
 
 <!-- If userId is not null, display the form -->
-<div *ngIf="userId" class="w-11/12 mx-auto sm:w-2/3 md:w-1/3">
+<div *ngIf="userId" class="w-11/12 mx-auto sm:w-2/3 md:w-1/2">
   <div class="relative w-full items-center">
     <label for="content" class="text-xl font-semibold text-white"
       >Input Content:</label
@@ -18,7 +18,7 @@
       [(ngModel)]="contentInput"
       placeholder="Enter any study material here..."
       [ngClass]="{ 'opacity-20 dark:bg-gray-800 text-gray-400': loading }"
-      class="block p-2.5 w-full rounded-xl"
+      class="block p-2.5 mb-4 w-full shadow-2xl rounded-xl"
     ></textarea>
     <div
       *ngIf="loading"
@@ -43,7 +43,10 @@
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-  <button (click)="getInput()" class="p-2 text-white bg-gray-900 rounded-md">
+  <button
+    (click)="getInput()"
+    class="p-2 text-white bg-gray-900 shadow-2xl rounded-md"
+  >
     check content
   </button>
 </div>

@@ -20,6 +20,7 @@ export class SignupFormComponent {
   userPassword: string = '';
   isError = false;
   hide: boolean = true;
+  errorMsg: string = '';
 
   constructor(private userService: UserService, private router: Router) {}
 

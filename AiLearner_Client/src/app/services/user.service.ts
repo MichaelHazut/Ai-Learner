@@ -13,7 +13,8 @@ export class UserService {
   baseUrl = 'https://localhost:7089/api/User/';
 
   private userIdSource = new BehaviorSubject<string | null>(
-    '525c8c8d-a799-439e-9a3a-e8fc1665f923'
+    // '525c8c8d-a799-439e-9a3a-e8fc1665f923'
+    null
   );
   userId$ = this.userIdSource.asObservable();
 

@@ -1,6 +1,6 @@
 export interface MaterialDTO {
  id: number;
- uploadeDate : Date;
+ uploadDate : Date;
  topic: string;
  summery: string;
  content: string;

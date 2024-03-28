@@ -4,11 +4,11 @@ import { MaterialService } from '../../../services/material.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user.service';
 import { Subscription } from 'rxjs';
-
+import { FormatDatePipe } from '../../../pipes/format-date.pipe';
 @Component({
   selector: 'app-materials-screen',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormatDatePipe],
   templateUrl: './materials-screen.component.html',
   styleUrl: './materials-screen.component.css',
 })

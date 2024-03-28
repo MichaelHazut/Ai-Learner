@@ -35,7 +35,7 @@ export class LoginFormComponent {
         console.log(response);
         if (response.status === 200) {
           console.log('succssfully registered user');
-          this.router.navigate(['/test']);
+          this.router.navigate(['/study-hub']);
         }
       },
       error: (error) => {

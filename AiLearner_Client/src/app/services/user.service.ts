@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { UserDTO } from '../models/UserDTO';
+import { environment } from '../../environments/environment.secret';
 
 /**
  * Service for managing user-related operations.
@@ -10,7 +11,8 @@ import { UserDTO } from '../models/UserDTO';
   providedIn: 'root',
 })
 export class UserService {
-  baseUrl = 'https://localhost:7089/api/User/';
+  secretUrl = environment.baseUrl;
+  baseUrl = this.secretUrl + '/User/';
 
   private userIdSource = new BehaviorSubject<string | null>(
     // '525c8c8d-a799-439e-9a3a-e8fc1665f923'
@@ -18,7 +20,9 @@ export class UserService {
   );
   userId$ = this.userIdSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    console.log("secretrtt: " + this.secretUrl);
+  }
 
   /**
    * Registers a new user.

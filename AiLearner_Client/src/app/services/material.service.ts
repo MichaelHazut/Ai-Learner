@@ -3,12 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { MaterialRequestDTO } from '../models/MaterialRequestDTO';
 import { MaterialDTO } from '../models/MaterialDTO';
+import { environment } from '../../environments/environment.secret';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MaterialService {
-  baseUrl = 'https://localhost:7089/api/material';
+  secretUrl = environment.baseUrl;
+
+  baseUrl = this.secretUrl + '/material';
 
   constructor(private http: HttpClient) {}
 

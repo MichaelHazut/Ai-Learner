@@ -34,7 +34,10 @@ namespace AiLearner_API.Controllers
             //cache user in memory
             _cachingService.CacheItem(user.Email!, user);
 
-            return Ok("User Registered Successfully");
+            // Using the registration endpoint URI as a placeholder
+            string uri = Url.Action(nameof(RegisterUser)) ?? string.Empty;
+
+            return Created(uri, new { email = user.Email });
         }
 
 
@@ -46,7 +49,7 @@ namespace AiLearner_API.Controllers
             //check if user is already cached in memory 
             bool isCached = _cachingService.TryGetCachedItem(userData.Email, out User? user);
             if (isCached is true)            
-                return Ok(user);
+                return Ok(new { UserId = user!.Id });
             
             //get user from db and verify credentials
             user = await _unitOfWork.Users.LogIn(userData.Email, userData.Password);
@@ -65,8 +68,7 @@ namespace AiLearner_API.Controllers
             _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);
             
 
-            return Ok();
-
+            return Ok(new { UserId = user.Id });
         }
 
 

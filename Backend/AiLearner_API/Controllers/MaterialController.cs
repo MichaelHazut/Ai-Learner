@@ -73,8 +73,8 @@ namespace AiLearner_API.Controllers
             if (!isValid || material == null) return BadRequest("Unable to generate valid study material.");
 
             bool isSuccess = await _unitOfWork.CreateMaterialWithQuestionsAndAnswers(requestDto.UserId, material);
-
-            return isSuccess ? Ok("Created material") : NotFound();
+            
+            return isSuccess ? new CreatedResult("/material", material) : NotFound();
         }
 
 

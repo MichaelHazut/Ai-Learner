@@ -30,7 +30,7 @@
         {{ expandedState[material.id] ? "Show Less..." : "Show More..." }}
       </button>
       <button
-      [routerLink]="['/study-hub/materials', material.id]"
+      (click)="navigateToMaterial(material)"
         class="p-2 mt-4 mr-4 bg-violet-600 text-white rounded-md shadow-2xl cursor-pointer"
       >
         View Material
@@ -38,3 +38,4 @@
     </div>
   </div>
 </div>
+<!-- [routerLink]="['/study-hub/materials', material.id]" -->

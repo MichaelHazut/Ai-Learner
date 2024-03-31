@@ -9,6 +9,7 @@ import { MaterialSelectionComponent } from './components/study-hub/material-sele
 import { NewMaterialComponent } from './components/study-hub/new-material/new-material.component';
 import { MaterialsScreenComponent } from './components/study-hub/materials-screen/materials-screen.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { MaterialComponent } from './components/study-hub/material/material.component';
 
 
 export const routes: Routes = [
@@ -23,6 +24,7 @@ export const routes: Routes = [
       { path: '', component: MaterialSelectionComponent },
       { path: 'new-material', component: NewMaterialComponent },
       { path: 'materials', component: MaterialsScreenComponent },
+      { path: 'materials/:id', component: MaterialComponent },
     ],
   },
   { path: 'test', component: TestPageComponent },

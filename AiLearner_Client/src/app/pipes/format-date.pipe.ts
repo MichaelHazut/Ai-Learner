@@ -22,11 +22,11 @@ export class FormatDatePipe implements PipeTransform {
     // Extracting date and time parts
     const parts = dateString.split('T');
     const datePart = parts[0];
-    const timePart = parts[1].substring(0, 5); // Getting HH:mm
+    //const timePart = parts[1].substring(0, 5); // Getting HH:mm
 
     // Reformatting the date to YYYY/MM/DD
     const formattedDate = datePart.replace(/-/g, '/');
 
-    return `${formattedDate} ${timePart}`;
+    return formattedDate;
   }
 }

@@ -1,0 +1,16 @@
+/* Add this in your styles.css or component-specific CSS file */
+.expandable-text {
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+  }
+  
+  .collapsed {
+    max-height: 4.5rem; /* Adjust this value based on your text line height */
+  }
+  
+  .expanded {
+    max-height: 100rem; /* Set a large max-height for the expanded state */
+  }
+  .text-shadow {
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  }

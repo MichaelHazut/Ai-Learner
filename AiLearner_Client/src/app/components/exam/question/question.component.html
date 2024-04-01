@@ -1,0 +1,6 @@
+<div class="bg-slate-400 rounded-2xl">
+    <h4 class="text-xl">{{ question.text }}</h4>
+    <div class="my-3 bg-slate-500" *ngFor="let answer of answers; let i = index">
+        <h5 class="text-lg border rounded-3xl" [ngClass]="{'bg-green-400': answer.isCorrect}" (click)="selectAnswer(answer.id)">{{ answer.text }}</h5>
+    </div>
+</div>

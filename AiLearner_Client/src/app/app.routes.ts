@@ -10,7 +10,7 @@ import { NewMaterialComponent } from './components/study-hub/new-material/new-ma
 import { MaterialsScreenComponent } from './components/study-hub/materials-screen/materials-screen.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { MaterialComponent } from './components/study-hub/material/material.component';
-
+import { ExamComponent } from './components/exam/exam.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -25,6 +25,8 @@ export const routes: Routes = [
       { path: 'new-material', component: NewMaterialComponent },
       { path: 'materials', component: MaterialsScreenComponent },
       { path: 'materials/:id', component: MaterialComponent },
+      { path: 'materials/:id/exam', component: MaterialsScreenComponent },
+      { path: 'materials/:id/exam/:questionIndex', component: ExamComponent },
     ],
   },
   { path: 'test', component: TestPageComponent },

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MaterialDTO } from '../../../models/MaterialDTO';
 import { ContentDialogComponent } from './content-dialog/content-dialog.component';
@@ -7,19 +7,17 @@ import { ContentDialogComponent } from './content-dialog/content-dialog.componen
 @Component({
   selector: 'app-material',
   standalone: true,
-  imports: [CommonModule, ContentDialogComponent],
+  imports: [CommonModule,RouterLink ,ContentDialogComponent],
   templateUrl: './material.component.html',
   styleUrl: './material.component.css',
 })
 export class MaterialComponent {
-  materialId: string | null = null;
   material: MaterialDTO | null = null;
   showContent: boolean = false;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute ) {}
 
   ngOnInit() {
-    this.materialId = this.route.snapshot.paramMap.get('id');
     if (window.history.state.material) {
       this.material = window.history.state.material;
     } else {

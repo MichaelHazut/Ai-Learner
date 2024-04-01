@@ -20,9 +20,7 @@ export class UserService {
   );
   userId$ = this.userIdSource.asObservable();
 
-  constructor(private http: HttpClient) {
-    console.log("secretrtt: " + this.secretUrl);
-  }
+  constructor(private http: HttpClient) {  }
 
   /**
    * Registers a new user.

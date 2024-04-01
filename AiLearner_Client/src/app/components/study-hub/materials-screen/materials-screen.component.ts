@@ -26,7 +26,6 @@ export class MaterialsScreenComponent implements OnDestroy {
   ) {
     this.subscription = this.userService.userId$.subscribe((id) => {
       this.userId = id;
-      console.log(this.userId);
     });
   }
 
@@ -46,7 +45,7 @@ export class MaterialsScreenComponent implements OnDestroy {
   loadMaterials(): void {
     this.materialService.getMaterials(this.userId!).subscribe({
       next: (materials: MaterialDTO[]) => {
-        //this.materials = materials;
+        this.materials = materials;
       },
       error: (error) => {
         console.error('There was an error fetching materials!', error);
@@ -55,7 +54,6 @@ export class MaterialsScreenComponent implements OnDestroy {
   }
 
   navigateToMaterial(material: MaterialDTO) {
-    console.log(material);
     this.router.navigate(['/study-hub/materials', material.id], { state: { material: material } });
   }
 

@@ -1,1 +1,19 @@
-{{materialContent}}
+<div class="justify-center w-11/12 mx-auto bg-gray-300">
+  <div *ngIf="questionsWithAnswers.length > currentQuestionIndex -1">
+    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+      <div
+        class="bg-blue-600 h-2.5 rounded-full"
+        [style.width]="
+          ((currentQuestionIndex) / questions.length) * 100 + '%'
+        "
+      ></div>
+    </div>
+    <app-question
+      *ngIf="currentQuestionIndex - 1 < questionsWithAnswers.length"
+      [question]="questionsWithAnswers[currentQuestionIndex - 1].question"
+      [answers]="questionsWithAnswers[currentQuestionIndex - 1].answers"
+      (answerSelected)="handleAnswerSelection($event)"
+    >
+    </app-question>
+  </div>
+</div>

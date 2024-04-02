@@ -13,7 +13,8 @@ export class UserAnswersService {
   baseUrl = this.secretUrl + '/useranswer';
   constructor(private http: HttpClient) {}
 
-  registerMaterial(dto: UserAnswersDTO[]): Observable<any> {
+  registerAnswers(dto: UserAnswersDTO[]): Observable<any> {
+    console.log("start answer save: ", dto);
     return this.http
       .post(this.baseUrl, dto, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -28,7 +29,7 @@ export class UserAnswersService {
   }
 
   getUserAnswers(materialId: number): Observable<UserAnswersDTO[]> {
-    return this.http.get<UserAnswersDTO[]>(`${this.baseUrl}/useranswer/${materialId}`).pipe(
+    return this.http.get<UserAnswersDTO[]>(`${this.baseUrl}/${materialId}`).pipe(
       catchError(error => {
         // Check if the error status is 404, which means no user answers were found
         if (error.status === 404) {

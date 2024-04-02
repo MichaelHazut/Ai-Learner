@@ -13,7 +13,7 @@ export class QuestionService {
 
   constructor(private http: HttpClient) { }
 
-  getQuestions(materialId: string): Observable<QuestionDTO[]> {
+  getQuestions(materialId: number) : Observable<QuestionDTO[]> {
     return this.http.get<QuestionDTO[]>(this.baseUrl + '/' + materialId);
   }
 }

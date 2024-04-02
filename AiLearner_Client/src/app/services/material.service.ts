@@ -31,4 +31,8 @@ export class MaterialService {
   getMaterials(userId: string): Observable<MaterialDTO[]> {
     return this.http.get<MaterialDTO[]>(this.baseUrl + '/' +userId);
   }
+
+  getMaterialById(materialId: number): Observable<MaterialDTO> {
+    return this.http.get<MaterialDTO>(this.baseUrl + '/material/' + materialId);
+  }
 }

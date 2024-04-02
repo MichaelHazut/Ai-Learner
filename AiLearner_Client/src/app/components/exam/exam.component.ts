@@ -10,6 +10,9 @@ import { QuestionComponent } from './question/question.component';
 import { Subscription } from 'rxjs';
 import { ExamDataService } from '../../services/exam-data.service';
 import { Exam } from '../../models/Exam';
+import { UserService } from '../../services/user.service';
+import { UserAnswersDTO } from '../../models/UserAnswersDTO';
+import { UserAnswersService } from '../../services/user-answers.service';
 @Component({
   selector: 'app-exam',
   standalone: true,
@@ -19,34 +22,31 @@ import { Exam } from '../../models/Exam';
 })
 export class ExamComponent implements OnDestroy {
   materialId: string | null = null;
-  questions: QuestionDTO[] = [];
-  answers: AnswerDTO[] = [];
-  questionsWithAnswers: QuestionAndAnswers[] = [];
   currentQuestionIndex: number = 0;
   private subscriptions: Subscription[] = [];
   examData: Exam | null = null;
+  userId: string | null = null;
 
   constructor(
-    private questionsService: QuestionService,
-    private answersService: AnswerService,
     private route: ActivatedRoute,
     private router: Router,
+    private userService: UserService,
+    private userAnswersService: UserAnswersService,
     private examDataService: ExamDataService
   ) {}
 
   ngOnInit() {
     this.materialId = this.route.snapshot.paramMap.get('id');
 
-    // if (this.materialId) {
-    //   this.loadQuestions();
-    //   this.loadAnswers();
-    // }
     this.subscriptions.push(
       this.examDataService.examData$.subscribe((examData) => {
         this.examData = examData;
-        console.log('examData: ', examData);
-        console.log("length: " , examData?.questions.length);
-        console.log("currentQuestionIndex: ", this.currentQuestionIndex);
+      })
+    );
+    this.subscriptions.push(
+      this.userService.userId$.subscribe((user) => {
+        this.userId = user;
+        console.log(this.userId);
       })
     );
     this.subscriptions.push(
@@ -91,8 +91,16 @@ export class ExamComponent implements OnDestroy {
   //   }
   // }
   handleAnswerSelection(anserId: number): void {
-    this.currentQuestionIndex++;
+    let userAnswer: UserAnswersDTO = {
+      questionId:
+        this.examData?.questions[this.currentQuestionIndex - 1].question.id!,
+      answerId: anserId,
+      userId: this.userId!,
+      answerDate: new Date(),
+    };
+    this.examData?.userAnswers.push(userAnswer);
 
+    this.currentQuestionIndex++;
     if (
       this.examData &&
       this.currentQuestionIndex <= this.examData.questions.length
@@ -101,7 +109,15 @@ export class ExamComponent implements OnDestroy {
         `/study-hub/materials/${this.materialId}/exam/${this.currentQuestionIndex}`,
       ]);
     } else {
-      this.router.navigate([`/study-hub/materials/${this.materialId}/result`]);
+      this.userAnswersService.registerAnswers(this.examData?.userAnswers!).subscribe({
+        next: () => {
+          console.log("ok");
+          this.router.navigate([`/study-hub/materials/${this.materialId}/result`]);
+        },
+        error: (error) => {
+          localStorage.setItem(this.examData?.material.id.toString()!, JSON.stringify(this.examData?.userAnswers));
+        },
+      });
     }
   }
   ngOnDestroy() {

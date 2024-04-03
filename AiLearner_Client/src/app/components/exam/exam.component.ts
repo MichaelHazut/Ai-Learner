@@ -12,7 +12,7 @@ import { ExamResultComponent } from './exam-result/exam-result.component';
 @Component({
   selector: 'app-exam',
   standalone: true,
-  imports: [CommonModule, QuestionComponent,ExamResultComponent],
+  imports: [CommonModule, QuestionComponent, ExamResultComponent],
   templateUrl: './exam.component.html',
   styleUrl: './exam.component.css',
 })
@@ -104,14 +104,32 @@ export class ExamComponent implements OnDestroy {
         `/study-hub/materials/${this.materialId}/exam/${this.currentQuestionIndex}`,
       ]);
     } else {
-      this.userAnswersService.registerAnswers(this.examData?.userAnswers!).subscribe({
-        next: () => {
-          this.router.navigate([`/study-hub/materials/${this.materialId}/result`]);
-        },
-        error: (error) => {
-          localStorage.setItem(this.examData?.material.id.toString()!, JSON.stringify(this.examData?.userAnswers));
-        },
-      });
+      this.userAnswersService
+        .registerAnswers(
+          this.examData?.material.id!,
+          this.examData?.userAnswers!
+        )
+        .subscribe({
+          next: () => {
+            // If successful, navigate to the result page
+            console.log('Success! Navigate to result page.');
+            this.router.navigate([
+              `/study-hub/materials/${this.materialId}/result`,
+            ]);
+          },
+          error: (error) => {
+            // If there is an error, log it and save the answers in local storage
+            console.error(
+              'Failed to register answers, saving to local storage',
+              error
+            );
+            localStorage.setItem(
+              this.examData?.material.id.toString()!,
+              JSON.stringify(this.examData?.userAnswers)
+            );
+            this.router.navigate([`/study-hub/materials`]);
+          },
+        });
     }
   }
   ngOnDestroy() {

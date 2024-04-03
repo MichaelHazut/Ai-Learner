@@ -1,2 +1,71 @@
-<p>exam-result works!</p>
-<p>{{ examData?.material?.id }}</p>
+<div class="max-w-2xl p-3 mx-auto my-4 bg-gray-600 rounded-lg">
+  <div class="flex justify-center">
+    <h3 class="mb-3 text-lg font-bold text-white font-zabal text-shadow">
+      {{ examData?.material?.topic }}
+    </h3>
+  </div>
+  <p class="font-zabal text-slate-300">Summary</p>
+  <p class="text-xs text-gray-300 line-clamp-3">
+    {{ examData?.material?.content }}
+  </p>
+  <button
+    (click)="showOrHideContent()"
+    class="self-start text-sm text-blue-500 underline cursor-pointer"
+  >
+    Show Content
+  </button>
+  <div
+    (click)="showOrHideAnswers()"
+    class="p-3 my-3 transition-colors duration-300 ease-in-out bg-gray-400 rounded-lg shadow-2xl cursor-pointer hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50"
+  >
+    <div>
+      <div class="flex items-center justify-between w-full">
+        <h4
+          [ngClass]="
+            examData?.questions?.length! <= examData?.userAnswers?.length!
+              ? 'text-green-400 hover:text-blue-800'
+              : 'text-red-700'
+          "
+          class="text-base font-semibold text-shadow"
+        >
+          Exam
+          {{
+            examData?.questions?.length! <= examData?.userAnswers?.length!
+              ? "Completed"
+              : "Not Completed"
+          }}
+        </h4>
+        <div
+          class="flex items-center justify-center w-12 h-12 rounded-full bg-slate-300"
+        >
+          <p
+            class="m-0 leading-none text-center text-slate-700 font-zabal textshadow"
+          >
+            {{ currectAnswers.length }}/{{ examData?.questions?.length }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div [ngClass]="answerVisable ? 'block' : 'hidden'" class="my-2 ">
+      <p class="text-stone-200">Questions you got wrong:</p>
+      <div
+        *ngFor="let question of wrongAnswers; let i = index"
+        class="p-2 my-1 bg-gray-500 border rounded-md text-stone-200"
+      >
+        {{ question.question.text }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Optionally indicate if this answer is correct -->
+
+  <!-- Check if this answer is in the userAnswers array -->
+  <!-- <div *ngIf="examData?.userAnswers?.find((userAnswer) => userAnswer.question === question.question.id && userAnswer.answerId === answer.id)">
+        User selected this answer.
+      </div> -->
+</div>
+
+<app-content-dialog
+  [material]="examData?.material!"
+  [showContent]="contentVisable"
+></app-content-dialog>

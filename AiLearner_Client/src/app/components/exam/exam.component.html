@@ -1,8 +1,8 @@
-<div class="justify-center w-11/12 mx-auto bg-gray-300">
+<div class="justify-center p-4 mx-auto bg-slate-400 rounded-2xl">
   <div *ngIf="(examData?.questions?.length!) > currentQuestionIndex - 1">
-    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+    <div class="w-full rounded-full h-2.5 bg-gray-700">
       <div
-        class="bg-blue-600 h-2.5 rounded-full"
+        class="bg-blue-600 h-2.5 mb-1 rounded-full"
         [style.width]="
           (currentQuestionIndex / (examData?.questions?.length ?? 1)) * 100 +
           '%'
@@ -17,5 +17,4 @@
     >
     </app-question>
   </div>
-  <app-exam-result [examData]="examData"></app-exam-result>
 </div>

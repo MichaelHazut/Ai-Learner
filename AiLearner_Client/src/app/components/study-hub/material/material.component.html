@@ -1,28 +1,50 @@
-<div class="max-w-2xl p-3 mx-auto my-4 bg-gray-600 rounded-lg min-h-48">
-  <div class="flex justify-center">
-    <h3 class="mb-5 text-lg font-bold text-white text-shadow">
-      {{ material?.topic }}
-    </h3>
+<div
+  class="relative max-w-2xl p-3 mx-auto my-4 bg-gray-600 rounded-lg min-h-48"
+>
+  <div [ngClass]="examData ? 'block' : 'hidden'">
+    <div class="flex justify-center">
+      <h3 class="mb-5 text-lg font-bold text-white text-shadow">
+        {{ examData?.material?.topic }}
+      </h3>
+    </div>
+    <p class="text-gray-400 line-clamp-5">
+      {{ material?.content }}
+      {{ examData?.material?.content }}
+    </p>
+    <button
+      (click)="showOrHideContent()"
+      class="self-start text-sm text-blue-500 underline cursor-pointer"
+    >
+      Show Content
+    </button>
+
+    <button
+      [routerLink]="['./exam', '1']"
+      class="block px-20 py-2 mx-auto text-xl text-white shadow-2xl text-shadow bg-violet-600 rounded-3xl mt-7"
+    >
+      Start Exam
+    </button>
   </div>
-  <p class="text-gray-400 line-clamp-5">
-    {{ material?.content }}
-  </p>
-  <button
-    (click)="showOrHideContent()"
-    class="self-start text-sm text-blue-500 underline cursor-pointer"
-  >
-    Show Content
-  </button>
 
-  <button
-  [routerLink]="['./exam', '1']"
-    class="block px-20 py-2 mx-auto text-xl text-white shadow-2xl text-shadow bg-violet-600 rounded-3xl mt-7"
+  <div
+    [ngClass]="examData ? 'hidden' : 'absolute'"
+    class="space-x-2 -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2"
   >
-    Start Exam
-  </button>
+    <div class="flex">
+      <span class="sr-only">Loading...</span>
+      <div
+        class="h-8 w-8 mx-2 shadow-2xl bg-stone-300 rounded-full animate-bounce [animation-delay:-0.3s]"
+      ></div>
+      <div
+        class="h-8 w-8 mx-2 shadow-2xl bg-stone-300 rounded-full animate-bounce [animation-delay:-0.15s]"
+      ></div>
+      <div
+        class="w-8 h-8 mx-2 rounded-full shadow-2xl bg-stone-300 animate-bounce"
+      ></div>
+    </div>
+  </div>
 </div>
-
 <app-content-dialog
-  [material]="material"
+  [material]="examData?.material!"
   [showContent]="showContent"
 ></app-content-dialog>

@@ -1,11 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { QuestionDTO } from '../../models/QuestionDTO';
-import { QuestionService } from '../../services/question.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AnswerDTO } from '../../models/AnswerDTO';
-import { AnswerService } from '../../services/answer.service';
-import { QuestionAndAnswers } from '../../models/QuestionAndAnswers';
 import { QuestionComponent } from './question/question.component';
 import { Subscription } from 'rxjs';
 import { ExamDataService } from '../../services/exam-data.service';
@@ -13,10 +8,11 @@ import { Exam } from '../../models/Exam';
 import { UserService } from '../../services/user.service';
 import { UserAnswersDTO } from '../../models/UserAnswersDTO';
 import { UserAnswersService } from '../../services/user-answers.service';
+import { ExamResultComponent } from './exam-result/exam-result.component';
 @Component({
   selector: 'app-exam',
   standalone: true,
-  imports: [CommonModule, QuestionComponent],
+  imports: [CommonModule, QuestionComponent,ExamResultComponent],
   templateUrl: './exam.component.html',
   styleUrl: './exam.component.css',
 })
@@ -46,7 +42,6 @@ export class ExamComponent implements OnDestroy {
     this.subscriptions.push(
       this.userService.userId$.subscribe((user) => {
         this.userId = user;
-        console.log(this.userId);
       })
     );
     this.subscriptions.push(
@@ -55,7 +50,7 @@ export class ExamComponent implements OnDestroy {
         this.currentQuestionIndex = index ? parseInt(index, 10) : 0;
       })
     );
-    this.examDataService.getExamData(parseInt(this.materialId!));
+    //this.examDataService.getExamData(parseInt(this.materialId!));
   }
 
   // loadQuestions(): void {
@@ -111,7 +106,6 @@ export class ExamComponent implements OnDestroy {
     } else {
       this.userAnswersService.registerAnswers(this.examData?.userAnswers!).subscribe({
         next: () => {
-          console.log("ok");
           this.router.navigate([`/study-hub/materials/${this.materialId}/result`]);
         },
         error: (error) => {

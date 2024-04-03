@@ -41,13 +41,16 @@ export class ExamDataService {
   }
 
   getExamData(materialId: number): void {
+    const currentExamData = this.examData.value;
+    if(currentExamData && currentExamData.material.id === materialId) {
+      return;
+    }
     this.fetchExamData(materialId).subscribe({
       next: ({ material, questions, answers, userAnswers }) => {
         let examObj = new Exam(material, questions, answers, userAnswers);
         this.examData.next(examObj);
       },
-      error: (error) => console.error('Error fetching data:', error),
-      complete: () => console.log('Data fetching complete.'),
+      error: (error) => console.error('Error fetching data:', error)
     });
   }
 }

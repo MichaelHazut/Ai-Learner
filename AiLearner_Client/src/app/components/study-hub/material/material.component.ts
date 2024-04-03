@@ -1,32 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MaterialDTO } from '../../../models/MaterialDTO';
 import { ContentDialogComponent } from './content-dialog/content-dialog.component';
+import { Subscription } from 'rxjs';
+import { ExamDataService } from '../../../services/exam-data.service';
+import { Exam } from '../../../models/Exam';
 
 @Component({
   selector: 'app-material',
   standalone: true,
-  imports: [CommonModule,RouterLink ,ContentDialogComponent],
+  imports: [CommonModule, RouterLink, ContentDialogComponent],
   templateUrl: './material.component.html',
   styleUrl: './material.component.css',
 })
-export class MaterialComponent {
+export class MaterialComponent implements OnDestroy {
   material: MaterialDTO | null = null;
   showContent: boolean = false;
+  private subsription: Subscription = new Subscription();
+  examData: Exam | null = null;
 
-  constructor(private route: ActivatedRoute ) {}
+  constructor(
+    private examDataService: ExamDataService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    if (window.history.state.material) {
-      this.material = window.history.state.material;
-    } else {
-      // Handle the scenario where materialContent is not available
-      console.log('Material content not available');
-    }
+    this.subsription = this.examDataService.examData$.subscribe((examData) => {
+      this.examData = examData;
+    });
+    const materialId = this.route.snapshot.paramMap.get('id');
+    this.examDataService.getExamData(parseInt(materialId!));
+
+ 
   }
 
   showOrHideContent() {
     this.showContent = !this.showContent;
+  }
+  ngOnDestroy(){
+    this.subsription.unsubscribe();
   }
 }

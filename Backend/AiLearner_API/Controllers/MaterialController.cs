@@ -23,7 +23,6 @@ namespace AiLearner_API.Controllers
         {
             // Try to get the cached item and assign it to the materials variable
             bool isCached = _cachingService.TryGetCachedItem(userId, out List<Material>? materials);
-
             // If the item is not cached, get the materials from the database
             if (isCached is false)
             {
@@ -40,6 +39,23 @@ namespace AiLearner_API.Controllers
             List<MaterialDTO> materialDTOs = materials!.Select(MaterialDTO.FromMaterial).ToList();
             return Ok(materialDTOs);
         }
+        [HttpGet("material/{materialId:int}")]
+        public async Task<IActionResult> GetMaterial(int materialId)
+        {
+            bool isCached = _cachingService.TryGetCachedItem(materialId.ToString(), out Material? material);
+            if (isCached is false)
+            {
+                material = await _unitOfWork.Materials.GetByIdAsync(materialId);
+                if (material == null)
+                    return NotFound("Material Not Found");
+
+                _cachingService.CacheItem(materialId.ToString(), material);
+            }
+            MaterialDTO materialDTO = MaterialDTO.FromMaterial(material!);
+            return Ok(materialDTO);
+
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateMaterial([FromBody] MaterialRequestDto requestDto)
@@ -72,8 +88,13 @@ namespace AiLearner_API.Controllers
             // if the loop fails to generate a valid study material, return a bad request
             if (!isValid || material == null) return BadRequest("Unable to generate valid study material.");
 
+            // Create the material with questions and answers in the database
             bool isSuccess = await _unitOfWork.CreateMaterialWithQuestionsAndAnswers(requestDto.UserId, material);
+
+            // Clear the cached items related to the user
+            _cachingService.RemoveCachedItem<List<Material>>(requestDto.UserId);
             
+            // Return the created material or a Not found response
             return isSuccess ? new CreatedResult("/material", material) : NotFound();
         }
 
@@ -86,7 +107,7 @@ namespace AiLearner_API.Controllers
 
             // Try to delete the material from the database and return a bool response
             bool isDeleted = await _unitOfWork.DeleteMaterialAsync(id);
-            if (isDeleted is false) 
+            if (isDeleted is false)
                 return NotFound("Material Not Found");
 
             // Clear the cached items related to the material

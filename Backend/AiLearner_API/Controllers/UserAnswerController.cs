@@ -32,13 +32,13 @@ namespace AiLearner_API.Controllers
 
             // Convert the UserAnswers to UserAnswerDTOs and cache them
             userAnswerDTOs = userAnswers.Select(UserAnswerDTO.FromUserAnswer).ToList();
-            _cachingService.CacheItem(materialId.ToString(), userAnswerDTOs);
+            _cachingService.CacheItem("User_Answers_" + materialId.ToString(), userAnswerDTOs);
 
             return Ok(userAnswerDTOs);
         }
 
         [HttpPost("{materialId}")]
-        public async Task<IActionResult> PostUserAnswers(int materialId,[FromBody]List<UserAnswerDTO> userAnswers)
+        public async Task<IActionResult> PostUserAnswers(int materialId, [FromBody] List<UserAnswerDTO> userAnswers)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -48,8 +48,26 @@ namespace AiLearner_API.Controllers
             if (changes <= 0)
                 return BadRequest("User Answers Creation Failed");
 
-            _cachingService.CacheItem("User_Answers_"+materialId, userAnswers);
+            if (userAnswers.Count >= 10)
+                _cachingService.CacheItem("User_Answers_" + materialId, userAnswers);
+
             return Ok("User Answers Created Successfully");
+        }
+
+        [HttpPut("{materialId}")]
+        public async Task<IActionResult> UpdateUserAnswers(int materialId, [FromBody] List<UserAnswerDTO> userAnswers)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            await _unitOfWork.UserAnswers.UpdateUserAnswers(userAnswers);
+
+            int changes = await _unitOfWork.CompleteAsync();
+
+            if (changes <= 0)
+                return BadRequest("User Answers Update Failed");
+
+            _cachingService.RemoveCachedItem<List<UserAnswerDTO>>("User_Answers_" + materialId);
+            return NoContent();
         }
     }
 }

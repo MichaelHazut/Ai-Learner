@@ -39,4 +39,18 @@ export class UserAnswersService {
       })
     );
   }
+
+  updateUserAnswers(materialId: number, dto: UserAnswersDTO[]): Observable<any> {
+    return this.http
+      .put(`${this.baseUrl}/${materialId}`, dto, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        observe: 'response',
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((error) => {
+          return throwError(() => error);
+        })
+      );
+  }
 }

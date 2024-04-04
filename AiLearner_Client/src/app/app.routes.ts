@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { MaterialComponent } from './components/study-hub/material/material.component';
 import { ExamComponent } from './components/exam/exam.component';
 import { ExamResultComponent } from './components/exam/exam-result/exam-result.component';
+import { ExamRetryComponent } from './components/exam/exam-retry/exam-retry.component';
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'home', component: HomePageComponent },
@@ -28,6 +29,7 @@ export const routes: Routes = [
       { path: 'materials/:id/exam', component: MaterialsScreenComponent },
       { path: 'materials/:id/exam/:questionIndex', component: ExamComponent },
       { path: 'materials/:id/result', component: ExamResultComponent },
+      { path: 'materials/:id/exam/retry/:questionIndex', component: ExamRetryComponent },
     ],
   },
   { path: 'test', component: TestPageComponent },

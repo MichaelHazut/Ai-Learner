@@ -31,8 +31,6 @@ export class MaterialComponent implements OnDestroy {
     });
     const materialId = this.route.snapshot.paramMap.get('id');
     this.examDataService.getExamData(parseInt(materialId!));
-
- 
   }
 
   showOrHideContent() {

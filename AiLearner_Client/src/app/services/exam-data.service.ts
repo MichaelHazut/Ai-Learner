@@ -9,13 +9,17 @@ import { QuestionDTO } from '../models/QuestionDTO';
 import { AnswerDTO } from '../models/AnswerDTO';
 import { UserAnswersDTO } from '../models/UserAnswersDTO';
 import { Exam } from '../models/Exam';
+import { QuestionAndAnswers } from '../models/QuestionAndAnswers';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExamDataService {
-  private examData = new BehaviorSubject<Exam | null>(null);
+  examData = new BehaviorSubject<Exam | null>(null);
   examData$ = this.examData.asObservable();
+  
+  private examRetryData = new BehaviorSubject<QuestionAndAnswers[]| null>(null);
+  examRetryData$ = this.examRetryData.asObservable();
 
   constructor(
     private materialService: MaterialService,
@@ -52,5 +56,9 @@ export class ExamDataService {
       },
       error: (error) => console.error('Error fetching data:', error)
     });
+  }
+
+  setExamRetryData(wrongQuestions: QuestionAndAnswers[]): void {
+    this.examRetryData.next(wrongQuestions);
   }
 }

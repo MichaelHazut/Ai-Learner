@@ -1,8 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router, NavigationStart, Event as RouterEvent } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { QuestionComponent } from './question/question.component';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { ExamDataService } from '../../services/exam-data.service';
 import { Exam } from '../../models/Exam';
 import { UserService } from '../../services/user.service';
@@ -20,7 +20,7 @@ export class ExamComponent implements OnDestroy {
   materialId: string | null = null;
   currentQuestionIndex: number = 0;
   private subscriptions: Subscription[] = [];
-  examData: Exam | null = null;
+  @Input() examData: Exam | null = null;
   userId: string | null = null;
 
   constructor(
@@ -34,6 +34,15 @@ export class ExamComponent implements OnDestroy {
   ngOnInit() {
     this.materialId = this.route.snapshot.paramMap.get('id');
 
+    this.router.events.pipe(
+      filter((event: RouterEvent): event is NavigationStart => event instanceof NavigationStart)
+    ).subscribe((event: NavigationStart) => {
+      // Now 'event' is assured to be of type NavigationStart
+      const tryData = history.state?.wrongAnswers
+      if(tryData){
+        this.examData = history.state?.wrongAnswers;
+       }
+    });
     this.subscriptions.push(
       this.examDataService.examData$.subscribe((examData) => {
         this.examData = examData;
@@ -50,46 +59,13 @@ export class ExamComponent implements OnDestroy {
         this.currentQuestionIndex = index ? parseInt(index, 10) : 0;
       })
     );
-    //this.examDataService.getExamData(parseInt(this.materialId!));
   }
 
-  // loadQuestions(): void {
-  //   this.questionsService.getQuestions(this.materialId!).subscribe({
-  //     next: (questions: QuestionDTO[]) => {
-  //       this.questions = questions;
-  //       this.combineQuestionsAndAnswers();
-  //     },
-  //     error: (error) => {
-  //       console.error('There was an error fetching questions!', error);
-  //     },
-  //   });
-  // }
-  // loadAnswers(): void {
-  //   this.answersService.getAnswers(this.materialId!).subscribe({
-  //     next: (answers: AnswerDTO[]) => {
-  //       this.answers = answers;
-  //       this.combineQuestionsAndAnswers();
-  //     },
-  //     error: (error) => {
-  //       console.error('There was an error fetching questions!', error);
-  //     },
-  //   });
-  // }
-  // combineQuestionsAndAnswers(): void {
-  //   if (this.questions.length && this.answers.length) {
-  //     this.questionsWithAnswers = this.questions.map((question) => ({
-  //       question,
-  //       answers: this.answers.filter(
-  //         (answer) => answer.questionId === question.id
-  //       ),
-  //     }));
-  //   }
-  // }
-  handleAnswerSelection(anserId: number): void {
+  handleAnswerSelection(answerId: number): void {
     let userAnswer: UserAnswersDTO = {
       questionId:
         this.examData?.questions[this.currentQuestionIndex - 1].question.id!,
-      answerId: anserId,
+      answerId: answerId,
       userId: this.userId!,
       answerDate: new Date(),
     };
@@ -111,8 +87,6 @@ export class ExamComponent implements OnDestroy {
         )
         .subscribe({
           next: () => {
-            // If successful, navigate to the result page
-            console.log('Success! Navigate to result page.');
             this.router.navigate([
               `/study-hub/materials/${this.materialId}/result`,
             ]);

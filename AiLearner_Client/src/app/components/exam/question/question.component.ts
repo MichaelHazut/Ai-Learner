@@ -26,7 +26,6 @@ export class QuestionComponent implements OnDestroy{
     this.questionNumber = this.route.snapshot.paramMap.get('questionIndex') || '';
     this.routeSub = this.route.paramMap.subscribe(params => {
       this.questionNumber = params.get('questionIndex');
-      
     });
   }
   selectAnswer(answerId: number) {

@@ -37,13 +37,14 @@ export class ExamResultComponent implements OnDestroy {
 
   ngOnInit() {
     this.subsription = this.examDataService.examData$.subscribe((examData) => {
+      console.log("in subscription");
       if (!examData) {
+        console.log("no exam data fetching...");
         const materialId = this.route.snapshot.paramMap.get('id');
         this.examDataService.getExamData(parseInt(materialId!));
         return;
       }
       this.examData = examData;
-      console.log(examData);
       this.getCorrectAnswers();
       this.getIncorrectAnswers();
     });
@@ -83,8 +84,6 @@ export class ExamResultComponent implements OnDestroy {
       return wrongAnswers.length > 0;
     });
     // filter((qa) => qa.answers.length > 0);
-    console.log(this.examData?.questions);
-    console.log(this.wrongAnswers);
   }
 
   getCorrectAnswersPercentage(): number {
@@ -93,11 +92,10 @@ export class ExamResultComponent implements OnDestroy {
     }
     const percentage =
       (this.currectAnswers.length / this.examData.questions.length) * 100;
-    return percentage;
-  }
+      return Math.round(percentage);
+    }
 
   navigateToExam() {
-    console.log('state sending: ', this.wrongAnswers);
     this.examDataService.setExamRetryData(this.wrongAnswers);
     this.router.navigate([
       `study-hub/materials/${this.examData?.material.id}/exam/retry/`,

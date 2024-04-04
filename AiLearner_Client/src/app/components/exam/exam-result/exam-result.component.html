@@ -41,17 +41,33 @@
           <p
             class="m-0 leading-none text-center text-slate-700 font-zabal textshadow"
           >
-            {{ currectAnswers.length }}/{{ examData?.questions?.length }}
+            {{ getCorrectAnswersPercentage() }}%
           </p>
         </div>
       </div>
     </div>
-    <div [ngClass]="answerVisable ? 'block' : 'hidden'" class="my-2 ">
-      <p class="text-stone-200">Questions you got wrong:</p>
+    <div
+      [ngStyle]="{
+        'max-height': answerVisible ? '1000px' : '0px',
+        overflow: 'hidden'
+      }"
+      class="transition-all duration-1000 ease-in-out"
+    >
+      <div class="flex items-center justify-between mt-2">
+        <p class="text-stone-200">Questions you got wrong:</p>
+        <button
+          (click)="navigateToExam()"
+          class="px-2 py-1 bg-gray-700 border rounded-lg shadow-2xl text-stone-200"
+        >
+          Retry Wrong Answers
+        </button>
+      </div>
       <div
-        *ngFor="let question of wrongAnswers; let i = index"
+        *ngFor="let question of wrongAnswers"
+        [routerLink]="['../exam/retry/', question.questionIndex]"
         class="p-2 my-1 bg-gray-500 border rounded-md text-stone-200"
       >
+        {{ question.questionIndex }} )
         {{ question.question.text }}
       </div>
     </div>
@@ -64,6 +80,9 @@
         User selected this answer.
       </div> -->
 </div>
+<!-- <div *ngIf="wrongAnswers && wrongAnswers.length > 0">
+  <app-exam-retry [wrongQuestions]="wrongAnswers"></app-exam-retry>
+</div> -->
 
 <app-content-dialog
   [material]="examData?.material!"

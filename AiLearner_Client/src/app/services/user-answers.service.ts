@@ -13,11 +13,11 @@ export class UserAnswersService {
   baseUrl = this.secretUrl + '/useranswer';
   constructor(private http: HttpClient) {}
 
-  registerAnswers(dto: UserAnswersDTO[]): Observable<any> {
-    console.log("start answer save: ", dto);
+  registerAnswers(materialId:number, dto: UserAnswersDTO[]): Observable<any> {
     return this.http
-      .post(this.baseUrl, dto, {
+      .post(`${this.baseUrl}/${materialId}`, dto, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        responseType: 'text',
         observe: 'response',
         withCredentials: true,
       })

@@ -4,19 +4,21 @@
       {{ examData?.material?.topic }}
     </h3>
   </div>
-  <p class="font-zabal text-slate-300">Summary</p>
-  <p class="text-xs text-gray-300 line-clamp-3">
+  <p class="font-zabal text-slate-300 text-shadow">Summary</p>
+  <p class="text-xs text-gray-300 line-clamp-3 text-shadow-sm">
     {{ examData?.material?.content }}
   </p>
   <button
     (click)="showOrHideContent()"
-    class="self-start text-sm text-blue-500 underline cursor-pointer"
+    class="self-start text-sm text-blue-500 underline cursor-pointer text-shadow"
   >
     Show Content
   </button>
+
   <div
     (click)="showOrHideAnswers()"
-    class="p-3 my-3 transition-colors duration-300 ease-in-out bg-gray-400 rounded-lg shadow-2xl cursor-pointer hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50"
+    [ngClass]="wrongAnswers.length > 0 ? 'cursor-pointer' : 'cursor-auto'"
+    class="p-3 my-3 transition-colors duration-300 ease-in-out bg-gray-400 rounded-lg shadow-2xl hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50"
   >
     <div>
       <div class="flex items-center justify-between w-full">
@@ -26,7 +28,7 @@
               ? 'text-green-400 hover:text-blue-800'
               : 'text-red-700'
           "
-          class="text-base font-semibold text-shadow"
+          class="text-base font-semibold text-shadow-white"
         >
           Exam
           {{
@@ -46,43 +48,37 @@
         </div>
       </div>
     </div>
+
     <div
       [ngStyle]="{
         'max-height': answerVisible ? '1000px' : '0px',
         overflow: 'hidden'
       }"
-      class="transition-all duration-1000 ease-in-out"
+      class="transition-all duration-1000 ease-in-out cursor-auto"
     >
-      <div class="flex items-center justify-between mt-2">
-        <p class="text-stone-200">Questions you got wrong:</p>
+      <div
+        *ngIf="wrongAnswers.length > 0"
+        class="flex-row-reverse items-center justify-between mt-2 md:flex"
+      >
         <button
           (click)="navigateToExam()"
-          class="px-2 py-1 bg-gray-700 border rounded-lg shadow-2xl text-stone-200"
+          class="px-2 py-1 transition-colors duration-300 ease-in-out bg-gray-700 border rounded-lg shadow-2xl text-stone-200 hover:bg-gray-800 "
         >
           Retry Wrong Answers
         </button>
+        <p class="text-stone-200">Questions you got wrong:</p>
       </div>
       <div
         *ngFor="let question of wrongAnswers"
-        [routerLink]="['../exam/retry/', question.questionIndex]"
-        class="p-2 my-1 bg-gray-500 border rounded-md text-stone-200"
+        class="p-2 my-1 transition-colors duration-300 ease-in-out bg-gray-500 border rounded-md cursor-default hover:bg-gray-400 text-stone-200 hover:text-stone-300"
       >
         {{ question.questionIndex }} )
         {{ question.question.text }}
       </div>
     </div>
   </div>
-
-  <!-- Optionally indicate if this answer is correct -->
-
-  <!-- Check if this answer is in the userAnswers array -->
-  <!-- <div *ngIf="examData?.userAnswers?.find((userAnswer) => userAnswer.question === question.question.id && userAnswer.answerId === answer.id)">
-        User selected this answer.
-      </div> -->
 </div>
-<!-- <div *ngIf="wrongAnswers && wrongAnswers.length > 0">
-  <app-exam-retry [wrongQuestions]="wrongAnswers"></app-exam-retry>
-</div> -->
+
 
 <app-content-dialog
   [material]="examData?.material!"

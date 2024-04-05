@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
   <div
     *ngFor="let material of materials; let index = index"
-    class="p-3 my-4 bg-gray-600 rounded-lg min-h-48"
+    class="p-3 bg-gray-600 rounded-lg shadow-2xl min-h-48"
   >
     <div class="flex justify-between">
       <h3 class="text-lg font-bold text-white text-shadow">
@@ -13,11 +13,9 @@
     </div>
     <span class="text-xs">{{ material.uploadDate | formatDate }}</span>
     <p
-      [ngClass]="{
-        'expandable-text': true,
-        collapsed: !expandedState[material.id],
-        expanded: expandedState[material.id]
-      }"
+      [ngClass]="
+        !expandedState[material.id] ? 'line-clamp-3' : 'line-clamp-none'
+      "
       class="text-base text-white"
     >
       {{ material.summery }}
@@ -30,8 +28,8 @@
         {{ expandedState[material.id] ? "Show Less..." : "Show More..." }}
       </button>
       <button
-      (click)="navigateToMaterial(material)"
-        class="p-2 mt-4 mr-4 text-white rounded-md shadow-2xl cursor-pointer bg-violet-600"
+        (click)="navigateToMaterial(material)"
+        class="p-2 mt-4 mr-4 text-white transition-colors duration-300 ease-in-out rounded-md shadow-2xl cursor-pointer text-shadow bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-opacity-50"
       >
         View Material
       </button>
@@ -39,3 +37,8 @@
   </div>
 </div>
 <!-- [routerLink]="['/study-hub/materials', material.id]" -->
+<!-- [ngClass]="{
+  'expandable-text': true,
+  collapsed: !expandedState[material.id],
+  expanded: expandedState[material.id]
+}" -->

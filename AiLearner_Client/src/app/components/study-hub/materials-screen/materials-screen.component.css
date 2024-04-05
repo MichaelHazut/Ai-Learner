@@ -5,12 +5,22 @@
   }
   
   .collapsed {
-    max-height: 4.5rem; /* Adjust this value based on your text line height */
+    /* max-height: 4.5rem; */
+    line-clamp: 3; /* Adjust this value based on your text line height */
   }
   
   .expanded {
-    max-height: 100rem; /* Set a large max-height for the expanded state */
+    max-height: 10rem; /* Set a large max-height for the expanded state */
   }
   .text-shadow {
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    
+  }
+  .line-clamp-3, .line-clamp-none {
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+  }
+  
+  .line-clamp-transition {
+    max-height: 5em; /* Adjust based on your text size */
   }

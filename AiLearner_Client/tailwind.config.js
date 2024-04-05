@@ -14,8 +14,25 @@ module.exports = {
       screens: {
         "max-400": { max: "399px" },
       },
-      textShadow: ["responsive"],
+      textShadow: {
+        sm: "-2px 2px 2px rgba(0, 0, 0, 0.5)",
+        DEFAULT: "2px 2px 2px rgba(0, 0, 0, 0.5)",
+        white: " -2px 2px 10px rgba(255,255,255,0.6)",
+        lg: "0 8px 16px var(--tw-shadow-color)",
+      },
     },
   },
-  plugins: [addDynamicIconSelectors()],
+  plugins: [
+    addDynamicIconSelectors(),
+    function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          "text-shadow": (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow") }
+      );
+    },
+  ],
 };

@@ -1,0 +1,14 @@
+.animate-question {
+  animation: slideInFromRight 0.5s ease-out forwards;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(30%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

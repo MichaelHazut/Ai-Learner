@@ -1,12 +1,15 @@
-<div class="max-w-2xl p-3 mx-auto my-4 bg-gray-600 rounded-lg">
+<div
+  *ngIf="examData"
+  class="max-w-2xl p-3 mx-auto my-4 bg-gray-600 rounded-lg shadow-2xl animate-right-bounce text-shadow-sm"
+>
   <div class="flex justify-center">
     <h3 class="mb-3 text-lg font-bold text-white font-zabal text-shadow">
-      {{ examData?.material?.topic }}
+      {{ examData.material.topic }}
     </h3>
   </div>
   <p class="font-zabal text-slate-300 text-shadow">Summary</p>
   <p class="text-xs text-gray-300 line-clamp-3 text-shadow-sm">
-    {{ examData?.material?.content }}
+    {{ examData.material.content }}
   </p>
   <button
     (click)="showOrHideContent()"
@@ -24,21 +27,21 @@
       <div class="flex items-center justify-between w-full">
         <h4
           [ngClass]="
-            examData?.questions?.length! <= examData?.userAnswers?.length!
-              ? 'text-green-400 hover:text-blue-800'
-              : 'text-red-700'
+            examData.questions.length! <= examData.userAnswers.length
+              ? 'text-green-400 hover:text-green-500 hover:text-shadow-white'
+              : 'text-red-700 hover:text-red-800 hover:text-shadow-white'
           "
-          class="text-base font-semibold text-shadow-white"
+          class="text-base font-semibold text-shadow"
         >
           Exam
           {{
-            examData?.questions?.length! <= examData?.userAnswers?.length!
+            examData.questions.length <= examData.userAnswers.length
               ? "Completed"
               : "Not Completed"
           }}
         </h4>
         <div
-          class="flex items-center justify-center w-12 h-12 rounded-full bg-slate-300"
+          class="flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-slate-300 hover:scale-105 hover:bg-slate-400"
         >
           <p
             class="m-0 leading-none text-center text-slate-700 font-zabal textshadow"
@@ -62,7 +65,7 @@
       >
         <button
           (click)="navigateToExam()"
-          class="px-2 py-1 transition-colors duration-300 ease-in-out bg-gray-700 border rounded-lg shadow-2xl text-stone-200 hover:bg-gray-800 "
+          class="px-2 py-1 transition-colors duration-300 ease-in-out bg-gray-700 border rounded-lg shadow-2xl text-stone-200 hover:bg-gray-800"
         >
           Retry Wrong Answers
         </button>
@@ -79,8 +82,8 @@
   </div>
 </div>
 
-
 <app-content-dialog
   [material]="examData?.material!"
   [showContent]="contentVisable"
+  (contentVisibilityChanged)="handleVisibilityChange($event)"
 ></app-content-dialog>

@@ -1,0 +1,10 @@
+.fade-in-scale-up {
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  
+  .fade-in-scale-up.active {
+    opacity: 1;
+    transform: scale(1);
+  }

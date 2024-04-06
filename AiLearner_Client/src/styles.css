@@ -15,6 +15,45 @@ textarea {
   resize: none !important;
 }
 
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rightLoad {
+  0% {
+    transform: translateX(30%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceOnce {
+  0% {
+    opacity: 0;
+    transform: translateX(2000px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-30px);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
 @tailwind base;
 @tailwind components;

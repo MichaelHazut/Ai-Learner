@@ -1,5 +1,5 @@
 <div
-  class="relative max-w-2xl p-3 mx-auto my-4 bg-gray-600 rounded-lg min-h-48"
+  class="relative max-w-2xl p-3 mx-auto my-4 bg-gray-600 rounded-lg min-h-48 animate-scale-up"
 >
   <div [ngClass]="examData ? 'block' : 'hidden'">
     <div class="flex justify-center">
@@ -43,7 +43,9 @@
     </div>
   </div>
 </div>
+
 <app-content-dialog
   [material]="examData?.material!"
   [showContent]="showContent"
+  (contentVisibilityChanged)="handleVisibilityChange($event)"
 ></app-content-dialog>

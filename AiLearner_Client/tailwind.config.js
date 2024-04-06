@@ -20,6 +20,11 @@ module.exports = {
         white: " -2px 2px 10px rgba(255,255,255,0.6)",
         lg: "0 8px 16px var(--tw-shadow-color)",
       },
+      animation: {
+        "scale-up": "scaleUp 1.5s ease-out forwards",
+        "right-load": "rightLoad 0.8s ease-out forwards",
+        "right-bounce": "bounceOnce 2s ease forwards",
+      },
     },
   },
   plugins: [

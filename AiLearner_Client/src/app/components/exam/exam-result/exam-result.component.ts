@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ExamDataService } from '../../../services/exam-data.service';
 import { Exam } from '../../../models/Exam';
@@ -21,25 +21,39 @@ import { QuestionAndAnswers } from '../../../models/QuestionAndAnswers';
   templateUrl: './exam-result.component.html',
   styleUrl: './exam-result.component.css',
 })
-export class ExamResultComponent implements OnDestroy {
+export class ExamResultComponent implements OnDestroy, AfterViewInit {
   subsription: Subscription = new Subscription();
-  @Input() examData: Exam | null = null;
   contentVisable: boolean = false;
   answerVisible: boolean = false;
   currectAnswers: any[] = [];
   wrongAnswers: any[] = [];
-
+  animationActive = false;
+  private _examData: Exam | null = null;
+  @Input()
+  set examData(value: Exam | null) {
+    this._examData = value;
+    if (value) {
+      // Trigger the animation once data is available
+      this.animationActive = false;
+      setTimeout(() => this.animationActive = true);
+    }
+  }
+  get examData(): Exam | null {
+    return this._examData;
+  }
   constructor(
     private examDataService: ExamDataService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
+  ngAfterViewInit() {
+    setTimeout(() => this.animationActive = true);
+  }
+
   ngOnInit() {
     this.subsription = this.examDataService.examData$.subscribe((examData) => {
-      console.log("in subscription");
       if (!examData) {
-        console.log("no exam data fetching...");
         const materialId = this.route.snapshot.paramMap.get('id');
         this.examDataService.getExamData(parseInt(materialId!));
         return;
@@ -106,6 +120,11 @@ export class ExamResultComponent implements OnDestroy {
   showOrHideContent() {
     this.contentVisable = !this.contentVisable;
   }
+  
+  handleVisibilityChange(isVisible: boolean) {
+    this.contentVisable = isVisible;
+  }
+
   showOrHideAnswers() {
     this.answerVisible = !this.answerVisible;
   }

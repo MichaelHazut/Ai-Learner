@@ -1,5 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, Output, input } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  input,
+} from '@angular/core';
 import { common } from '@mui/material/colors';
 import { QuestionDTO } from '../../../models/QuestionDTO';
 import { AnswerDTO } from '../../../models/AnswerDTO';
@@ -13,19 +22,34 @@ import { Subscription } from 'rxjs';
   templateUrl: './question.component.html',
   styleUrl: './question.component.css',
 })
-export class QuestionComponent implements OnDestroy{
+export class QuestionComponent implements OnDestroy {
   @Input() question!: QuestionDTO;
   @Input() answers!: AnswerDTO[];
   @Output() answerSelected = new EventEmitter<number>();
-  
   routeSub!: Subscription;
   questionNumber: string | null = '';
+  animationActive = false;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private changeDetector: ChangeDetectorRef
+  ) {}
+
   ngOnInit() {
-    this.questionNumber = this.route.snapshot.paramMap.get('questionIndex') || '';
-    this.routeSub = this.route.paramMap.subscribe(params => {
+    this.toggleAnimation();
+
+    this.routeSub = this.route.paramMap.subscribe((params) => {
       this.questionNumber = params.get('questionIndex');
+      this.toggleAnimation();
+    });
+  }
+
+  toggleAnimation() {
+    this.animationActive = false;
+    this.changeDetector.detectChanges();
+    setTimeout(() => {
+      this.animationActive = true;
+      this.changeDetector.detectChanges();
     });
   }
   selectAnswer(answerId: number) {

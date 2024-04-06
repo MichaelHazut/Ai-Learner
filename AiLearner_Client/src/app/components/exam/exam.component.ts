@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, NavigationStart, Event as RouterEvent } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { QuestionComponent } from './question/question.component';
@@ -16,20 +16,27 @@ import { ExamResultComponent } from './exam-result/exam-result.component';
   templateUrl: './exam.component.html',
   styleUrl: './exam.component.css',
 })
-export class ExamComponent implements OnDestroy {
+export class ExamComponent implements OnDestroy, AfterViewInit  {
   materialId: string | null = null;
   currentQuestionIndex: number = 0;
   private subscriptions: Subscription[] = [];
   @Input() examData: Exam | null = null;
   userId: string | null = null;
+  animationActive = false;
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
     private userAnswersService: UserAnswersService,
-    private examDataService: ExamDataService
+    private examDataService: ExamDataService,
+
   ) {}
+  
+  ngAfterViewInit() {
+    setTimeout(() => this.animationActive = true);
+  }
 
   ngOnInit() {
     this.materialId = this.route.snapshot.paramMap.get('id');

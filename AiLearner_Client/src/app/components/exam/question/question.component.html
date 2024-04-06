@@ -1,15 +1,18 @@
-<div class="">
-  <!-- Displaying the question number -->
-  <div class="mb-2 text-lg font-semibold">Question {{ questionNumber }}</div>
+<div [class.animate-question]="animationActive">
+  <div class="mb-2 text-lg font-semibold text-shadow">
+    Question {{ questionNumber }}
+  </div>
 
-  <h4 class="mb-4 text-xl">{{ question.text }}</h4>
-  <div class="space-y-2" *ngFor="let answer of answers; let i = index">
-    <button
-      (click)="selectAnswer(answer.id)"
-      class="block w-full p-4 text-lg text-left transition-colors duration-300 ease-in-out border rounded-lg hover:bg-slate-300 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50"
-      [class.bg-green-400]="answer.isCorrect"
-    >
-      {{ answer.text }}
-    </button>
+  <h4 class="mb-4 text-xl text-shadow-white">{{ question.text }}</h4>
+  <div class="grid-cols-2 gap-2 lg:grid">
+    <div class="my-2 lg:my-0" *ngFor="let answer of answers; let i = index">
+      <button
+        (click)="selectAnswer(answer.id)"
+        class="block w-full p-4 text-lg text-left transition-colors duration-300 ease-in-out border rounded-lg shadow-2xl hover:bg-slate-300 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50"
+        [class.bg-green-400]="answer.isCorrect"
+      >
+        {{ answer.text }}
+      </button>
+    </div>
   </div>
 </div>

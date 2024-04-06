@@ -36,6 +36,10 @@ export class MaterialComponent implements OnDestroy {
   showOrHideContent() {
     this.showContent = !this.showContent;
   }
+  handleVisibilityChange(isVisible: boolean) {
+    this.showContent = isVisible;
+  }
+
   ngOnDestroy(){
     this.subsription.unsubscribe();
   }

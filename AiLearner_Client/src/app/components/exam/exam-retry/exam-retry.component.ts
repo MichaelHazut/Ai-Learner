@@ -33,7 +33,6 @@ export class ExamRetryComponent {
   ) {}
 
   ngOnInit() {
-    console.log('nginit exam retry component');
     this.subscriptions.push(
       this.examDataService.examRetryData$.subscribe((examRetryData) => {
         this.wrongQuestions = examRetryData;
@@ -77,7 +76,6 @@ export class ExamRetryComponent {
           next: () => {
             this.examDataService.fetchExamData(materialId).subscribe({
               next: ({ material, questions, answers, userAnswers }) => {
-                console.log('in next exam retry component');
                 let examObj = new Exam(
                   material,
                   questions,

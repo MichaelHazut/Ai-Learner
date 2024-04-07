@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { Router,RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserDTO } from '../../models/UserDTO';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css',
 })
@@ -16,11 +17,13 @@ export class LoginFormComponent {
   userEmail: string = '';
   userPassword: string = '';
   isError = false;
-  hide : boolean = true;
+  hide: boolean = true;
 
-  constructor(private userService: UserService, private router: Router) {}
-
-
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   onSubmit(event: Event) {
     event.preventDefault();
@@ -38,8 +41,8 @@ export class LoginFormComponent {
           this.router.navigate(['/study-hub']);
         }
       },
-      error: (error) => {
-        console.error('Error registering user', error);
+      error: () => {
+        this.toastr.error('Invalid email or password');
         this.isError = true;
       },
     });

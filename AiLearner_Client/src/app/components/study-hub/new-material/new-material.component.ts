@@ -6,7 +6,7 @@ import { MaterialRequestDTO } from '../../../models/MaterialRequestDTO';
 import { UserService } from '../../../services/user.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-new-material',
   standalone: true,
@@ -23,12 +23,23 @@ export class NewMaterialComponent implements OnDestroy {
   constructor(
     private materialService: MaterialService,
     private userService: UserService,
-    private router : Router,
-    private route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) {
-    this.subscription = this.userService.userId$.subscribe((id) => {
-      this.userId = id;
-      console.log(this.userId);
+    this.subscription = this.userService.userId$.subscribe({
+      next: (id) => {
+        if (id) {
+          this.userId = id;
+        } else {
+          this.toastr.info('Try logging in first');
+          this.router.navigate(['/login']);
+        }
+      },
+      error: () => {
+        this.toastr.info('Try logging in first');
+        this.router.navigate(['/login']);
+      },
     });
   }
 
@@ -43,19 +54,18 @@ export class NewMaterialComponent implements OnDestroy {
       next: (response) => {
         console.log(response);
         if (response.status === 201) {
-          console.log('succssfully created material');
           this.loading = false;
+          this.toastr.success('Material registered successfully');
           this.router.navigate(['../materials'], { relativeTo: this.route });
         }
       },
-      error: (error) => {
+      error: () => {
         this.loading = false;
-        console.error('Error registering user', error);
+        this.toastr.warning('Error registering material');
       },
     });
   }
   ngOnDestroy(): void {
-    // Unsubscribe to prevent memory leaks
     this.subscription.unsubscribe();
   }
 }

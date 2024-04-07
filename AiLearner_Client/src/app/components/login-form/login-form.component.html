@@ -1,16 +1,22 @@
 <div
   class="h-96 w-11/12 mx-auto mt-10 md:max-w-2xl md:mx-auto animate-scale-up bg-slate-400/[.1] rounded-3xl shadow-2xl"
 >
-  <h3 class="p-5 text-2xl font-bold text-center text-white">Login</h3>
+  <h3 class="p-5 text-2xl font-bold text-center text-white text-shadow">
+    Login
+  </h3>
 
   <form
     #loginForm="ngForm"
     (submit)="onSubmit($event)"
     class="flex flex-col items-center"
   >
-    <label for="email" class="w-11/12 mx-auto text-center text-white">Email:</label>
+    <label
+      for="email"
+      class="w-11/12 mx-auto text-center text-white text-shadow-sm"
+      >Email:</label
+    >
     <input
-      class="w-11/12 p-2 text-lg text-center border-2 border-gray-500 md:w-3/4 rounded-2xl"
+      class="w-11/12 p-2 text-lg text-center border-2 border-gray-500 shadow-2xl md:w-3/4 rounded-2xl"
       type="email"
       id="email"
       name="email"
@@ -24,12 +30,14 @@
       <p *ngIf="email.errors?.['email']">Please enter a valid email.</p>
     </div>
 
-    <label for="password" class="w-11/12 mx-auto mt-2 text-center text-white"
+    <label
+      for="password"
+      class="w-11/12 mx-auto mt-2 text-center text-white text-shadow-sm"
       >Password:</label
     >
     <div class="relative w-11/12 mx-auto md:w-3/4">
       <input
-        class="w-full p-2 text-lg border-2 border-gray-500 rounded-2xl"
+        class="w-full p-2 text-lg border-2 border-gray-500 shadow-2xl rounded-2xl"
         [type]="hide ? 'password' : 'text'"
         id="password"
         name="password"
@@ -43,8 +51,13 @@
         class="absolute inset-y-0 right-0 flex items-center justify-center mr-6"
         (click)="hide = !hide"
       >
-      <i class="w-5 h-5" [ngClass]="hide ? 'icon-[mdi--eye-off-outline]' : 'icon-[nimbus--eye]'"></i>
-    </button>
+        <i
+          class="w-5 h-5"
+          [ngClass]="
+            hide ? 'icon-[mdi--eye-off-outline]' : 'icon-[nimbus--eye]'
+          "
+        ></i>
+      </button>
     </div>
 
     <div *ngIf="password.invalid && password.touched">
@@ -53,12 +66,40 @@
         Password must be at least 8 characters long.
       </p>
     </div>
-
-    <button type="submit" class="px-6 py-2 mt-2 bg-gray-400 shadow-2xl rounded-3xl">
-      Submit
-    </button>
-    <div *ngIf="isError" class="items-center p-5">
-      <p class="text-red-500">Error While Login</p>
+    <div class="relative flex">
+      <button
+      [ngClass]="loginForm.invalid ? 'bg-red-600 scale-x-90' : 'bg-gray-600 scale-105 scale-y-110 '"
+        class="absolute px-6 py-2 mt-2 animate-pulse rounded-3xl"
+      >
+        Submit
+      </button>
+      <button
+        type="submit"
+        class="px-6 py-2 mt-2 transition-all duration-300 ease-in-out bg-gray-400 shadow-2xl opacity- rounded-3xl"
+        [disabled]="loginForm.invalid"
+        [ngClass]="
+          loginForm.invalid
+            ? 'scale-75'
+            : 'cursor-pointer scale-100 opacity-100 hover:text-stone-300 hover:bg-gray-600 hover:scale-105'
+        "
+      >
+        Submit
+      </button>
+      <div *ngIf="isError" class="items-center p-5">
+        <p class="text-red-500">Invalid email or password</p>
+      </div>
     </div>
   </form>
+
+  <div class="flex justify-center mt-5">
+    <span class="text-white whitespace-pre text-shadow-sm"
+      >New to Ai Learner?
+    </span>
+    <a
+      [routerLink]="['/signup']"
+      class="text-white underline transition-all duration-300 cursor-pointer text-shadow-sm hover:text-stone-400 hover:scale-105"
+    >
+      Click Here</a
+    >
+  </div>
 </div>

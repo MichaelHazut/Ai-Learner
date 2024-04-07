@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { UserDTO } from '../../models/UserDTO';
 import { UserService } from '../../services/user.service';
-import { HttpResponse } from '@angular/common/http';
-import { tap } from 'rxjs';
+
 
 @Component({
   selector: 'app-signup-form',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './signup-form.component.html',
   styleUrl: './signup-form.component.css',
 })

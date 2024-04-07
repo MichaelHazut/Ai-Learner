@@ -6,6 +6,7 @@ import { UserService } from '../../../services/user.service';
 import { Subscription } from 'rxjs';
 import { FormatDatePipe } from '../../../pipes/format-date.pipe';
 import { Router, RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-materials-screen',
   standalone: true,
@@ -23,7 +24,8 @@ export class MaterialsScreenComponent implements OnDestroy {
   constructor(
     private materialService: MaterialService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.subscription = this.userService.userId$.subscribe((id) => {
       this.userId = id;
@@ -45,13 +47,13 @@ export class MaterialsScreenComponent implements OnDestroy {
   }
 
   loadMaterials(): void {
-    // this.materialService.getMaterials(this.userId!).subscribe({
-    this.materialService.getMaterials("525c8c8d-a799-439e-9a3a-e8fc1665f923").subscribe({
+    this.materialService.getMaterials(this.userId!).subscribe({
       next: (materials: MaterialDTO[]) => {
         this.materials = materials;
       },
       error: (error) => {
-        console.error('There was an error fetching materials!', error);
+        this.toastr.info(`you havent uploaded any materials yet!`);
+        this.router.navigate(['/study-hub/new-material']);
       },
     });
   }

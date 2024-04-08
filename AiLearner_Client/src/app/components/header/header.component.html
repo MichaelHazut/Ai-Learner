@@ -1,9 +1,9 @@
 <!-- This is the main container for the header. It uses flexbox for layout and has a specific height and background color. -->
 <div
-  class="sticky top-0 z-10 flex items-center justify-between bg-white h-14 bg-opacity-35 animated"
+  class="sticky top-0 z-10 flex items-center justify-between bg-gray-900/[0.4] h-14 animated"
 >
   <!-- This button is for toggling the sidebar. It is only visible on small screens. -->
-  <button class="p-4 sm:hidden" (click)="toggleSidebar()">
+  <button class="p-4 shadow-2xl sm:hidden" (click)="toggleSidebar()">
     <img
       src="../../../assets/SVG/hamburger-icon.svg"
       alt="hamburger-icon"
@@ -24,7 +24,7 @@
     <p
       routerLink="/{{ item | replaceSpace }}"
       *ngFor="let item of navArray"
-      class="relative text-sm transition duration-300 transform cursor-pointer sm:text-lg hover:text-white nav-item hover:shadow-sm hover:scale-110"
+      class="relative text-sm font-medium transition duration-300 transform cursor-pointer font-zabal text-shadow sm:text-lg text-stone-200 hover:text-white nav-item hover:shadow-sm hover:scale-110"
     >
       {{ item }}
     </p>
@@ -32,13 +32,17 @@
 
   <!-- This is the Login text. It is hidden on small screens and becomes visible on larger screens. -->
   <div routerLink="/login" class="items-center hidden gap-4 mx-3 sm:flex">
-    <p class="text-lg duration-300 cursor-pointer hover:scale-105">Login</p>
+    <p
+      class="text-lg font-medium duration-300 cursor-pointer hover:scale-105 font-zabal text-shadow"
+    >
+      Login
+    </p>
   </div>
 
   <!-- This is the sign up button. It has a specific styling. -->
   <button routerLink="signup">
     <p
-      class="text-sm text-white sm:text-lg mr-2 font-bold whitespace-nowrap cursor-pointer p-item p-1 px-1.5 border rounded-md border-gray-300 hover:scale-105 transition duration-300"
+      class="text-sm text-white sm:text-lg mr-2 font-bold whitespace-nowrap cursor-pointer p-item p-1 px-1.5 border-2 rounded-md text-shadow border-gray-900 hover:scale-105 transition duration-300"
     >
       Sign Up
     </p>
@@ -46,32 +50,26 @@
 
   <!-- This is the sidebar for small screens. It is hidden by default and becomes visible when the hamburger button is clicked. -->
   <div
-    class="absolute left-0 transition-transform duration-300 ease-in-out transform -translate-x-full bg-white top-14 sm:hidden"
-    [class.translate-x-0]="showSidebar"
-    [class.-translate-x-full]="!showSidebar"
+    class="absolute left-0 transition-transform duration-300 ease-in-out transform border-2 border-gray-900 rounded-lg shadow-2xl w-60 top-14 sm:hidden"
+    [ngClass]="
+      showSidebar ? 'translate-x-3 translate-y-3' : '-translate-x-full'
+    "
   >
-    <div class="flex flex-col h-auto gap-4 p-4 bg-slate-300">
+    <div class="flex flex-col h-auto gap-1 p-4 bg-gray-700 rounded-md">
       <p
         *ngFor="let item of navArray"
         routerLink="/{{ item | replaceSpace }}"
-        class="text-lg transition duration-300 cursor-pointer hover:text-white"
+        class="p-2 text-lg font-medium text-white transition-all duration-300 rounded-lg cursor-pointer font-zabal text-shadow hover:bg-gray-600 hover:text-stone-200"
         (click)="toggleSidebar()"
       >
         {{ item }}
       </p>
       <p
         routerLink="/login"
-        class="text-lg duration-300 cursor-pointer hover:scale-105"
+        class="p-2 text-lg font-medium text-white transition-all duration-300 bg-gray-600 rounded-lg cursor-pointer font-zabal text-shadow animate-pulse hover:bg-gray-600 hover:text-stone-200"
         (click)="toggleSidebar()"
       >
         Login
-      </p>
-      <p
-        routerLink="/signup"
-        class="text-lg font-bold duration-300 cursor-pointer hover:scale-105"
-        (click)="toggleSidebar()"
-      >
-        Sign Up
       </p>
     </div>
   </div>

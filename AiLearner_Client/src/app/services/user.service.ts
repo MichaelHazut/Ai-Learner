@@ -14,13 +14,10 @@ export class UserService {
   secretUrl = environment.baseUrl;
   baseUrl = this.secretUrl + '/User/';
 
-  private userIdSource = new BehaviorSubject<string | null>(
-    // '525c8c8d-a799-439e-9a3a-e8fc1665f923'
-    null
-  );
+  private userIdSource = new BehaviorSubject<string | null>(null);
   userId$ = this.userIdSource.asObservable();
 
-  constructor(private http: HttpClient) {  }
+  constructor(private http: HttpClient) {}
 
   /**
    * Registers a new user.

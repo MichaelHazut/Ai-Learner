@@ -48,8 +48,12 @@ namespace AiLearner_API.Controllers
 
             //check if user is already cached in memory 
             bool isCached = _cachingService.TryGetCachedItem(userData.Email, out User? user);
-            if (isCached is true)            
-                return Ok(new { UserId = user!.Id });
+            if (isCached is true)
+            {
+                bool isVerified = _unitOfWork.Users.VerifyPassword(user!, userData);
+                if (isVerified is false) return Unauthorized("Invalid credentials");
+                return await GenerateAndAppendTokens(user!);
+            }          
             
             //get user from db and verify credentials
             user = await _unitOfWork.Users.LogIn(userData.Email, userData.Password);
@@ -67,6 +71,14 @@ namespace AiLearner_API.Controllers
             //add jwtToken and refreshToken to HttpOnly cookies
             _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);
             
+
+            return await GenerateAndAppendTokens(user);
+        }
+        private async Task<IActionResult> GenerateAndAppendTokens(User user)
+        {
+            var jwtToken = _jwtTokenService.GenerateJwtToken(user);
+            var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id);
+            _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);
 
             return Ok(new { UserId = user.Id });
         }

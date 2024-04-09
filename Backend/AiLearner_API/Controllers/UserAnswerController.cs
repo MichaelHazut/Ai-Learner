@@ -28,7 +28,7 @@ namespace AiLearner_API.Controllers
             // Attempt to get the user answers from the database
             List<UserAnswer> userAnswers = await _unitOfWork.UserAnswers.GetUserAnswers(materialId);
             if (userAnswers is null || userAnswers.Count == 0)
-                return NotFound("No user answers found for Material id: {" + materialId + "}");
+                return Ok(new List<UserAnswer>());
 
             // Convert the UserAnswers to UserAnswerDTOs and cache them
             userAnswerDTOs = userAnswers.Select(UserAnswerDTO.FromUserAnswer).ToList();

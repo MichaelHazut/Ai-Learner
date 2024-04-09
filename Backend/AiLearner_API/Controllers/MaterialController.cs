@@ -4,7 +4,10 @@ using DataAccessLayer.DTO;
 using DataAccessLayer.Models;
 using DataAccessLayer.Models.Entities;
 using DataAccessLayer.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 
 namespace AiLearner_API.Controllers
@@ -12,15 +15,21 @@ namespace AiLearner_API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
-    public class MaterialController(IUnitOfWork unitOfWork, OpenAIService openAIService, CachingService cachingService) : ControllerBase
+    public class MaterialController(IUnitOfWork unitOfWork, OpenAIService openAIService, CachingService cachingService, JwtTokenService jwtTokenService) : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly OpenAIService _openAIService = openAIService;
         private readonly CachingService _cachingService = cachingService;
+        private readonly JwtTokenService _jwtTokenService = jwtTokenService;
 
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetMaterials(string userId)
+        [HttpGet]
+        public async Task<IActionResult> GetMaterials()
         {
+            var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);
+            var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+                                ?? throw new SecurityTokenException("User ID is missing in the token.");
+
+
             // Try to get the cached item and assign it to the materials variable
             bool isCached = _cachingService.TryGetCachedItem(userId, out List<Material>? materials);
             // If the item is not cached, get the materials from the database
@@ -93,7 +102,7 @@ namespace AiLearner_API.Controllers
 
             // Clear the cached items related to the user
             _cachingService.RemoveCachedItem<List<Material>>(requestDto.UserId);
-            
+
             // Return the created material or a Not found response
             return isSuccess ? new CreatedResult("/material", material) : NotFound();
         }

@@ -4,6 +4,7 @@ using DataAccessLayer.Models.Entities;
 using DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using DataAccessLayer.DTO;
 
 
 namespace DataAccessLayer.Repositories
@@ -33,6 +34,10 @@ namespace DataAccessLayer.Repositories
 
             await _context.AddAsync(user);
             return user;
+        }
+        public bool VerifyPassword(User user, UserDto userDto)
+        {
+            return PasswordService.VerifyPassword(userDto.Password, user.HashedPassword!);
         }
 
         public async Task<User?> LogIn(string email, string password)

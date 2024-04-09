@@ -64,7 +64,7 @@ export class TestPageComponent {
   }
 
   callAuth(): void {
-    this.http.get('https://localhost:7089/test').subscribe({
+    this.http.get('https://localhost:7089/Auth/validate-token',{withCredentials: true}).subscribe({
       next: (response) => {
         console.log('Response:', response);
       },

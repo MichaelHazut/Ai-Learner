@@ -77,7 +77,7 @@ namespace AiLearner_API.Controllers
         private async Task<IActionResult> GenerateAndAppendTokens(User user)
         {
             var jwtToken = _jwtTokenService.GenerateJwtToken(user);
-            var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id);
+            var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id!);
             _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);
 
             return Ok(new { UserId = user.Id });

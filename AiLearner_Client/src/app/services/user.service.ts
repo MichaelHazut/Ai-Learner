@@ -17,6 +17,8 @@ export class UserService {
   private userIdSource = new BehaviorSubject<string | null>(null);
   userId$ = this.userIdSource.asObservable();
 
+  private isAuthenticated = new BehaviorSubject<boolean>(false);
+
   constructor(private http: HttpClient) {}
 
   /**
@@ -54,6 +56,7 @@ export class UserService {
         tap((response) => {
           if (response.body?.userId) {
             this.userIdSource.next(response.body.userId);
+            this.checkAuth();
           }
         }),
         catchError((error) => {
@@ -68,5 +71,27 @@ export class UserService {
    */
   getUsers(): Observable<string> {
     return this.http.get<string>('https://localhost:7089/test');
+  }
+
+  checkAuth() {
+    this.http
+      .get<{
+        isAuthenticated: any;
+        IsAuthenticated: boolean;
+      }>(`${this.secretUrl}/auth/validate-token`, { withCredentials: true })
+      .subscribe({
+        next: (response) => {
+          console.log('is authenticated: ', response.isAuthenticated);
+          this.isAuthenticated.next(response.isAuthenticated);
+        },
+        error: () => {
+          console.log('error at auth check');
+          this.isAuthenticated.next(false);
+        },
+      });
+  }
+
+  getIsAuthenticated(): Observable<boolean> {
+    return this.isAuthenticated.asObservable();
   }
 }

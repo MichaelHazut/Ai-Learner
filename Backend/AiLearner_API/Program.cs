@@ -73,7 +73,11 @@ namespace AiLearner_API
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowMyOrigin",
-                    builder => builder.WithOrigins("http://localhost:4200", "https://localhost:4200" , "https://058jm4rm-4200.euw.devtunnels.ms")
+                    builder => builder.WithOrigins(
+                        "http://localhost:4200",
+                        "https://localhost:4200",
+                        "https://c76rjpx5.euw.devtunnels.ms:4200",
+                        "https://c76rjpx5-4200.euw.devtunnels.ms")
                                         .AllowAnyMethod()
                                         .AllowAnyHeader()
                                         .AllowCredentials());
@@ -136,17 +140,17 @@ namespace AiLearner_API
             {
 
             }
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                });
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             /**/
             //Add my ExceptionMiddleware
             app.UseMiddleware<ExceptionMiddleware>();
 
-            app.MapGet("/test",() => "Hello World!");
+            app.MapGet("/test", () => Results.StatusCode(StatusCodes.Status401Unauthorized));
 
             /**/
             app.UseHttpsRedirection();

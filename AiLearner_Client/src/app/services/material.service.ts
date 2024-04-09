@@ -17,7 +17,7 @@ export class MaterialService {
 
   registerMaterial(dto: MaterialRequestDTO): Observable<any> {
     return this.http
-      .post(this.baseUrl , dto, {
+      .post(this.baseUrl, dto, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
         observe: 'response',
       })
@@ -29,10 +29,15 @@ export class MaterialService {
   }
 
   getMaterials(userId: string): Observable<MaterialDTO[]> {
-    return this.http.get<MaterialDTO[]>(this.baseUrl + '/' +userId);
+    return this.http.get<MaterialDTO[]>(this.baseUrl, {
+      withCredentials: true,
+    });
   }
 
   getMaterialById(materialId: number): Observable<MaterialDTO> {
-    return this.http.get<MaterialDTO>(this.baseUrl + '/material/' + materialId);
+    return this.http.get<MaterialDTO>(
+      this.baseUrl + '/material/' + materialId,
+      { withCredentials: true }
+    );
   }
 }

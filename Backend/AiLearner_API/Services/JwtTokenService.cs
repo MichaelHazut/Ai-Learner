@@ -24,9 +24,9 @@ namespace AiLearner_API.Services
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
+            new Claim(ClaimTypes.NameIdentifier, user.Id!),
+            new Claim(ClaimTypes.Email, user.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.NameIdentifier, user.Id!)
         }),
                 Expires = DateTime.UtcNow.AddHours(1), // Token expiration set to 1 hour
                 Issuer = _configuration["Jwt:Issuer"],
@@ -80,7 +80,53 @@ namespace AiLearner_API.Services
                 Secure = true,
                 SameSite = SameSiteMode.None,
             });
-        }   
+        }
+        public ClaimsPrincipal ValidateToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!);
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = true,
+                ValidIssuer = _configuration["Jwt:Issuer"],
+                ValidateAudience = true,
+                ValidAudience = _configuration["Jwt:Audience"],
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero 
+            };
+
+            SecurityToken validatedToken;
+            var principal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+            return principal;
+        }
+
+        // Checks if the refresh token is valid, and if so, creates a new JWT token
+        public async Task<string> RefreshJwtToken(string expiredToken, string refreshTokenString)
+        {
+            var userClaim = ValidateToken(expiredToken)?.FindFirst(ClaimTypes.NameIdentifier);
+            if (userClaim == null)
+            {
+                throw new SecurityTokenException("Invalid token");
+            }
+
+            var refreshToken = await _unitOfWork.RefreshToken.VarifyRefreshToken(refreshTokenString);
+            if (refreshToken == null)
+            {
+                throw new SecurityTokenException("Invalid refresh token");
+            }
+
+            var user = await _unitOfWork.Users.GetByIdAsync(refreshToken.UserId);
+            if (user == null)
+            {
+                throw new SecurityTokenException("User does not exist");
+            }
+
+            // Optionally, you could also verify if the refresh token matches the one stored in the database
+
+            return GenerateJwtToken(user); // Reuse the method to generate a new JWT token
+        }
 
     }
 }

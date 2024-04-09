@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.dbContext;
+using DataAccessLayer.DTO;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -15,19 +16,39 @@ namespace DataAccessLayer.Repositories
             return userAnswers;
         }
 
-        public async Task<UserAnswer> CreateUsersAnswers(string userId, int questionId, int answerId)
+        public async Task<List<UserAnswer>> CreateUsersAnswers(List<UserAnswerDTO> userAnswersDTOs)
         {
-            UserAnswer userAnswer = new()
+            List<UserAnswer> userAnswers = userAnswersDTOs.Select(ua => new UserAnswer
             {
-                UserId = userId,
-                QuestionId = questionId,
-                AnswerId = answerId,
-                AnswerDate = DateTime.Now
-            };
+                QuestionId = ua.QuestionId,
+                AnswerId = ua.AnswerId,
+                AnswerDate = ua.AnswerDate,
+                UserId = ua.UserId
+            }).ToList();
 
-            await _context.AddAsync(userAnswer);
-            await _context.SaveChangesAsync();
-            return userAnswer;
+            await _context.AddRangeAsync(userAnswers);
+            return userAnswers;
+        }
+        public async Task UpdateUserAnswers(List<UserAnswerDTO> userAnswersDTOs)
+        {
+            foreach (var dto in userAnswersDTOs)
+            {
+                // Retrieve the corresponding UserAnswer entity from the database based on the QuestionId
+                var userAnswer = await _context.Set<UserAnswer>()
+                    .FirstOrDefaultAsync(ua => ua.QuestionId == dto.QuestionId);
+
+                if (userAnswer != null)
+                {
+                    // Update the UserAnswer entity with the values from the DTO
+                    userAnswer.AnswerId = dto.AnswerId;
+                    userAnswer.AnswerDate = dto.AnswerDate;
+                    // Update other properties as needed
+
+                    // Mark the UserAnswer entity as modified
+                    Update(userAnswer);
+                }
+
+            }
         }
     }
 }

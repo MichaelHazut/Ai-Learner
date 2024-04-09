@@ -11,7 +11,8 @@ Our Educational Content Assessment Platform is designed to help individuals and 
 - ASP.NET
 - MSSQL
 - Entity Framework
-- Angular (coming soon)
+- Angular
+- TailWind CSS
 
 ## Features
 
@@ -50,7 +51,8 @@ npm install
 4. Start the development server:
 ```
 dotnet run
-ng serve
+ng serve --ssl true
 ```
 
-5. Access the application at `http://localhost:4200/`.
+5. Access the application at `https://localhost:4200/`.
+6. Access backend swagger at `https://localhost:7089/swagger/index.html`

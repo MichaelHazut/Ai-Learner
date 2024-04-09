@@ -4,6 +4,7 @@ import { UserDTO } from '../../models/UserDTO';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-test-page',
@@ -15,7 +16,11 @@ import { ToastrService } from 'ngx-toastr';
 export class TestPageComponent {
   userId: string | null = null;
 
-  constructor(private userService: UserService,private toastr: ToastrService) {
+  constructor(
+    private userService: UserService,
+    private toastr: ToastrService,
+    private http: HttpClient
+  ) {
     this.userService.userId$.subscribe((id) => {
       this.userId = id;
       console.log('User ID updated:', id);
@@ -56,5 +61,16 @@ export class TestPageComponent {
   }
   showSuccess() {
     this.toastr.warning('there was a problem loading material!');
+  }
+
+  callAuth(): void {
+    this.http.get('https://localhost:7089/test').subscribe({
+      next: (response) => {
+        console.log('Response:', response);
+      },
+      error: (error) => {
+        console.log('Error:', error);
+      },
+    });
   }
 }

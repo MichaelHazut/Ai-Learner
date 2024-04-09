@@ -1,4 +1,5 @@
 const { addDynamicIconSelectors } = require("@iconify/tailwind");
+const { default: shadows } = require("@mui/material/styles/shadows");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -25,6 +26,9 @@ module.exports = {
         "right-load": "rightLoad 0.8s ease-out forwards",
         "right-bounce": "bounceOnce 2s ease forwards",
       },
+      dropShadow: {
+        'img-shadow': '10px 10px 10px rgba(0, 0, 0, 0.6)'
+      }
     },
   },
   plugins: [

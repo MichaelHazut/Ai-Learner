@@ -1,4 +1,4 @@
-<div class="bg-orange-600  w-96 h-96">
+<div class="bg-orange-600 w-96 h-96">
     <h1 class="text-3xl text-white">Test Page</h1>
     <p class="text-white">This is a test page</p>
 </div>
@@ -7,6 +7,7 @@
 <button (click)="signUp()" class="p-3 bg-slate-700">Test user signup</button>
 <button (click)="loginUser()" class="p-3 bg-slate-700">Test user Login</button>
 <button (click)="showSuccess()" class="p-3 bg-slate-700">Test toastr</button>
+<button (click)="callAuth()" class="p-3 bg-slate-700">Test Auth 401</button>
 
 <div *ngIf="userId; else notLoggedIn">
     Welcome, your user ID is: {{ userId }}

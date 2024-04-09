@@ -13,7 +13,7 @@ import { MaterialComponent } from './components/study-hub/material/material.comp
 import { ExamComponent } from './components/exam/exam.component';
 import { ExamResultComponent } from './components/exam/exam-result/exam-result.component';
 import { ExamRetryComponent } from './components/exam/exam-retry/exam-retry.component';
-import { authGuard } from './auth-guard';
+import { authGuard } from './auth/auth-guard';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },

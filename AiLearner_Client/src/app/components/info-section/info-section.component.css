@@ -1,4 +1,4 @@
-
+/* 
 @supports (animation-timeline: view()) {
   .parallax {
     opacity: 0;
@@ -17,3 +17,7 @@
     transform: translateY(-100px);
   }
 }
+
+.img-shadow{
+  filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.6));
+} */

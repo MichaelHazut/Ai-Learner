@@ -29,12 +29,12 @@ namespace AiLearner_API.Controllers
                 string newToken = await _jwtTokenService.RefreshJwtToken(expiredToken, refreshTokenString);
 
                 // Create a new refresh token
-                var principal = _jwtTokenService.ValidateToken(expiredToken);
+                var principal = _jwtTokenService.ValidateToken(expiredToken, false);
                 var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
                     ?? throw new SecurityTokenException("User ID is missing in the token.");
 
                 RefreshToken newRefreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(userId);
-
+                await _jwtTokenService.RevokeRefreshToken(refreshTokenString, newRefreshToken.Token!);
                 // Append new tokens to the response as cookies
                 _jwtTokenService.AppendCookie(Response, newToken, newRefreshToken);
 
@@ -64,7 +64,7 @@ namespace AiLearner_API.Controllers
                 if (principal == null)
                 {
                     // The token is invalid or expired
-                    return Ok(new { IsAuthenticated = false });
+                    return Unauthorized(new { IsAuthenticated = false }); ;
                 }
                 else
                 {
@@ -75,7 +75,7 @@ namespace AiLearner_API.Controllers
             catch (SecurityTokenException)
             {
                 // The token is invalid or expired
-                return Ok(new { IsAuthenticated = false });
+                return Unauthorized(new { IsAuthenticated = false });
             }
             catch (Exception ex)
             {

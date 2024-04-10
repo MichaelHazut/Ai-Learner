@@ -1,6 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpResponse,
+} from '@angular/common/http';
+import {
+  BehaviorSubject,
+  Observable,
+  catchError,
+  of,
+  tap,
+  throwError,
+} from 'rxjs';
 import { UserDTO } from '../models/UserDTO';
 import { environment } from '../../environments/environment.secret';
 
@@ -89,7 +101,32 @@ export class UserService {
       });
   }
 
-  getIsAuthenticated(): Observable<boolean| null> {
+  getIsAuthenticated(): Observable<boolean | null> {
     return this.isAuthenticated.asObservable();
+  }
+
+  refreshToken() {
+    console.log('in refresh token');
+    return this.http
+      .post<HttpResponse<any>>(
+        `${this.secretUrl}/auth/refresh`,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
+      .pipe(
+        tap((response: HttpResponse<any>) => {
+          if (response.status === 200) {
+            this.isAuthenticated.next(true);
+          } else {
+            this.isAuthenticated.next(false);
+          }
+        }),
+        catchError((error) => {
+          this.isAuthenticated.next(false);
+          return throwError(() => error);
+        })
+      );
   }
 }

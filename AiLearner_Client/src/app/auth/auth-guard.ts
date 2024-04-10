@@ -12,6 +12,7 @@ export const authGuard: CanActivateFn = (): Observable<boolean | UrlTree> => {
     tap(() => userService.checkAuth()),
     filter(isAuthenticated => isAuthenticated !== null), 
     switchMap(isAuthenticated => {
+      console.log("authGuard Fetch check auth: ", isAuthenticated);
       if (!isAuthenticated) {
         return of(router.parseUrl('/login'));
       }

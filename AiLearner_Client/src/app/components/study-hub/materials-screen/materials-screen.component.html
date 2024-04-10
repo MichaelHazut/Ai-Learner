@@ -1,9 +1,9 @@
 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
   <div
-  *ngFor="let material of materials; let index = index"
-  class="p-3 bg-gray-600 rounded-lg shadow-2xl min-h-48 animate-right-bounce"
-  [style.animation-delay]="index * 100 + 'ms'"
-  style="opacity: 0; transform: translateX(2000px);"
+    *ngFor="let material of materials; let index = index"
+    class="p-3 bg-gray-600 flex flex-col justify-between rounded-lg shadow-2xl min-h-48 animate-right-bounce"
+    [style.animation-delay]="index * 100 + 'ms'"
+    style="opacity: 0; transform: translateX(2000px)"
   >
     <div class="flex justify-between">
       <h3 class="text-lg font-bold text-white text-shadow">
@@ -13,28 +13,30 @@
         {{ index + 1 }}</span
       >
     </div>
-    <span class="text-xs">{{ material.uploadDate | formatDate }}</span>
-    <p
-      [ngClass]="
-        !expandedState[material.id] ? 'line-clamp-3' : 'line-clamp-none'
-      "
-      class="text-base text-white"
-    >
-      {{ material.summery }}
-    </p>
-    <div class="flex justify-between">
-      <button
-        (click)="toggleExpanded(material.id)"
-        class="self-start text-sm text-blue-500 underline cursor-pointer"
+    <div>
+      <span class="text-xs">{{ material.uploadDate | formatDate }}</span>
+      <p
+        [ngClass]="
+          !expandedState[material.id] ? 'line-clamp-3' : 'line-clamp-none'
+        "
+        class="text-base text-white transition-all duration-1000 ease-in-out"
       >
-        {{ expandedState[material.id] ? "Show Less..." : "Show More..." }}
-      </button>
-      <button
-        (click)="navigateToMaterial(material)"
-        class="p-2 mt-4 mr-4 text-white transition-colors duration-300 ease-in-out rounded-md shadow-2xl cursor-pointer text-shadow bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-opacity-50"
-      >
-        View Material
-      </button>
+        {{ material.summery }}
+      </p>
+      <div class="flex justify-between">
+        <button
+          (click)="toggleExpanded(material.id)"
+          class="self-start text-sm text-blue-500 underline cursor-pointer"
+        >
+          {{ expandedState[material.id] ? "Show Less..." : "Show More..." }}
+        </button>
+        <button
+          (click)="navigateToMaterial(material)"
+          class="p-2 mt-4 mr-4 text-white transition-colors duration-300 ease-in-out rounded-md shadow-2xl cursor-pointer text-shadow bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-opacity-50"
+        >
+          View Material
+        </button>
+      </div>
     </div>
   </div>
 </div>

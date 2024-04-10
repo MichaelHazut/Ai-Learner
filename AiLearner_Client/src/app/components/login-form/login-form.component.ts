@@ -25,6 +25,19 @@ export class LoginFormComponent {
     private toastr: ToastrService
   ) {}
 
+  ngOnInit() {
+    this.userService.getIsAuthenticated().subscribe({
+      next: (isAuthenticated) => {
+        if (isAuthenticated) {
+          this.router.navigate(['/study-hub']);
+        }
+      },
+      error: (error) => {
+        console.error('LoginForm: Error while checking authentication status: ', error);
+      }
+    });
+  }
+
   onSubmit(event: Event) {
     event.preventDefault();
 
@@ -35,9 +48,7 @@ export class LoginFormComponent {
 
     this.userService.loginUser(user).subscribe({
       next: (response) => {
-        console.log(response);
         if (response.status === 200) {
-          console.log('succssfully logged in user');
           this.router.navigate(['/study-hub']);
         }
       },

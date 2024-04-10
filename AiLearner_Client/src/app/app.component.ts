@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, } from '@angular/router';
 import { HeaderComponent }  from './components/header/header.component';
 import { UserService } from './services/user.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -12,12 +13,12 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
   title = 'AiLearner';
+  isAuthenticated: boolean | null = null;
 
   constructor(private userService: UserService) {}
-
+  
   ngOnInit() {
-    console.log("app init");
     this.userService.checkAuth();
-    console.log("checked auth");
-  }
+    }
+
 }

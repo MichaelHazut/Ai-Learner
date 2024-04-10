@@ -1,0 +1,25 @@
+<button id="avatarButton" (click)="toggleDropdown()" class="...">
+    <img class="w-10 h-10 mr-4 mt-1 rounded-full shadow-2xl cursor-pointer hover:scale-105" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS24ZGizhBdEEM45p1jTB-3BiOENqIB5sIpjMs5c4WqmEIWXvcI058bZDnXhrELsAoYbrE&usqp=CAU" alt="User dropdown">
+  </button>
+  
+<!-- Dropdown menu -->
+<div *ngIf="dropdownOpen" id="userDropdown" class="z-10 bg-white divide-y divide-gray-100 rounded-2xl shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute right-2">
+    <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+      <div>Bonnie Green</div>
+      <div class="font-medium truncate">nameflowbite.com</div>
+    </div>
+    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+      </li>
+      <li>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+      </li>
+      <li>
+        <a href="#" class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+      </li>
+    </ul>
+    <div class="pt-1">
+      <a href="/signout" class="block rounded-b-2xl px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+    </div>
+</div>

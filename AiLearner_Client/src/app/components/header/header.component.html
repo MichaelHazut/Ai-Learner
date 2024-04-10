@@ -31,23 +31,27 @@
   </div>
 
   <!-- This is the Login text. It is hidden on small screens and becomes visible on larger screens. -->
-  <div routerLink="/login" class="items-center hidden gap-4 mx-3 sm:flex">
-    <p
-      class="text-lg font-medium duration-300 cursor-pointer hover:scale-105 font-zabal text-shadow"
-    >
-      Login
-    </p>
+  <div class="flex" [class.hidden]="isAuthenticated">
+    <div routerLink="/login" class="items-center hidden gap-4 mx-3 sm:flex">
+      <p
+        class="text-lg text-white font-medium duration-300 cursor-pointer hover:scale-105 font-zabal text-shadow"
+      >
+        Login
+      </p>
+    </div>
+
+    <!-- This is the sign up button. It has a specific styling. -->
+    <button routerLink="signup">
+      <p
+        class="text-sm text-white sm:text-lg mr-2 font-bold whitespace-nowrap cursor-pointer p-item p-1 px-1.5 border-2 rounded-md text-shadow border-gray-900 hover:scale-105 transition duration-300"
+      >
+        Sign Up
+      </p>
+    </button>
   </div>
-
-  <!-- This is the sign up button. It has a specific styling. -->
-  <button routerLink="signup">
-    <p
-      class="text-sm text-white sm:text-lg mr-2 font-bold whitespace-nowrap cursor-pointer p-item p-1 px-1.5 border-2 rounded-md text-shadow border-gray-900 hover:scale-105 transition duration-300"
-    >
-      Sign Up
-    </p>
-  </button>
-
+  <div class="flex" [class.hidden]="!isAuthenticated">
+    <app-user-dropdown></app-user-dropdown>
+  </div>
   <!-- This is the sidebar for small screens. It is hidden by default and becomes visible when the hamburger button is clicked. -->
   <div
     class="absolute left-0 transition-transform duration-300 ease-in-out transform border-2 border-gray-900 rounded-lg shadow-2xl w-60 top-14 sm:hidden"

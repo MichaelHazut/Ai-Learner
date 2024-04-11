@@ -36,7 +36,6 @@ export class LoginFormComponent {
         console.error('LoginForm: Error while checking authentication status: ', error);
       }
     });
-    this.userService.checkAuth();
   }
 
   onSubmit(event: Event) {

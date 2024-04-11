@@ -3,23 +3,23 @@
   </button>
   
 <!-- Dropdown menu -->
-<div *ngIf="dropdownOpen" id="userDropdown" class="z-10 bg-white divide-y divide-gray-100 rounded-2xl shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute right-2">
+<div *ngIf="dropdownOpen" id="userDropdown" class="z-10 bg-white divide-y divide-gray-100 rounded-2xl shadow min-w-44 max-w-80 dark:bg-gray-700 dark:divide-gray-600 absolute right-2 border border-slate-400">
     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-      <div>Bonnie Green</div>
-      <div class="font-medium truncate">nameflowbite.com</div>
+      <div class="text-shadow font-zabal">Welcome!</div>
+      <div class="font-medium truncate font-zabal text-shadow">{{userEmail}}</div>
     </div>
     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-shadow font-zabal transition-colors duration-200 ease-in-out hover:scale-y-105">Dashboard</a>
       </li>
       <li>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white font-zabal text-shadow transition-colors duration-200 ease-in-out hover:scale-y-105">Settings</a>
       </li>
       <li>
-        <a href="#" class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+        <a href="#" class="block px-4 py-2  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white font-zabal text-shadow transition-colors duration-200 ease-in-out hover:scale-y-105">Earnings</a>
       </li>
     </ul>
     <div class="pt-1">
-      <a href="/signout" class="block rounded-b-2xl px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+      <a href="/signout" class="block rounded-b-2xl px-4 pt-3 pb-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white text-shadow transition-colors duration-200 font-zabal ease-in-out ">Sign out</a>
     </div>
 </div>

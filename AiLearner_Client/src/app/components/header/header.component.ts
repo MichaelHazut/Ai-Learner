@@ -8,7 +8,7 @@ import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CommonModule, ReplaceSpacePipe,UserDropdownComponent],
+  imports: [RouterLink, CommonModule, ReplaceSpacePipe, UserDropdownComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -23,10 +23,17 @@ export class HeaderComponent {
     this.userService.getIsAuthenticated().subscribe({
       next: (isAuthenticated) => {
         if (isAuthenticated) {
-          this.navArray.splice(1, 0, 'Study Hub')
-          this.navArray= [... new Set(this.navArray)];
+          this.navArray.splice(1, 0, 'Study Hub');
+          this.navArray = [...new Set(this.navArray)];
 
           this.isAuthenticated = true;
+        }
+        if (!isAuthenticated) {
+          const index = this.navArray.indexOf('Study Hub');
+          if (index !== -1) {
+            this.navArray.splice(index, 1);
+          }
+          this.isAuthenticated = false;
         }
       },
     });

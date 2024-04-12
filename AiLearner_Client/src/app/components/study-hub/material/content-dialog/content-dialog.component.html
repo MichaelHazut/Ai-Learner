@@ -1,6 +1,6 @@
 <div
   tabindex="-1"
-  class="fixed top-0 left-0 right-0 z-50 items-center justify-center w-full overflow-y-auto duration-300 ease-out transform md:inset-0 "
+  class="absolute -top-8 left-0 right-0 z-50 items-center justify-center w-full overflow-y-auto duration-300 ease-out transform "
   [ngClass]="{
     'flex opacity-0 scale-95 invisible': !showContent,
     'flex opacity-100 scale-100 visible': showContent
@@ -16,13 +16,13 @@
     <!-- Modal content -->
     <div
       (blur)="showOrHideContent()"
-      class="relative bg-white rounded-lg shadow dark:bg-gray-700"
+      class="relative bg-white max-h-96 rounded-lg shadow border  overflow-y-scroll border-gray-400 dark:bg-gray-800"
     >
       <!-- Modal header -->
       <div
         class="flex items-center justify-between p-4 border-b rounded-t-lg md:p-5 dark:border-gray-600"
       >
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+        <h3 class="text-xl font-semibold text-gray-900 text-shadow dark:text-white">
           {{ material?.topic }}
         </h3>
         <button
@@ -50,7 +50,7 @@
       </div>
       <!-- Modal body -->
       <div class="p-4 space-y-4 md:p-5">
-        <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+        <p class="text-base leading-relaxed text-gray-500 text-shadow-sm dark:text-gray-300">
           {{ material?.content }}
         </p>
       </div>

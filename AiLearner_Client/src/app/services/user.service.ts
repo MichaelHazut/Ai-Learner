@@ -9,12 +9,14 @@ import {
   BehaviorSubject,
   Observable,
   catchError,
+  map,
   of,
   tap,
   throwError,
 } from 'rxjs';
 import { UserDTO } from '../models/UserDTO';
 import { environment } from '../../environments/environment.secret';
+import { Router } from '@angular/router';
 
 /**
  * Service for managing user-related operations.
@@ -31,7 +33,7 @@ export class UserService {
 
   private isAuthenticated = new BehaviorSubject<boolean | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   /**
    * Registers a new user.
@@ -68,7 +70,13 @@ export class UserService {
         tap((response) => {
           if (response.body?.userId) {
             this.userIdSource.next(response.body.userId);
-            this.checkAuth();
+            this.checkAuth().subscribe({
+              next: (isAuthenticated) => {
+                if (isAuthenticated) {
+                  this.isAuthenticated.next(true);
+                }
+              }
+            });
           }
         }),
         catchError((error) => {
@@ -84,29 +92,74 @@ export class UserService {
   getUsers(): Observable<string> {
     return this.http.get<string>('https://localhost:7089/test');
   }
+  getEmail(): Observable<string> {
+    return this.http.get(this.baseUrl + 'email', { 
+      withCredentials: true, 
+      responseType: 'text'  // Tell Angular to expect a text response
+    });
+  }
 
-  checkAuth() {
+  logout() {
     this.http
-      .get<{
-        isAuthenticated: any;
-        IsAuthenticated: boolean;
-      }>(`${this.secretUrl}/auth/validate-token`, { withCredentials: true })
+      .delete(`${this.secretUrl}/auth/logout`, { withCredentials: true })
       .subscribe({
-        next: (response) => {
-          this.isAuthenticated.next(response.isAuthenticated);
+        next: () => {
+          this.userIdSource.next(null);
+          this.isAuthenticated.next(false);
+          this.router.navigate(['/login']);
         },
         error: () => {
+          this.userIdSource.next(null);
           this.isAuthenticated.next(false);
+          this.router.navigate(['/']);
         },
       });
   }
+  checkAuth(): Observable<boolean> {
+    return this.http
+      .get<{ isAuthenticated: boolean }>(`${this.secretUrl}/auth/validate-token`, { withCredentials: true })
+      .pipe(
+        tap({
+          next: (response) => {
+            this.isAuthenticated.next(response.isAuthenticated);
+          },
+          error: () => {
+            this.isAuthenticated.next(false);
+          },
+        }),
+        map(response => response.isAuthenticated),
+        catchError(() => {
+          this.isAuthenticated.next(false);
+          return of(false);
+        })
+      );
+  }
+  
+  // checkAuth() {
+  //   console.trace('checkAuth called');
+  //   this.http
+  //     .get<{
+  //       isAuthenticated: any;
+  //       IsAuthenticated: boolean;
+  //     }>(`${this.secretUrl}/auth/validate-token`, { withCredentials: true })
+  //     .subscribe({
+  //       next: (response) => {
+  //         if (this.isAuthenticated.value) {
+  //           return
+  //         }
+  //         this.isAuthenticated.next(response.isAuthenticated);
+  //       },
+  //       error: () => {
+  //         this.isAuthenticated.next(false);
+  //       },
+  //     });
+  // }
 
   getIsAuthenticated(): Observable<boolean | null> {
     return this.isAuthenticated.asObservable();
   }
 
   refreshToken() {
-    console.log('in refresh token');
     return this.http
       .post<HttpResponse<any>>(
         `${this.secretUrl}/auth/refresh`,

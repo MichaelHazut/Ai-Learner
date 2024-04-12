@@ -23,6 +23,13 @@ export class SignupFormComponent {
 
   constructor(private userService: UserService, private router: Router) {}
 
+  ngOnInit() {
+    this.userService.getIsAuthenticated().subscribe((isAuthenticated) => {
+      if (isAuthenticated) {
+        this.router.navigate(['/study-hub']);
+      }
+    });
+  }
   onSubmit(event: Event) {
     event.preventDefault();
 
@@ -35,12 +42,10 @@ export class SignupFormComponent {
       next: (response) => {
         console.log(response);
         if (response.status === 201) {
-          console.log('succssfully registered user');
           this.router.navigate(['/login']);
         }
       },
       error: (error) => {
-        console.error('Error registering user', error);
         this.isError = true;
       }
     });

@@ -37,7 +37,6 @@ export class HeaderComponent {
         }
       },
     });
-    this.userService.checkAuth();
   }
 
   toggleSidebar() {

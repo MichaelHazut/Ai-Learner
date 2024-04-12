@@ -8,6 +8,8 @@ import { ContentDialogComponent } from '../../study-hub/material/content-dialog/
 import { ExamComponent } from '../exam.component';
 import { ExamRetryComponent } from '../exam-retry/exam-retry.component';
 import { QuestionAndAnswers } from '../../../models/QuestionAndAnswers';
+import { MaterialService } from '../../../services/material.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-exam-result',
@@ -43,8 +45,10 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
   }
   constructor(
     private examDataService: ExamDataService,
+    private materialService: MaterialService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private tostar: ToastrService,
   ) {}
 
   ngAfterViewInit() {
@@ -78,6 +82,21 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
       ),
     })).filter((qa) => qa.answers.length > 0);
   }
+  deleteMaterial() {
+    const materialId = parseInt(this.route.snapshot.paramMap.get('id')!);
+    console.log("starting to delete material with id: " + materialId );
+
+    this.materialService.deleteMaterial(materialId).subscribe({
+      next: (response) => {
+        this.tostar.success('Material deleted successfully');
+        this.router.navigate(['study-hub/materials']);
+      },
+      error: (error) => {
+        console.log("error deleting material", error);
+      },
+    });
+  }
+  
 
   getIncorrectAnswers() {
     this.wrongAnswers = this.examData!.questions.map(

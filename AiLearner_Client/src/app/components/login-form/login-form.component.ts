@@ -45,10 +45,11 @@ export class LoginFormComponent {
       email: this.userEmail,
       password: this.userPassword,
     };
-
+    this.toastr.info('Logging in...');
     this.userService.loginUser(user).subscribe({
       next: (response) => {
         if (response.status === 200) {
+          this.toastr.success('Login successful');
           this.router.navigate(['/study-hub']);
         }
       },

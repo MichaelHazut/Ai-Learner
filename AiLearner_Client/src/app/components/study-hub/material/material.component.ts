@@ -22,13 +22,20 @@ export class MaterialComponent implements OnDestroy {
 
   constructor(
     private examDataService: ExamDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.subsription = this.examDataService.examData$.subscribe((examData) => {
       this.examData = examData;
+      if(examData){
+        if (examData.questions.length <= examData.userAnswers.length) {
+          this.router.navigate(['./result'], { relativeTo: this.route });
+        }
+      }
     });
+    
     const materialId = this.route.snapshot.paramMap.get('id');
     this.examDataService.getExamData(parseInt(materialId!));
   }

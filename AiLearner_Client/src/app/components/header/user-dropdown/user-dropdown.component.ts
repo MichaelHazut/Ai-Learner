@@ -15,20 +15,26 @@ export class UserDropdownComponent {
 
   constructor(private userService: UserService) {}
   ngOnInit() {
-    console.log("dropdown component initialized");
-    this.userService.getEmail().subscribe({
-      next: (email) => {
-        if (email) {
-          console.log(email);
-          this.userEmail = email;
+    this.userService.getIsAuthenticated().subscribe({
+      next: (isAuthenticated) => {
+        if (!isAuthenticated) {
+          return;
         }
+        this.userService.getEmail().subscribe({
+          next: (email) => {
+            if (email) {
+              this.userEmail = email;
+            }
+          },
+          error: (err) => {
+            console.error('Error fetching email:', err);
+          }
+        });
       },
       error: (err) => {
-        console.error('Error fetching email:', err);
-        // Handle the error appropriately
+        console.error('Error fetching authentication status:', err);
       }
     });
-
   }
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;

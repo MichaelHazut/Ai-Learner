@@ -27,7 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
           console.log("Error 401: Unauthorized");
           return this.handle401Error(request, next);
         }
-        return throwError(() => new Error('test'));
+        return throwError(() => new Error(error.message));
       })
     );
   }
@@ -38,7 +38,6 @@ export class AuthInterceptor implements HttpInterceptor {
     return this.userService.refreshToken().pipe(
       switchMap(() => {
         // After refreshing the token, retry the original request
-        console.log("try to validate token again");
         return next.handle(request);
       }),
       catchError((error) => {

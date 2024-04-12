@@ -40,4 +40,10 @@ export class MaterialService {
       { withCredentials: true }
     );
   }
+  deleteMaterial(materialId: number): Observable<string> {
+    return this.http.delete(this.baseUrl + '/' + materialId, {
+      withCredentials: true,
+      responseType: 'text'
+    });
+  }
 }

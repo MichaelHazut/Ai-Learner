@@ -16,7 +16,6 @@ export class ContentDialogComponent {
 
 
   showOrHideContent() {
-    console.log(this.showContent);
     this.showContent = !this.showContent;
     this.contentVisibilityChanged.emit(this.showContent);
   }

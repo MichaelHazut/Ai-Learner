@@ -4,8 +4,10 @@ using DataAccessLayer.Models.Entities;
 using DataAccessLayer.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using NuGet.Common;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Claims;
 
 namespace AiLearner_API.Controllers
 {
@@ -92,6 +94,18 @@ namespace AiLearner_API.Controllers
             var isDeleted = await _unitOfWork.DeleteUserAsync(userId);
 
             return (isDeleted is true) ? Ok("User Deleted Successfully") : NotFound("User Not Found");
+        }
+
+        [HttpGet("email")]
+        public async Task<IActionResult> GetUserByEmail()
+        {
+            var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);
+            var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+                                ?? throw new SecurityTokenException("User ID is missing in the token.");
+
+            var user = await _unitOfWork.Users.GetByIdAsync(userId);
+
+            return (user is not null) ? Ok(user.Email!.ToLower()) : NotFound("email Not Found");
         }
     }
 

@@ -28,7 +28,7 @@ namespace AiLearner_API.Services
             new Claim(ClaimTypes.Email, user.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         }),
-                Expires = DateTime.UtcNow.AddMinutes(5), // Token expiration set to 1 hour
+                Expires = DateTime.UtcNow.AddHours(1), // Token expiration set to 1 hour
                 Issuer = _configuration["Jwt:Issuer"],
                 Audience = _configuration["Jwt:Audience"],
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -67,10 +67,9 @@ namespace AiLearner_API.Services
             response.Cookies.Append("AccessToken", token, new CookieOptions
             {
                 HttpOnly = true,
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddDays(1),
                 Secure = true,
                 SameSite = SameSiteMode.None,
-
             });
 
             response.Cookies.Append("refreshToken", refreshToken.Token!, new CookieOptions
@@ -94,11 +93,9 @@ namespace AiLearner_API.Services
                 ValidateAudience = true,
                 ValidAudience = _configuration["Jwt:Audience"],
                 ValidateLifetime = validateLifetime,
-                ClockSkew = TimeSpan.Zero 
+                ClockSkew = TimeSpan.Zero
             };
-
-            SecurityToken validatedToken;
-            var principal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+            var principal = tokenHandler.ValidateToken(token, validationParameters, out _);
             return principal;
         }
 
@@ -128,16 +125,21 @@ namespace AiLearner_API.Services
             return GenerateJwtToken(user); // Reuse the method to generate a new JWT token
         }
 
-        public async Task<bool> RevokeRefreshToken(string oldRefreshTokenString, string newRefreshToken)
+        public async Task<bool> RevokeRefreshToken(string oldRefreshTokenString, string newRefreshToken = "")
         {
+            ArgumentNullException.ThrowIfNull(oldRefreshTokenString);
+
             var oRefreshToken = await _unitOfWork.RefreshToken.VarifyRefreshToken(oldRefreshTokenString);
             var nRefreshToken = await _unitOfWork.RefreshToken.VarifyRefreshToken(newRefreshToken);
-            if (oRefreshToken == null || nRefreshToken == null)
+
+            if (oRefreshToken == null) return false;
+
+            if (oRefreshToken != null && nRefreshToken != null)
             {
-                return false;
+                oRefreshToken!.ReplacedByTokenId = nRefreshToken!.Id;
             }
-            oRefreshToken.ReplacedByTokenId = nRefreshToken.Id;
-            oRefreshToken.Revoked = true;
+
+            oRefreshToken!.Revoked = true;
             await _unitOfWork.CompleteAsync();
             return true;
         }

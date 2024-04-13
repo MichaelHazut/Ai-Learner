@@ -56,7 +56,8 @@ namespace AiLearner_API.Controllers
                 var token = Request.Cookies["AccessToken"];
                 if (string.IsNullOrEmpty(token))
                 {
-                    return BadRequest("No token provided.");
+                    
+                    return Unauthorized(new { message = "No token provided." });
                 }
 
                 // Validate the token
@@ -81,6 +82,32 @@ namespace AiLearner_API.Controllers
             {
                 // An unexpected error occurred
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Error = ex.Message });
+            }
+        }
+        [HttpDelete("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            // Extract the refresh token from the HTTP-only cookie
+            var refreshTokenString = Request.Cookies["refreshToken"];
+            if (string.IsNullOrEmpty(refreshTokenString))
+            {
+                return BadRequest("Refresh token is required.");
+            }
+
+            try
+            {
+                // Revoke the refresh token
+                await _jwtTokenService.RevokeRefreshToken(refreshTokenString);
+
+                // Remove the cookies from the response
+                Response.Cookies.Delete("AccessToken");
+                Response.Cookies.Delete("refreshToken");
+
+                return Ok();
+            }
+            catch (SecurityTokenException ex)
+            {
+                return Unauthorized(new { message = ex.Message });
             }
         }
 

@@ -48,6 +48,7 @@ namespace AiLearner_API.Controllers
             List<MaterialDTO> materialDTOs = materials!.Select(MaterialDTO.FromMaterial).ToList();
             return Ok(materialDTOs);
         }
+
         [HttpGet("material/{materialId:int}")]
         public async Task<IActionResult> GetMaterial(int materialId)
         {
@@ -114,15 +115,21 @@ namespace AiLearner_API.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);
+            var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+                                ?? throw new SecurityTokenException("User ID is missing in the token.");
+
+            // Clear the cached items related to the material
+            _cachingService.RemoveCachedItem<Material>(id.ToString());
+            _cachingService.RemoveCachedItem<List<Material>>(userId);
+            _cachingService.RemoveCachedItem<List<Question>>(id.ToString());
+            _cachingService.RemoveCachedItem<List<Answer>>(id.ToString());
+
             // Try to delete the material from the database and return a bool response
             bool isDeleted = await _unitOfWork.DeleteMaterialAsync(id);
             if (isDeleted is false)
                 return NotFound("Material Not Found");
 
-            // Clear the cached items related to the material
-            _cachingService.RemoveCachedItem<List<Material>>(id.ToString());
-            _cachingService.RemoveCachedItem<List<Question>>(id.ToString());
-            _cachingService.RemoveCachedItem<List<Answer>>(id.ToString());
 
             return Ok("Material Deleted Successfully");
         }

@@ -6,6 +6,7 @@ import { ContentDialogComponent } from './content-dialog/content-dialog.componen
 import { Subscription } from 'rxjs';
 import { ExamDataService } from '../../../services/exam-data.service';
 import { Exam } from '../../../models/Exam';
+import { NavigationService } from '../../../services/navigation.service';
 
 @Component({
   selector: 'app-material',
@@ -23,10 +24,12 @@ export class MaterialComponent implements OnDestroy {
   constructor(
     private examDataService: ExamDataService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
+    this.navigationService.setBackRoute(['/study-hub', 'materials']);
     this.subsription = this.examDataService.examData$.subscribe((examData) => {
       this.examData = examData;
       if(examData){

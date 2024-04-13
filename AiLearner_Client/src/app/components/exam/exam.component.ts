@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service';
 import { UserAnswersDTO } from '../../models/UserAnswersDTO';
 import { UserAnswersService } from '../../services/user-answers.service';
 import { ExamResultComponent } from './exam-result/exam-result.component';
+import { NavigationService } from '../../services/navigation.service';
 @Component({
   selector: 'app-exam',
   standalone: true,
@@ -31,7 +32,7 @@ export class ExamComponent implements OnDestroy, AfterViewInit  {
     private userService: UserService,
     private userAnswersService: UserAnswersService,
     private examDataService: ExamDataService,
-
+    private navigationService: NavigationService
   ) {}
   
   ngAfterViewInit() {
@@ -40,6 +41,7 @@ export class ExamComponent implements OnDestroy, AfterViewInit  {
 
   ngOnInit() {
     this.materialId = this.route.snapshot.paramMap.get('id');
+    this.navigationService.setBackRoute(['/study-hub', 'materials', this.materialId!]);
 
     this.router.events.pipe(
       filter((event: RouterEvent): event is NavigationStart => event instanceof NavigationStart)

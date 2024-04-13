@@ -1,11 +1,27 @@
 <div
   class="w-11/12 p-3 mx-auto my-5 bg-gray-700 shadow-2xl lg:mt-10 lg:p-4 lg:pb-8 sm:8 min-h-80 max-h-fit md:max-w-screen-xl md:mx-auto rounded-3xl animate-scale-up"
 >
-  <h3
-    class="pb-5 text-2xl font-bold text-center text-white drop-shadow-2xl text-shadow"
-  >
-    Study Hub
-  </h3>
+  <div class="flex relative items-center justify-center mt-2 mb-5">
+    <button
+      (click)="goBack()"
+      type="button"
+      class="bg-gray-800 absolute left-4 text-white rounded-md hover:bg-red-700 hover:text-white py-1 px-3 shadow-2xl"
+    >
+      <div class="flex flex-row align-middle">
+        <img
+          src="../../../assets/SVG/arrow2-icon.svg"
+          alt=""
+          class="rotate-180"
+        />
+        <p class="ml-2">Prev</p>
+      </div>
+    </button>
+    <h3
+      class="text-2xl font-bold text-center text-white drop-shadow-2xl text-shadow"
+    >
+      Study Hub
+    </h3>
+  </div>
 
   <router-outlet class="animate-right-load"></router-outlet>
 </div>

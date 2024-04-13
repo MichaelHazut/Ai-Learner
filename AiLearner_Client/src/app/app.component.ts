@@ -18,6 +18,13 @@ export class AppComponent {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.userService.checkAuth();
+    console.log("AppComponent ngOnInit");
+    this.userService.checkAuth().subscribe((res) => {
+      console.log("AppComponent checkAuth subscribe res: ", res);
+      if(res) {
+        console.log("AppComponent checkAuth subscribe res is true");
+        this.isAuthenticated = true;
+      }
+    });
   }
 }

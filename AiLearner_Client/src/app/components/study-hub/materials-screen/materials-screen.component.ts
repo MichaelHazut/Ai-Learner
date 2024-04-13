@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { FormatDatePipe } from '../../../pipes/format-date.pipe';
 import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NavigationService } from '../../../services/navigation.service';
 @Component({
   selector: 'app-materials-screen',
   standalone: true,
@@ -25,7 +26,8 @@ export class MaterialsScreenComponent implements OnDestroy {
     private materialService: MaterialService,
     private userService: UserService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private navigationService: NavigationService
   ) {
     this.subscription = this.userService.userId$.subscribe((id) => {
       this.userId = id;
@@ -33,6 +35,7 @@ export class MaterialsScreenComponent implements OnDestroy {
   }
 
   ngOnInit(): void {
+    this.navigationService.setBackRoute(['/study-hub']);
     this.loadMaterials();
     this.subscription = this.userService.userId$.subscribe((id) => {
       this.userId = id;

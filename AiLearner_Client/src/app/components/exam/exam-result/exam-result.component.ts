@@ -10,6 +10,8 @@ import { ExamRetryComponent } from '../exam-retry/exam-retry.component';
 import { QuestionAndAnswers } from '../../../models/QuestionAndAnswers';
 import { MaterialService } from '../../../services/material.service';
 import { ToastrService } from 'ngx-toastr';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { NavigationService } from '../../../services/navigation.service';
 
 @Component({
   selector: 'app-exam-result',
@@ -19,6 +21,7 @@ import { ToastrService } from 'ngx-toastr';
     RouterLink,
     ContentDialogComponent,
     ExamRetryComponent,
+    DeleteDialogComponent,
   ],
   templateUrl: './exam-result.component.html',
   styleUrl: './exam-result.component.css',
@@ -26,6 +29,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ExamResultComponent implements OnDestroy, AfterViewInit {
   subsription: Subscription = new Subscription();
   contentVisable: boolean = false;
+  deleteVisable: boolean = false;
   answerVisible: boolean = false;
   currectAnswers: any[] = [];
   wrongAnswers: any[] = [];
@@ -37,7 +41,7 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
     if (value) {
       // Trigger the animation once data is available
       this.animationActive = false;
-      setTimeout(() => this.animationActive = true);
+      setTimeout(() => (this.animationActive = true));
     }
   }
   get examData(): Exam | null {
@@ -49,13 +53,15 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private tostar: ToastrService,
+    private navigationService: NavigationService
   ) {}
 
   ngAfterViewInit() {
-    setTimeout(() => this.animationActive = true);
+    setTimeout(() => (this.animationActive = true));
   }
 
   ngOnInit() {
+    this.navigationService.setBackRoute(['/study-hub', 'materials']);
     this.subsription = this.examDataService.examData$.subscribe((examData) => {
       if (!examData) {
         const materialId = this.route.snapshot.paramMap.get('id');
@@ -82,21 +88,6 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
       ),
     })).filter((qa) => qa.answers.length > 0);
   }
-  deleteMaterial() {
-    const materialId = parseInt(this.route.snapshot.paramMap.get('id')!);
-    console.log("starting to delete material with id: " + materialId );
-
-    this.materialService.deleteMaterial(materialId).subscribe({
-      next: (response) => {
-        this.tostar.success('Material deleted successfully');
-        this.router.navigate(['study-hub/materials']);
-      },
-      error: (error) => {
-        console.log("error deleting material", error);
-      },
-    });
-  }
-  
 
   getIncorrectAnswers() {
     this.wrongAnswers = this.examData!.questions.map(
@@ -125,8 +116,8 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
     }
     const percentage =
       (this.currectAnswers.length / this.examData.questions.length) * 100;
-      return Math.round(percentage);
-    }
+    return Math.round(percentage);
+  }
 
   navigateToExam() {
     this.examDataService.setExamRetryData(this.wrongAnswers);
@@ -139,11 +130,17 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
   showOrHideContent() {
     this.contentVisable = !this.contentVisable;
   }
-  
+
   handleVisibilityChange(isVisible: boolean) {
     this.contentVisable = isVisible;
   }
 
+  handleDeleteVisibilityChange(isVisible: boolean) {
+    this.deleteVisable = isVisible;
+  }
+  showOrHideDelete() {
+    this.deleteVisable = !this.deleteVisable;
+  }
   showOrHideAnswers() {
     this.answerVisible = !this.answerVisible;
   }

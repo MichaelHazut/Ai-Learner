@@ -20,6 +20,7 @@ export class MaterialService {
       .post(this.baseUrl, dto, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
         observe: 'response',
+        withCredentials: true,
       })
       .pipe(
         catchError((error) => {

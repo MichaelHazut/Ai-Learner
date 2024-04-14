@@ -1,11 +1,4 @@
-<!-- <div class="w-11/12 mx-auto sm:w-2/3 md:w-1/3">
-    <label for="content" class="text-xl font-semibold text-white">Input Content</label>
-    <textarea name="content" [(ngModel)]="contentInput" cols="30" rows="10" class="w-full p-2 shadow-xl rounded-xl"></textarea>
-    <button (click)="getInput()" class="p-2 text-white bg-gray-700"> check content</button>
-</div> -->
-
-<!-- If userId is not null, display the form -->
-<div *ngIf="userId" class="w-11/12 mx-auto sm:w-2/3 md:w-1/2">
+<div class="w-11/12 mx-auto sm:w-2/3 md:w-1/2">
   <div class="relative w-full items-center">
     <label for="content" class="text-xl font-semibold text-white"
       >Input Content:</label
@@ -21,7 +14,7 @@
       class="block p-2.5 mb-4 w-full shadow-2xl rounded-xl"
     ></textarea>
     <div
-      *ngIf="loading"
+      *ngIf="!loading"
       class="absolute inset-0 flex items-center justify-center"
     >
       <svg

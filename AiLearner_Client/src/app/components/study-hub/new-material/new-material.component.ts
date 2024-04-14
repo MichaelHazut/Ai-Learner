@@ -14,10 +14,9 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './new-material.component.html',
   styleUrl: './new-material.component.css',
 })
-export class NewMaterialComponent implements OnDestroy {
+export class NewMaterialComponent {
   contentInput: string = '';
   userId: string | null = null;
-  private subscription: Subscription;
   loading: boolean = false;
 
   constructor(
@@ -27,26 +26,13 @@ export class NewMaterialComponent implements OnDestroy {
     private route: ActivatedRoute,
     private toastr: ToastrService
   ) {
-    this.subscription = this.userService.userId$.subscribe({
-      next: (id) => {
-        if (id) {
-          this.userId = id;
-        } else {
-          this.toastr.info('Try logging in first');
-          this.router.navigate(['/login']);
-        }
-      },
-      error: () => {
-        this.toastr.info('Try logging in first');
-        this.router.navigate(['/login']);
-      },
-    });
+    
   }
 
   getInput(): void {
     this.loading = true;
     const dto: MaterialRequestDTO = {
-      userId: this.userId!,
+      userId: '',
       content: this.contentInput,
       numOfQuestions: 10,
     };
@@ -65,7 +51,5 @@ export class NewMaterialComponent implements OnDestroy {
       },
     });
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+
 }

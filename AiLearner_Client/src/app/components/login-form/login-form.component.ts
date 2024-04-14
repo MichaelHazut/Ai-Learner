@@ -18,6 +18,7 @@ export class LoginFormComponent {
   userPassword: string = '';
   isError = false;
   hide: boolean = true;
+  isLoading = false;
 
   constructor(
     private userService: UserService,
@@ -40,6 +41,7 @@ export class LoginFormComponent {
 
   onSubmit(event: Event) {
     event.preventDefault();
+    this.isLoading = true;
 
     const user: UserDTO = {
       email: this.userEmail,
@@ -58,5 +60,6 @@ export class LoginFormComponent {
         this.isError = true;
       },
     });
+    this.isLoading = false;
   }
 }

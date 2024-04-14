@@ -1,5 +1,5 @@
 export interface MaterialRequestDTO{
-    userId: string;
+    userId?: string;
     content: string;
     numOfQuestions: number;
 }

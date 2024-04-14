@@ -20,6 +20,7 @@ export class SignupFormComponent {
   isError = false;
   hide: boolean = true;
   errorMsg: string = '';
+  isLoading = false;
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -32,6 +33,7 @@ export class SignupFormComponent {
   }
   onSubmit(event: Event) {
     event.preventDefault();
+    this.isLoading = true;
 
     const user: UserDTO = {
       email: this.userEmail,
@@ -40,14 +42,16 @@ export class SignupFormComponent {
 
     this.userService.registerUser(user).subscribe({
       next: (response) => {
-        console.log(response);
+        this.isLoading = false;
         if (response.status === 201) {
           this.router.navigate(['/login']);
         }
       },
       error: (error) => {
+        this.isLoading = false;
         this.isError = true;
       }
+      
     });
   }
 }

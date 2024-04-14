@@ -73,8 +73,15 @@ namespace AiLearner_API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);
+            var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+                                ?? throw new SecurityTokenException("User ID is missing in the token.");
+
+            requestDto.UserId = userId;
+
             StudyMaterial? material = null;
             bool isValid = false;
+
 
             // Try to generate a valid study material 10 times
             for (int attempt = 0; attempt < 10 && !isValid; attempt++)
@@ -99,10 +106,10 @@ namespace AiLearner_API.Controllers
             if (!isValid || material == null) return BadRequest("Unable to generate valid study material.");
 
             // Create the material with questions and answers in the database
-            bool isSuccess = await _unitOfWork.CreateMaterialWithQuestionsAndAnswers(requestDto.UserId, material);
+            bool isSuccess = await _unitOfWork.CreateMaterialWithQuestionsAndAnswers(requestDto.UserId!, material);
 
             // Clear the cached items related to the user
-            _cachingService.RemoveCachedItem<List<Material>>(requestDto.UserId);
+            _cachingService.RemoveCachedItem<List<Material>>(requestDto.UserId!);
 
             // Return the created material or a Not found response
             return isSuccess ? new CreatedResult("/material", material) : NotFound();

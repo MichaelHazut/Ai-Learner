@@ -1,9 +1,6 @@
 **.vs/
 **bin/
 **obj/
-AiLearner_API/appsettings.json
-AiLearner_API/logs
-**/appsettings.json
 *.usergit 
 *.userosscache
 *.suo
@@ -12,3 +9,7 @@ AiLearner_API/logs
 *.cache
 *.csproj.user
 *.vbproj.user
+
+# AiLearner_API/appsettings.json
+# **/appsettings.json
+# AiLearner_API/logs

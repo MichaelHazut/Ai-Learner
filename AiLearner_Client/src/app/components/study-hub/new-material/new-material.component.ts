@@ -7,6 +7,7 @@ import { UserService } from '../../../services/user.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NavigationService } from '../../../services/navigation.service';
 @Component({
   selector: 'app-new-material',
   standalone: true,
@@ -24,11 +25,15 @@ export class NewMaterialComponent {
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private navigationService: NavigationService
   ) {
     
   }
 
+  ngOnInit(){
+    this.navigationService.setBackRoute(['study-hub']);
+  }
   getInput(): void {
     this.loading = true;
     const dto: MaterialRequestDTO = {

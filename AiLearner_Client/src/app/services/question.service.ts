@@ -14,6 +14,6 @@ export class QuestionService {
   constructor(private http: HttpClient) { }
 
   getQuestions(materialId: number) : Observable<QuestionDTO[]> {
-    return this.http.get<QuestionDTO[]>(this.baseUrl + '/' + materialId);
+    return this.http.get<QuestionDTO[]>(this.baseUrl + '/' + materialId,{withCredentials: true,});
   }
 }

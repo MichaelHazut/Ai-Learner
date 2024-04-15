@@ -14,7 +14,7 @@ namespace AiLearner_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class MaterialController(IUnitOfWork unitOfWork, OpenAIService openAIService, CachingService cachingService, JwtTokenService jwtTokenService) : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;

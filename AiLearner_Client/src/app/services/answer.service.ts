@@ -14,7 +14,7 @@ export class AnswerService {
   constructor(private http: HttpClient) { }
 
   getAnswers(materialId: number): Observable<AnswerDTO[]> {
-    return this.http.get<AnswerDTO[]>(this.baseUrl + '/' + materialId);
+    return this.http.get<AnswerDTO[]>(this.baseUrl + '/' + materialId,{withCredentials: true,});
   }
 }
 

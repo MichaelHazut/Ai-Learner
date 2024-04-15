@@ -3,12 +3,13 @@
   class="sticky top-0 z-10 flex items-center justify-between bg-gray-900/[0.4] h-14 animated"
 >
   <!-- This button is for toggling the sidebar. It is only visible on small screens. -->
-  <button class="p-4 shadow-2xl sm:hidden" (click)="toggleSidebar()">
-    <img
-      src="../../../assets/SVG/hamburger-icon.svg"
-      alt="hamburger-icon"
-      class="h-6 p-0 m-0 transition duration-300 transform cursor-pointer hover:scale-110 custom-drop-shadow"
-    />
+  <button class="p-4 sm:hidden mt-1" (click)="toggleSidebar()">
+    <span
+      [ngClass]="
+        showSidebar ? 'icon-[mingcute--close-line] h-8 w-8 mr-2' : 'icon-[solar--hamburger-menu-broken] h-10 w-10'
+      "
+      class="icon-[solar--hamburger-menu-broken] bg-slate-300 shadow-2xl custom-drop-shadow hover:scale-110 transition-all duration-300 ease-in-out hover:bg-slate-600"
+    ></span>
   </button>
 
   <!-- This is the logo of the website. -->
@@ -16,7 +17,7 @@
     routerLink="/"
     src="../../../assets/SVG/logo-no-background.svg"
     alt="Logo"
-    class="ml-5 transition duration-300 transform cursor-pointer h-6 sm:g-8  sm:ml-3 hover:scale-105 drop-shadow-lg"
+    class="mr-6 transition duration-300 transform cursor-pointer h-6 sm:g-8 sm:ml-3 hover:scale-105 drop-shadow-lg"
   />
 
   <!-- This is the navigation menu. It is hidden on small screens and becomes visible on larger screens. -->

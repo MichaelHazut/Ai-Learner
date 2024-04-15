@@ -95,7 +95,7 @@ export class UserService {
   getEmail(): Observable<string> {
     return this.http.get(this.baseUrl + 'email', { 
       withCredentials: true, 
-      responseType: 'text'  // Tell Angular to expect a text response
+      responseType: 'text',
     });
   }
 
@@ -121,6 +121,9 @@ export class UserService {
       .pipe(
         tap({
           next: (response) => {
+            if (this.isAuthenticated.value) {
+              return;
+            }
             this.isAuthenticated.next(response.isAuthenticated);
           },
           error: () => {
@@ -135,25 +138,6 @@ export class UserService {
       );
   }
   
-  // checkAuth() {
-  //   console.trace('checkAuth called');
-  //   this.http
-  //     .get<{
-  //       isAuthenticated: any;
-  //       IsAuthenticated: boolean;
-  //     }>(`${this.secretUrl}/auth/validate-token`, { withCredentials: true })
-  //     .subscribe({
-  //       next: (response) => {
-  //         if (this.isAuthenticated.value) {
-  //           return
-  //         }
-  //         this.isAuthenticated.next(response.isAuthenticated);
-  //       },
-  //       error: () => {
-  //         this.isAuthenticated.next(false);
-  //       },
-  //     });
-  // }
 
   getIsAuthenticated(): Observable<boolean | null> {
     return this.isAuthenticated.asObservable();

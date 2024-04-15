@@ -55,8 +55,8 @@ namespace AiLearner_API
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
                     ValidateIssuer = true,
-                    ValidateAudience = true,
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidateAudience = true,
                     ValidAudience = builder.Configuration["Jwt:Audience"],
                     ClockSkew = TimeSpan.Zero
                 };
@@ -132,6 +132,15 @@ namespace AiLearner_API
 
             var app = builder.Build();
 
+            app.Use(async (context, next) =>
+            {
+                var token = context.Request.Cookies["AccessToken"];
+                if (!string.IsNullOrEmpty(token) && !context.Request.Headers.ContainsKey("Authorization"))
+                {
+                    context.Request.Headers.Append("Authorization", $"Bearer {token}");
+                }
+                await next.Invoke();
+            });
 
             app.UseCors("AllowMyOrigin");
 

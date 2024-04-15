@@ -9,7 +9,7 @@ namespace AiLearner_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class QuestionController(IUnitOfWork unitOfWork, CachingService cachingService) : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;

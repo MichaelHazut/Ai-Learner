@@ -2,6 +2,7 @@
 using DataAccessLayer.DTO;
 using DataAccessLayer.Models.Entities;
 using DataAccessLayer.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
@@ -97,6 +98,7 @@ namespace AiLearner_API.Controllers
         }
 
         [HttpGet("email")]
+        [Authorize]
         public async Task<IActionResult> GetUserByEmail()
         {
             var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);

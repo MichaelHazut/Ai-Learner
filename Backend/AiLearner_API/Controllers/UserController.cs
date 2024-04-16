@@ -111,7 +111,7 @@ namespace AiLearner_API.Controllers
         }
 
         [HttpGet("test")]//test will delete later
-        public async Task<IActionResult> Test()
+        public IActionResult Test()
         {
             string environmentVariable = Environment.GetEnvironmentVariable("DB_SERVER");
             if (environmentVariable is null)

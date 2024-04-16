@@ -73,11 +73,12 @@ namespace AiLearner_API
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowMyOrigin",
-                    builder => builder.WithOrigins(
-                        "http://localhost:4200",
-                        "https://localhost:4200",
-                        "https://c76rjpx5.euw.devtunnels.ms:4200",
-                        "https://c76rjpx5-4200.euw.devtunnels.ms")
+                    builder => builder.WithOrigins("*"
+                        //"http://localhost:4200",
+                        //"https://localhost:4200",
+                        //"https://c76rjpx5.euw.devtunnels.ms:4200",
+                        //"https://c76rjpx5-4200.euw.devtunnels.ms"
+                        )
                                         .AllowAnyMethod()
                                         .AllowAnyHeader()
                                         .AllowCredentials());

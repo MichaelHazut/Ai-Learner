@@ -9,6 +9,7 @@
 *.cache
 *.csproj.user
 *.vbproj.user
+*.Development.json
 AiLearner_API/logs/log.txt
 
 # AiLearner_API/appsettings.json

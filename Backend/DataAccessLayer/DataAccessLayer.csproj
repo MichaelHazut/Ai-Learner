@@ -25,4 +25,8 @@
     <ProjectReference Include="..\AiLearner_ClassLibrary\AiLearner_ClassLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

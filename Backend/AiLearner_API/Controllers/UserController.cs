@@ -28,7 +28,7 @@ namespace AiLearner_API.Controllers
 
             //check if user already exists
             User user = await _unitOfWork.Users.NewUser(userData.Email, userData.Password);
-            
+
             //change is 0 if user already exists
             int changes = await _unitOfWork.CompleteAsync();
             if (changes <= 0)
@@ -56,14 +56,14 @@ namespace AiLearner_API.Controllers
                 bool isVerified = _unitOfWork.Users.VerifyPassword(user!, userData);
                 if (isVerified is false) return Unauthorized("Invalid credentials");
                 return await GenerateAndAppendTokens(user!);
-            }          
-            
+            }
+
             //get user from db and verify credentials
             user = await _unitOfWork.Users.LogIn(userData.Email, userData.Password);
-            if (user is null) 
+            if (user is null)
                 return Unauthorized("Invalid credentials");
 
-            
+
             //generate jwtToken and refreshToken
             var jwtToken = _jwtTokenService.GenerateJwtToken(user);
             var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id!);
@@ -73,7 +73,7 @@ namespace AiLearner_API.Controllers
 
             //add jwtToken and refreshToken to HttpOnly cookies
             _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);
-            
+
 
             return await GenerateAndAppendTokens(user);
         }
@@ -108,6 +108,13 @@ namespace AiLearner_API.Controllers
             var user = await _unitOfWork.Users.GetByIdAsync(userId);
 
             return (user is not null) ? Ok(user.Email!.ToLower()) : NotFound("email Not Found");
+        }
+
+        [HttpGet("test")]//test will delete later
+        public async Task<IActionResult> Test()
+        {
+            var user = await _unitOfWork.Users.GetByIdAsync("096c208e-335b-454f-8605-4d1746af5087");
+            return Ok(user);
         }
     }
 

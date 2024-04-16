@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(AiLearnerDbContext))]
-    [Migration("20240307155618_InitCreate")]
-    partial class InitCreate
+    [Migration("20240416095254_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace DataAccessLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.Answer", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.Answer", b =>
                 {
                     b.Property<int>("AnswerId")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.Material", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.Material", b =>
                 {
                     b.Property<int>("MaterialId")
                         .ValueGeneratedOnAdd()
@@ -58,6 +58,9 @@ namespace DataAccessLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaterialId"));
 
                     b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Summery")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Topic")
@@ -69,9 +72,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("summery")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("MaterialId");
 
                     b.HasIndex("UserId");
@@ -79,7 +79,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Materials");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.Question", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.Question", b =>
                 {
                     b.Property<int>("QuestionId")
                         .ValueGeneratedOnAdd()
@@ -103,7 +103,42 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.User", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Expiration")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ReplacedByTokenId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Revoked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReplacedByTokenId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -128,7 +163,7 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.UserAnswer", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.UserAnswer", b =>
                 {
                     b.Property<int>("UserAnswerId")
                         .ValueGeneratedOnAdd()
@@ -159,27 +194,27 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("UserAnswers");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.Answer", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.Answer", b =>
                 {
-                    b.HasOne("DataAccessLayer.models.Entities.Question", "Question")
+                    b.HasOne("DataAccessLayer.Models.Entities.Question", "Question")
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId");
 
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.Material", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.Material", b =>
                 {
-                    b.HasOne("DataAccessLayer.models.Entities.User", "User")
+                    b.HasOne("DataAccessLayer.Models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.Question", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.Question", b =>
                 {
-                    b.HasOne("DataAccessLayer.models.Entities.Material", "Material")
+                    b.HasOne("DataAccessLayer.Models.Entities.Material", "Material")
                         .WithMany("Questions")
                         .HasForeignKey("MaterialId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -188,21 +223,36 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Material");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.UserAnswer", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.RefreshToken", b =>
                 {
-                    b.HasOne("DataAccessLayer.models.Entities.Answer", "Answer")
+                    b.HasOne("DataAccessLayer.Models.Entities.RefreshToken", "ReplacedByToken")
+                        .WithMany()
+                        .HasForeignKey("ReplacedByTokenId");
+
+                    b.HasOne("DataAccessLayer.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("ReplacedByToken");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.UserAnswer", b =>
+                {
+                    b.HasOne("DataAccessLayer.Models.Entities.Answer", "Answer")
                         .WithMany()
                         .HasForeignKey("AnswerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("DataAccessLayer.models.Entities.Question", "Question")
+                    b.HasOne("DataAccessLayer.Models.Entities.Question", "Question")
                         .WithMany()
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("DataAccessLayer.models.Entities.User", "User")
+                    b.HasOne("DataAccessLayer.Models.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -214,12 +264,12 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.Material", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.Material", b =>
                 {
                     b.Navigation("Questions");
                 });
 
-            modelBuilder.Entity("DataAccessLayer.models.Entities.Question", b =>
+            modelBuilder.Entity("DataAccessLayer.Models.Entities.Question", b =>
                 {
                     b.Navigation("Answers");
                 });

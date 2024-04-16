@@ -113,8 +113,18 @@ namespace AiLearner_API.Controllers
         [HttpGet("test")]//test will delete later
         public async Task<IActionResult> Test()
         {
-            var user = await _unitOfWork.Users.GetByIdAsync("096c208e-335b-454f-8605-4d1746af5087");
-            return Ok(user);
+            string environmentVariable = Environment.GetEnvironmentVariable("DB_SERVER");
+            if (environmentVariable is null)
+                return BadRequest("Environment Variable Not Found");
+            string environmentVariable2 = Environment.GetEnvironmentVariable("DB_NAME");
+            if (environmentVariable2 is null)
+                return BadRequest(environmentVariable + " +Environment Variable Not Found");
+            string environmentVariable3 = Environment.GetEnvironmentVariable("ADMIN_ID");
+            if (environmentVariable3 is null)
+                return BadRequest(environmentVariable + environmentVariable2 + " +Environment Variable Not Found");
+            return Ok(environmentVariable + environmentVariable2 + environmentVariable3);
+            //var user = await _unitOfWork.Users.GetByIdAsync("096c208e-335b-454f-8605-4d1746af5087");
+            //return Ok(user);
         }
     }
 

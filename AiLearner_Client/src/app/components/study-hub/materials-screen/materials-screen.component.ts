@@ -15,9 +15,8 @@ import { NavigationService } from '../../../services/navigation.service';
   templateUrl: './materials-screen.component.html',
   styleUrl: './materials-screen.component.css',
 })
-export class MaterialsScreenComponent implements OnDestroy {
+export class MaterialsScreenComponent {
   userId: string | null = null;
-  private subscription: Subscription;
   expandedState: Record<number, boolean> = {};
 
   materials: MaterialDTO[] | null =  null;
@@ -29,20 +28,12 @@ export class MaterialsScreenComponent implements OnDestroy {
     private toastr: ToastrService,
     private navigationService: NavigationService
   ) {
-    this.subscription = this.userService.userId$.subscribe((id) => {
-      this.userId = id;
-    });
+
   }
 
   ngOnInit(): void {
     this.navigationService.setBackRoute(['/study-hub']);
     this.loadMaterials();
-    this.subscription = this.userService.userId$.subscribe((id) => {
-      this.userId = id;
-      if (this.userId) {
-        this.loadMaterials();
-      }
-    });
   }
   
   toggleExpanded(materialId: number): void {
@@ -65,7 +56,4 @@ export class MaterialsScreenComponent implements OnDestroy {
     this.router.navigate(['/study-hub/materials', material.id], { state: { material: material } });
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 }

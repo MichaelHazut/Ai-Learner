@@ -21,6 +21,10 @@ export class AuthInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
+    if (request.url.includes('/auth/refresh')) {
+      console.log("Request URL includes /auth/refresh");
+      return next.handle(request);
+    }
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
@@ -31,6 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
       })
     );
   }
+
   private handle401Error(
     request: HttpRequest<any>,
     next: HttpHandler

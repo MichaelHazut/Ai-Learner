@@ -15,12 +15,14 @@ import { ExamResultComponent } from './components/exam/exam-result/exam-result.c
 import { ExamRetryComponent } from './components/exam/exam-retry/exam-retry.component';
 import { authGuard } from './auth/auth-guard';
 import { LogoutComponent } from './components/logout/logout.component';
+import { AboutPageComponent } from './pages/Aboute-page/about-page/about-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'signup', component: SignupPageComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'about', component: AboutPageComponent },
   { path: 'signout', component: LogoutComponent, canActivate: [authGuard]},
   {
     path: 'study-hub',

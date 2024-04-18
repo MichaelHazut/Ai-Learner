@@ -54,8 +54,8 @@ export class TestPageComponent {
     // });
   }
 
-  getUsers() {
-    this.userService.getUsers().subscribe((data) => {
+  testGetUserFromAzure() {
+    this.userService.testGetUserFromAzure().subscribe((data) => {
       console.log(data);
     });
   }

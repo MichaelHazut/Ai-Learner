@@ -98,6 +98,12 @@ export class UserService {
       responseType: 'text',
     });
   }
+  
+  testGetUserFromAzure(): Observable<any> {
+    return this.http.get(this.baseUrl + 'test', { 
+      withCredentials: true, 
+    });
+  }
 
   logout() {
     this.http
@@ -155,12 +161,15 @@ export class UserService {
       .pipe(
         tap((response: HttpResponse<any>) => {
           if (response.status === 200) {
+            console.log("refreshed token");
             this.isAuthenticated.next(true);
           } else {
+            console.log("failed to refresh token");
             this.isAuthenticated.next(false);
           }
         }),
         catchError((error) => {
+          console.log("error in refresh token");
           this.isAuthenticated.next(false);
           return throwError(() => error);
         })

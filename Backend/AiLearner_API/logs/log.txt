@@ -84,3 +84,846 @@
   }
 }
 
+2024-04-16 17:41:29 - {
+  "ErrorType": "SqlException",
+  "ErrorMessage": "A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)",
+  "InnerException": "The network path was not found.",
+  "StackTrace": "   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at DataAccessLayer.Repositories.UserRepo.CheckIfExist(String email) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\DataAccessLayer\\Repositories\\UserRepo.cs:line 16
+   at DataAccessLayer.Repositories.UserRepo.NewUser(String email, String password) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\DataAccessLayer\\Repositories\\UserRepo.cs:line 23
+   at AiLearner_API.Controllers.UserController.RegisterUser(UserDto userData) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Controllers\\UserController.cs:line 31
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 23",
+  "Path": {
+    "Value": "/api/User/register",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-16 18:26:04 - {
+  "ErrorType": "ArgumentOutOfRangeException",
+  "ErrorMessage": "IDX10653: The encryption algorithm 'http://www.w3.org/2001/04/xmldsig-more#hmac-sha256' requires a key size of at least '128' bits. Key '[PII of type 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]', is of size: '72'. (Parameter 'key')",
+  "InnerException": null,
+  "StackTrace": "   at Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider..ctor(SecurityKey key, String algorithm, Boolean willCreateSignatures)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateSignatureProvider(SecurityKey key, String algorithm, Boolean willCreateSignatures, Boolean cacheProvider)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateForSigning(SecurityKey key, String algorithm, Boolean cacheProvider)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateForSigning(SecurityKey key, String algorithm)
+   at Microsoft.IdentityModel.JsonWebTokens.JwtTokenUtilities.CreateEncodedSignature(String input, SigningCredentials signingCredentials)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.CreateJwtSecurityTokenPrivate(String issuer, String audience, ClaimsIdentity subject, Nullable`1 notBefore, Nullable`1 expires, Nullable`1 issuedAt, SigningCredentials signingCredentials, EncryptingCredentials encryptingCredentials, IDictionary`2 claimCollection, String tokenType, IDictionary`2 additionalHeaderClaims, IDictionary`2 additionalInnerHeaderClaims)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.CreateToken(SecurityTokenDescriptor tokenDescriptor)
+   at AiLearner_API.Services.JwtTokenService.GenerateJwtToken(User user) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\JwtTokenService.cs:line 37
+   at AiLearner_API.Controllers.UserController.LoginUser(UserDto userData) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Controllers\\UserController.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 23",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-16 18:28:35 - {
+  "ErrorType": "ArgumentOutOfRangeException",
+  "ErrorMessage": "IDX10653: The encryption algorithm 'http://www.w3.org/2001/04/xmldsig-more#hmac-sha256' requires a key size of at least '128' bits. Key '[PII of type 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]', is of size: '72'. (Parameter 'key')",
+  "InnerException": null,
+  "StackTrace": "   at Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider..ctor(SecurityKey key, String algorithm, Boolean willCreateSignatures)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateSignatureProvider(SecurityKey key, String algorithm, Boolean willCreateSignatures, Boolean cacheProvider)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateForSigning(SecurityKey key, String algorithm, Boolean cacheProvider)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateForSigning(SecurityKey key, String algorithm)
+   at Microsoft.IdentityModel.JsonWebTokens.JwtTokenUtilities.CreateEncodedSignature(String input, SigningCredentials signingCredentials)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.CreateJwtSecurityTokenPrivate(String issuer, String audience, ClaimsIdentity subject, Nullable`1 notBefore, Nullable`1 expires, Nullable`1 issuedAt, SigningCredentials signingCredentials, EncryptingCredentials encryptingCredentials, IDictionary`2 claimCollection, String tokenType, IDictionary`2 additionalHeaderClaims, IDictionary`2 additionalInnerHeaderClaims)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.CreateToken(SecurityTokenDescriptor tokenDescriptor)
+   at AiLearner_API.Services.JwtTokenService.GenerateJwtToken(User user) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\JwtTokenService.cs:line 37
+   at AiLearner_API.Controllers.UserController.LoginUser(UserDto userData) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Controllers\\UserController.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 23",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-16 18:29:24 - {
+  "ErrorType": "ArgumentOutOfRangeException",
+  "ErrorMessage": "IDX10653: The encryption algorithm 'http://www.w3.org/2001/04/xmldsig-more#hmac-sha256' requires a key size of at least '128' bits. Key '[PII of type 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]', is of size: '72'. (Parameter 'key')",
+  "InnerException": null,
+  "StackTrace": "   at Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider..ctor(SecurityKey key, String algorithm, Boolean willCreateSignatures)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateSignatureProvider(SecurityKey key, String algorithm, Boolean willCreateSignatures, Boolean cacheProvider)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateForSigning(SecurityKey key, String algorithm, Boolean cacheProvider)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateForSigning(SecurityKey key, String algorithm)
+   at Microsoft.IdentityModel.JsonWebTokens.JwtTokenUtilities.CreateEncodedSignature(String input, SigningCredentials signingCredentials)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.CreateJwtSecurityTokenPrivate(String issuer, String audience, ClaimsIdentity subject, Nullable`1 notBefore, Nullable`1 expires, Nullable`1 issuedAt, SigningCredentials signingCredentials, EncryptingCredentials encryptingCredentials, IDictionary`2 claimCollection, String tokenType, IDictionary`2 additionalHeaderClaims, IDictionary`2 additionalInnerHeaderClaims)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.CreateToken(SecurityTokenDescriptor tokenDescriptor)
+   at AiLearner_API.Services.JwtTokenService.GenerateJwtToken(User user) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\JwtTokenService.cs:line 37
+   at AiLearner_API.Controllers.UserController.LoginUser(UserDto userData) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Controllers\\UserController.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 23",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-16 18:29:59 - {
+  "ErrorType": "ArgumentOutOfRangeException",
+  "ErrorMessage": "IDX10653: The encryption algorithm 'http://www.w3.org/2001/04/xmldsig-more#hmac-sha256' requires a key size of at least '128' bits. Key '[PII of type 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]', is of size: '72'. (Parameter 'key')",
+  "InnerException": null,
+  "StackTrace": "   at Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider..ctor(SecurityKey key, String algorithm, Boolean willCreateSignatures)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateSignatureProvider(SecurityKey key, String algorithm, Boolean willCreateSignatures, Boolean cacheProvider)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateForSigning(SecurityKey key, String algorithm, Boolean cacheProvider)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateForSigning(SecurityKey key, String algorithm)
+   at Microsoft.IdentityModel.JsonWebTokens.JwtTokenUtilities.CreateEncodedSignature(String input, SigningCredentials signingCredentials)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.CreateJwtSecurityTokenPrivate(String issuer, String audience, ClaimsIdentity subject, Nullable`1 notBefore, Nullable`1 expires, Nullable`1 issuedAt, SigningCredentials signingCredentials, EncryptingCredentials encryptingCredentials, IDictionary`2 claimCollection, String tokenType, IDictionary`2 additionalHeaderClaims, IDictionary`2 additionalInnerHeaderClaims)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.CreateToken(SecurityTokenDescriptor tokenDescriptor)
+   at AiLearner_API.Services.JwtTokenService.GenerateJwtToken(User user) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\JwtTokenService.cs:line 37
+   at AiLearner_API.Controllers.UserController.LoginUser(UserDto userData) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Controllers\\UserController.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 23",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-16 18:32:20 - {
+  "ErrorType": "ArgumentOutOfRangeException",
+  "ErrorMessage": "IDX10653: The encryption algorithm 'http://www.w3.org/2001/04/xmldsig-more#hmac-sha256' requires a key size of at least '128' bits. Key '[PII of type 'Microsoft.IdentityModel.Tokens.SymmetricSecurityKey' is hidden. For more details, see https://aka.ms/IdentityModel/PII.]', is of size: '72'. (Parameter 'key')",
+  "InnerException": null,
+  "StackTrace": "   at Microsoft.IdentityModel.Tokens.SymmetricSignatureProvider..ctor(SecurityKey key, String algorithm, Boolean willCreateSignatures)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateSignatureProvider(SecurityKey key, String algorithm, Boolean willCreateSignatures, Boolean cacheProvider)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateForSigning(SecurityKey key, String algorithm, Boolean cacheProvider)
+   at Microsoft.IdentityModel.Tokens.CryptoProviderFactory.CreateForSigning(SecurityKey key, String algorithm)
+   at Microsoft.IdentityModel.JsonWebTokens.JwtTokenUtilities.CreateEncodedSignature(String input, SigningCredentials signingCredentials)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.CreateJwtSecurityTokenPrivate(String issuer, String audience, ClaimsIdentity subject, Nullable`1 notBefore, Nullable`1 expires, Nullable`1 issuedAt, SigningCredentials signingCredentials, EncryptingCredentials encryptingCredentials, IDictionary`2 claimCollection, String tokenType, IDictionary`2 additionalHeaderClaims, IDictionary`2 additionalInnerHeaderClaims)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.CreateToken(SecurityTokenDescriptor tokenDescriptor)
+   at AiLearner_API.Services.JwtTokenService.GenerateJwtToken(User user) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\JwtTokenService.cs:line 37
+   at AiLearner_API.Controllers.UserController.LoginUser(UserDto userData) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Controllers\\UserController.cs:line 74
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 23",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-18 13:05:12 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+   at System.Lazy`1.ExecutionAndPublication(LazyHelper executionAndPublication, Boolean useDefaultConstructor)
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/auth/validate-token",
+    "HasValue": true
+  },
+  "Method": "GET",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-18 13:05:38 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/auth/validate-token",
+    "HasValue": true
+  },
+  "Method": "GET",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-18 13:06:53 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/auth/validate-token",
+    "HasValue": true
+  },
+  "Method": "GET",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-18 13:08:38 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:28:30 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+   at System.Lazy`1.ExecutionAndPublication(LazyHelper executionAndPublication, Boolean useDefaultConstructor)
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/auth/validate-token",
+    "HasValue": true
+  },
+  "Method": "GET",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:28:43 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/auth/validate-token",
+    "HasValue": true
+  },
+  "Method": "GET",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:29:04 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:29:48 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:30:15 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:30:40 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:30:48 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:30:52 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/auth/validate-token",
+    "HasValue": true
+  },
+  "Method": "GET",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:31:02 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:31:36 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-21 15:32:54 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+   at System.Lazy`1.ExecutionAndPublication(LazyHelper executionAndPublication, Boolean useDefaultConstructor)
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-30 19:45:14 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+   at System.Lazy`1.ExecutionAndPublication(LazyHelper executionAndPublication, Boolean useDefaultConstructor)
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-30 19:45:34 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-30 19:49:50 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-30 19:50:13 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/test",
+    "HasValue": true
+  },
+  "Method": "GET",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-30 19:51:43 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+   at System.Lazy`1.ExecutionAndPublication(LazyHelper executionAndPublication, Boolean useDefaultConstructor)
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+
+2024-04-30 19:52:01 - {
+  "ErrorType": "ArgumentNullException",
+  "ErrorMessage": "Value cannot be null. (Parameter 's')",
+  "InnerException": null,
+  "StackTrace": "   at System.ArgumentNullException.Throw(String paramName)
+   at System.Text.Encoding.GetBytes(String s)
+   at AiLearner_API.Program.<>c.<Main>b__0_2(JwtBearerOptions options) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Program.cs:line 63
+   at Microsoft.Extensions.Options.OptionsFactory`1.Create(String name)
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+--- End of stack trace from previous location ---
+   at System.Lazy`1.CreateValue()
+   at Microsoft.Extensions.Options.OptionsCache`1.GetOrAdd[TArg](String name, Func`3 createOptions, TArg factoryArgument)
+   at Microsoft.Extensions.Options.OptionsMonitor`1.Get(String name)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationHandlerProvider.GetHandlerAsync(HttpContext context, String authenticationScheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync(HttpContext context, String scheme)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AiLearner_API.Services.ExceptionMiddleware.InvokeAsync(HttpContext httpContext) in C:\\Users\\Michael\\Desktop\\Learning\\Projects\\Ai Learner\\Backend\\AiLearner_API\\Services\\ExceptionMiddleware.cs:line 24",
+  "Path": {
+    "Value": "/api/User/login",
+    "HasValue": true
+  },
+  "Method": "POST",
+  "QueryString": {
+    "Value": "",
+    "HasValue": false
+  }
+}
+

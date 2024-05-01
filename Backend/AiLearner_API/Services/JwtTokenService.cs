@@ -11,9 +11,8 @@ using System.Text;
 
 namespace AiLearner_API.Services
 {
-    public class JwtTokenService(IConfiguration configuration, IUnitOfWork unitOfWork)
+    public class JwtTokenService(IUnitOfWork unitOfWork)
     {
-        private readonly IConfiguration _configuration = configuration;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         public string GenerateJwtToken(User user)
@@ -28,7 +27,7 @@ namespace AiLearner_API.Services
             new Claim(ClaimTypes.Email, user.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         }),
-                Expires = DateTime.UtcNow.AddHours(1), // Token expiration set to 1 hour
+                Expires = DateTime.UtcNow.AddMinutes(5), // Token expiration set to 1 hour
                 Issuer = Environment.GetEnvironmentVariable("JWT_ISSUER"),
                 Audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -69,6 +68,7 @@ namespace AiLearner_API.Services
                 HttpOnly = true,
                 Expires = DateTime.UtcNow.AddDays(1),
                 Secure = true,
+                Path = "/",
                 SameSite = SameSiteMode.None,
             });
 
@@ -77,6 +77,7 @@ namespace AiLearner_API.Services
                 HttpOnly = true,
                 Expires = refreshToken.Expiration,
                 Secure = true,
+                Path = "/",
                 SameSite = SameSiteMode.None,
             });
         }

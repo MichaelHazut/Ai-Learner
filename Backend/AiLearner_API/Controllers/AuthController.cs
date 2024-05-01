@@ -100,8 +100,16 @@ namespace AiLearner_API.Controllers
                 await _jwtTokenService.RevokeRefreshToken(refreshTokenString);
 
                 // Remove the cookies from the response
-                Response.Cookies.Delete("AccessToken");
-                Response.Cookies.Delete("refreshToken");
+                var cookieOptions = new CookieOptions
+                {
+                    Path = "/",
+                    HttpOnly= true,
+                    Secure = true, 
+                    SameSite = SameSiteMode.None
+                };
+
+                Response.Cookies.Delete("AccessToken", cookieOptions);
+                Response.Cookies.Delete("refreshToken", cookieOptions);
 
                 return Ok();
             }

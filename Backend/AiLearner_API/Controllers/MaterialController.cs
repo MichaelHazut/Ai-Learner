@@ -14,7 +14,7 @@ namespace AiLearner_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class MaterialController(IUnitOfWork unitOfWork, OpenAIService openAIService, CachingService cachingService, JwtTokenService jwtTokenService) : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
@@ -72,47 +72,53 @@ namespace AiLearner_API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
-            var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);
-            var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
-                                ?? throw new SecurityTokenException("User ID is missing in the token.");
-
-            requestDto.UserId = userId;
-
-            StudyMaterial? material = null;
-            bool isValid = false;
-
-
-            // Try to generate a valid study material 10 times
-            for (int attempt = 0; attempt < 10 && !isValid; attempt++)
+            try
             {
-                // Call the OpenAI service to generate a study material
-                var res = await _openAIService.CallChatGPTAsync(requestDto.Content, requestDto.NumOfQuestions);
-                if (res == null)
-                    continue;
 
-                // Clean the JSON response and deserialize it into a StudyMaterial object
-                string cleanJson = JsonService.CleanJson(res);
-                material = JsonService.DeserializeJson<StudyMaterial>(cleanJson);
-                if (material == null)
-                    continue;
+                var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);
+                var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+                                    ?? throw new SecurityTokenException("User ID is missing in the token.");
 
-                // Set the content of the study material and validate it
-                material.Content = requestDto.Content;
-                isValid = material.ValidateStudyMaterial();
+                requestDto.UserId = userId;
+
+                StudyMaterial? material = null;
+                bool isValid = false;
+
+
+                // Try to generate a valid study material 10 times
+                for (int attempt = 0; attempt < 10 && !isValid; attempt++)
+                {
+                    // Call the OpenAI service to generate a study material
+                    var res = await _openAIService.CallChatGPTAsync(requestDto.Content, requestDto.NumOfQuestions);
+                    if (res == null)
+                        continue;
+
+                    // Clean the JSON response and deserialize it into a StudyMaterial object
+                    string cleanJson = JsonService.CleanJson(res);
+                    material = JsonService.DeserializeJson<StudyMaterial>(cleanJson);
+                    if (material == null)
+                        continue;
+
+                    // Set the content of the study material and validate it
+                    material.Content = requestDto.Content;
+                    isValid = material.ValidateStudyMaterial();
+                }
+
+                // if the loop fails to generate a valid study material, return a bad request
+                if (!isValid || material == null) return BadRequest("Unable to generate valid study material.");
+
+                // Create the material with questions and answers in the database
+                bool isSuccess = await _unitOfWork.CreateMaterialWithQuestionsAndAnswers(requestDto.UserId!, material);
+
+                // Clear the cached items related to the user
+                _cachingService.RemoveCachedItem<List<Material>>(requestDto.UserId!);
+
+                // Return the created material or a Not found response
+                return isSuccess ? new CreatedResult("/material", material) : NotFound();
+            } catch (Exception ex)
+            {
+                return BadRequest("Problem creating material, Error:" +ex.Message);
             }
-
-            // if the loop fails to generate a valid study material, return a bad request
-            if (!isValid || material == null) return BadRequest("Unable to generate valid study material.");
-
-            // Create the material with questions and answers in the database
-            bool isSuccess = await _unitOfWork.CreateMaterialWithQuestionsAndAnswers(requestDto.UserId!, material);
-
-            // Clear the cached items related to the user
-            _cachingService.RemoveCachedItem<List<Material>>(requestDto.UserId!);
-
-            // Return the created material or a Not found response
-            return isSuccess ? new CreatedResult("/material", material) : NotFound();
         }
 
 
@@ -139,6 +145,13 @@ namespace AiLearner_API.Controllers
 
 
             return Ok("Material Deleted Successfully");
+        }
+
+        [HttpPost("new-create")]
+        public async Task<IActionResult> CreateMaterial2([FromBody] string content)
+        {
+            var res = await _openAIService.CallChatGPTAsync2(content, 10);
+            return Ok(res);
         }
     }
 }

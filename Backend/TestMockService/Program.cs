@@ -98,7 +98,7 @@ namespace TestMockService
             try
             {
                 IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-                OpenAIService openAIService = new(configuration);
+                OpenAIService openAIService = new();
                 await Console.Out.WriteLineAsync("type number of questions");
                 int numberOfQuestions = int.Parse(Console.ReadLine() ?? "5");
                 List<StudyMaterial> stList = [];

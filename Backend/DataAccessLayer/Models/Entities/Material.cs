@@ -17,6 +17,6 @@ namespace DataAccessLayer.Models.Entities
 
         public virtual User? User { get; set; }
         public virtual ICollection<Question>? Questions { get; set; }
-
+        public virtual ICollection<Recommendation>? Recommendations { get; set; }
     }
 }

@@ -14,12 +14,13 @@ namespace AiLearner_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(IUnitOfWork unitOfWork, JwtTokenService jwtTokenService, CachingService cachingService) : ControllerBase
+    public class UserController(IUnitOfWork unitOfWork, JwtTokenService jwtTokenService, CachingService cachingService, ILogger<UserController> logger) : ControllerBase
     {
 
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly JwtTokenService _jwtTokenService = jwtTokenService;
         private readonly CachingService _cachingService = cachingService;
+        private readonly Microsoft.Extensions.Logging.ILogger _logger = logger;
 
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] UserDto userData)
@@ -33,13 +34,14 @@ namespace AiLearner_API.Controllers
             int changes = await _unitOfWork.CompleteAsync();
             if (changes <= 0)
                 return BadRequest("User Registration Failed");
-
+            
             //cache user in memory
             _cachingService.CacheItem(user.Email!, user);
-
+            
             // Using the registration endpoint URI as a placeholder
             string uri = Url.Action(nameof(RegisterUser)) ?? string.Empty;
-
+            string message = $"User Registration Completed URI: {uri}";
+            
             return Created(uri, new { email = user.Email });
         }
 
@@ -49,29 +51,35 @@ namespace AiLearner_API.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            _logger.LogInformation("User Login Started");
             //check if user is already cached in memory 
             bool isCached = _cachingService.TryGetCachedItem(userData.Email, out User? user);
             if (isCached is true)
             {
+                _logger.LogInformation("User found in cache");
                 bool isVerified = _unitOfWork.Users.VerifyPassword(user!, userData);
                 if (isVerified is false) return Unauthorized("Invalid credentials");
                 return await GenerateAndAppendTokens(user!);
             }
-
+            _logger.LogInformation("User not found in cache");
             //get user from db and verify credentials
+            _logger.LogInformation("Attemting to get user from db");
             user = await _unitOfWork.Users.LogIn(userData.Email, userData.Password);
             if (user is null)
                 return Unauthorized("Invalid credentials");
-
+            _logger.LogInformation("User found in db");
 
             //generate jwtToken and refreshToken
+            _logger.LogInformation("Attemting to generate jwtToken and refreshToken");
             var jwtToken = _jwtTokenService.GenerateJwtToken(user);
             var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id!);
 
-            //cache user in memory
+            //cache user in memory  
+            _logger.LogInformation("Attemting to cache user in memory");
             _cachingService.CacheItem(user.Email!, user);
 
             //add jwtToken and refreshToken to HttpOnly cookies
+            _logger.LogInformation("Attemting to append jwtToken and refreshToken to HttpOnly cookies");
             _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);
 
 
@@ -82,7 +90,6 @@ namespace AiLearner_API.Controllers
             var jwtToken = _jwtTokenService.GenerateJwtToken(user);
             var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id!);
             _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);
-
             return Ok(new { UserId = user.Id });
         }
 
@@ -110,22 +117,6 @@ namespace AiLearner_API.Controllers
             return (user is not null) ? Ok(user.Email!.ToLower()) : NotFound("email Not Found");
         }
 
-        [HttpGet("test")]//test will delete later
-        public IActionResult Test()
-        {
-            string environmentVariable = Environment.GetEnvironmentVariable("DB_SERVER");
-            if (environmentVariable is null)
-                return BadRequest("Environment Variable Not Found");
-            string environmentVariable2 = Environment.GetEnvironmentVariable("DB_NAME");
-            if (environmentVariable2 is null)
-                return BadRequest(environmentVariable + " +Environment Variable Not Found");
-            string environmentVariable3 = Environment.GetEnvironmentVariable("ADMIN_ID");
-            if (environmentVariable3 is null)
-                return BadRequest(environmentVariable + environmentVariable2 + " +Environment Variable Not Found");
-            return Ok(environmentVariable + environmentVariable2 + environmentVariable3);
-            //var user = await _unitOfWork.Users.GetByIdAsync("096c208e-335b-454f-8605-4d1746af5087");
-            //return Ok(user);
-        }
     }
 
 }

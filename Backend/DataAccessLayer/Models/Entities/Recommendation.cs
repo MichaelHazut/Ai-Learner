@@ -9,6 +9,7 @@ namespace DataAccessLayer.Models.Entities
     public class Recommendation
     {
         public int RecommendationId { get; set; }
+        public int MaterialId { get; set; } 
         public string? Topic { get; set; }
         public string? Summery { get; set; }
 

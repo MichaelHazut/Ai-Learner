@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DataAccessLayer.Models.Entities;
+using System.Collections;
 using System.Reflection;
 
 namespace DataAccessLayer.Models
@@ -12,6 +13,7 @@ namespace DataAccessLayer.Models
         public string Content { get; set; } = "Placeholder";
         public required string Summary { get; set; } = "";
         public required List<Questions> Questions { get; set; }
+        public required List<Recommendations> Recommendations { get; set; }
 
         public bool ValidateStudyMaterial()
         {
@@ -29,13 +31,14 @@ namespace DataAccessLayer.Models
                     continue;
                 }
 
-                //sending the List<> variable for validate it
-                if (ValidateQuestions(variable) is not true) return false;
+                //sending a List<> variable for validate it
+                if (variable.Name == "Questions")
+                    if (ValidateGenericType(variable) is not true) return false;
             }
             return true;
         }
 
-        private bool ValidateQuestions(PropertyInfo variable)
+        private bool ValidateGenericType(PropertyInfo variable)
         {
             //Get IEnumerable object from generic property
             IEnumerable? questions = variable.GetValue(this) as IEnumerable;

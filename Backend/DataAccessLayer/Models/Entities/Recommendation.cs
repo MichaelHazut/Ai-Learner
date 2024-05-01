@@ -11,7 +11,7 @@ namespace DataAccessLayer.Models.Entities
         public int RecommendationId { get; set; }
         public int MaterialId { get; set; } 
         public string? Topic { get; set; }
-        public string? Summery { get; set; }
+        public string? Summary { get; set; }
 
         public virtual Material? Material { get; set; }
     }

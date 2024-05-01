@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.dbContext;
 using DataAccessLayer.Interfaces;
+using DataAccessLayer.Models;
 using DataAccessLayer.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,7 +18,7 @@ namespace DataAccessLayer.Repositories
             return await _context.Set<Recommendation>().Where(r => r.MaterialId == materialId).ToListAsync();
         }
 
-        public async Task<List<Recommendation>> CreateRecommendation(int materialId, List<Recommendation> recommendations)
+        public async Task<List<Recommendation>> CreateRecommendation(int materialId, List<Recommendations> recommendations)
         {
             List<Recommendation> recommendationEntities = [];
 
@@ -28,7 +29,7 @@ namespace DataAccessLayer.Repositories
                 {
                     MaterialId = materialId,
                     Topic = recommendation.Topic,
-                    Summery = recommendation.Summery
+                    Summary = recommendation.Summary
                 });
 
             }
@@ -36,7 +37,5 @@ namespace DataAccessLayer.Repositories
 
             return recommendationEntities;
         }
-    }
-    {
     }
 }

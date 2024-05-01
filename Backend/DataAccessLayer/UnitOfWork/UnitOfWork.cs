@@ -9,7 +9,8 @@ namespace DataAccessLayer.UnitOfWork
 {
     // The UnitOfWork class is responsible for managing the repositories and the database context.
     // It implements the IUnitOfWork interface and provides the implementation for the repositories.
-    public class UnitOfWork(AiLearnerDbContext context, IUserRepo userRepo, IMaterialRepo materialRepo, IQuestionRepo questionRepo, IAnswerRepo answerRepo, IUsersAnswersRepo usersAnswersRepo, IRefreshTokenRepo refreshTokenRepo) : IUnitOfWork
+    public class UnitOfWork(AiLearnerDbContext context, IUserRepo userRepo, IMaterialRepo materialRepo, IQuestionRepo questionRepo, IAnswerRepo answerRepo, IUsersAnswersRepo usersAnswersRepo,
+        IRecommendationRepo recommendationRepo, IRefreshTokenRepo refreshTokenRepo) : IUnitOfWork
     {
         // The UnitOfWork class has a constructor that takes the database context and the repositories as parameters.
         public IUserRepo Users { get; private set; } = userRepo;
@@ -17,6 +18,7 @@ namespace DataAccessLayer.UnitOfWork
         public IQuestionRepo Questions { get; private set; } = questionRepo;
         public IAnswerRepo Answers { get; private set; } = answerRepo;
         public IUsersAnswersRepo UserAnswers { get; private set; } = usersAnswersRepo;
+        public IRecommendationRepo Recommendations { get; private set; } = recommendationRepo;
         public IRefreshTokenRepo RefreshToken { get; private set; } = refreshTokenRepo;
 
         private readonly AiLearnerDbContext Context = context;
@@ -34,9 +36,14 @@ namespace DataAccessLayer.UnitOfWork
 
             //Create the answer entities and save it to the database
             await Answers.CreateAnswer(questions, studyMaterial.Questions);
+            await CompleteAsync();
+
+            //Create the recommendation entities and save it to the database
+            await Recommendations.CreateRecommendation(material.MaterialId, studyMaterial.Recommendations);
+            int changes = await CompleteAsync();
 
             //save the changes and return true if the number of changes are greater than 0
-            int changes = await CompleteAsync();
+            //int changes = await CompleteAsync();
             return changes > 0;
         }
 
@@ -86,6 +93,10 @@ namespace DataAccessLayer.UnitOfWork
                 bool isSuccsessful = await DeleteQuestionAsync(question.QuestionId);
                 if (isSuccsessful == false) return false;
             }
+
+            //delete the recommendations
+            if(DeleteRecommendations(materialId) == false) return false;
+
             //remove the material
             Context.Materials.Remove(material);
 
@@ -118,6 +129,13 @@ namespace DataAccessLayer.UnitOfWork
         {
             var userAnswers = Context.UserAnswers.Where(answer => answer.QuestionId == questionId).ToList();
             Context.UserAnswers.RemoveRange(userAnswers);
+            return true;
+        }
+
+        public bool DeleteRecommendations(int materialId)
+        {
+            var recommendations = Context.Recommendations.Where(recommendation => recommendation.MaterialId == materialId).ToList();
+            Context.Recommendations.RemoveRange(recommendations);
             return true;
         }
 

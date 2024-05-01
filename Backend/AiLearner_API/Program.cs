@@ -43,6 +43,7 @@ namespace AiLearner_API
             builder.Services.AddScoped<IQuestionRepo, QuestionRepo>();
             builder.Services.AddScoped<IAnswerRepo, AnswerRepo>();
             builder.Services.AddScoped<IUsersAnswersRepo, UsersAnswersRepo>();
+            builder.Services.AddScoped<IRecommendationRepo, RecommendationRepo>();
             builder.Services.AddScoped<IRefreshTokenRepo, RefreshTokenRepo>();
 
             //Add UnitOfWork 

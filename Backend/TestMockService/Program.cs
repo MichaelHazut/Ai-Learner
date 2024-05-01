@@ -121,7 +121,7 @@ namespace TestMockService
                         Console.WriteLine(e);
                         await Console.Out.WriteLineAsync("Attemting Json Clean");
                         await File.AppendAllTextAsync("../../../logs/failed_material_Log.txt", $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} \n" + response + "\n\n");
-                        StudyMaterial? stItem = new() { Topic = "dasd", Summary = "dsad", Questions = [] };
+                        StudyMaterial? stItem = new() { Topic = "dasd", Summary = "dsad", Questions = [], Recommendations = [] };
                         string cleanedJson = JsonService.CleanJson(response);
                         try
                         {

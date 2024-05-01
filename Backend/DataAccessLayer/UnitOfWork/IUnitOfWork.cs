@@ -16,6 +16,7 @@ namespace DataAccessLayer.UnitOfWork
         IQuestionRepo Questions { get; }
         IAnswerRepo Answers { get; }
         IUsersAnswersRepo UserAnswers { get; }
+        IRecommendationRepo Recommendations { get; }
         IRefreshTokenRepo RefreshToken { get; }
 
 

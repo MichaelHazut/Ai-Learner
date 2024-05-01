@@ -115,9 +115,10 @@ namespace AiLearner_API.Controllers
 
                 // Return the created material or a Not found response
                 return isSuccess ? new CreatedResult("/material", material) : NotFound();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                return BadRequest("Problem creating material, Error:" +ex.Message);
+                return BadRequest("Problem creating material, Error:" + ex.Message);
             }
         }
 
@@ -145,13 +146,6 @@ namespace AiLearner_API.Controllers
 
 
             return Ok("Material Deleted Successfully");
-        }
-
-        [HttpPost("new-create")]
-        public async Task<IActionResult> CreateMaterial2([FromBody] string content)
-        {
-            var res = await _openAIService.CallChatGPTAsync2(content, 10);
-            return Ok(res);
         }
     }
 }

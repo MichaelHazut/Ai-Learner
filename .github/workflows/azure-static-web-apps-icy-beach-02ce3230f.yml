@@ -42,7 +42,9 @@ jobs:
           
       - name: Echo Secrets
         run: |
-          echo "Base URL: ${{ secrets.BASE_URL }}"
+          echo "Base URL: '${{ secrets.BASE_URL }}'"
+          echo "Base URL2: ${{ secrets.BASE_URL }}"
+
           
       - name: Build And Deploy
         id: builddeploy

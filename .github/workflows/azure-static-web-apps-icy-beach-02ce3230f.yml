@@ -38,8 +38,8 @@ jobs:
             baseUrl: '${{ secrets.BASE_URL  }}'
           };
           EOF
+          echo "Environment file created at: $(pwd)/src/environments/environment.secret.ts"
           cat src/environments/environment.secret.ts
-
       - name: Echo Secrets
         run: |
           echo "Base URL: '${{ secrets.BASE_URL  }}'"

@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_VERSION: '20.11.0'
-      base_url: ${{ secrets.BASE_URL }}
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v4
@@ -36,7 +35,7 @@ jobs:
           mkdir -p src/environments
           cat <<EOF > src/environments/environment.secret.ts
           export const environment = {
-            baseUrl: '${{ env.base_url }}'
+            baseUrl: '${{ env.BASE_URL  }}'
           };
           EOF
 
@@ -44,7 +43,7 @@ jobs:
 
       - name: Echo Secrets
         run: |
-          echo "Base URL: '${{ env.base_url }}'"
+          echo "Base URL: '${{ env.BASE_URL  }}'"
           echo "Base URL2: ${{ env.base_url }}"
 
       - name: Build And Deploy

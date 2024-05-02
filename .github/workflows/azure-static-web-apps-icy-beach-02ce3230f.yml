@@ -21,18 +21,25 @@ jobs:
         with:
           submodules: true
           lfs: false
-
-      - name: Check Node.js version
-        run: node --version
   
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.11.0'
+
       
       - name: Check Node.js version
         run: node --version       
         
+      - name: Create Environment File
+        run: |
+          cat <<EOF > src/environments/environment.secret.ts
+          export const environment = {
+            production: ${{ secrets.PRODUCTION }},
+            baseUrl: '${{ secrets.BASE_URL }}'
+          };
+          EOF    
+          
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1

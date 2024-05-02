@@ -33,12 +33,12 @@ jobs:
         
       - name: Create Environment File
         run: |
+          mkdir -p src/environments
           cat <<EOF > src/environments/environment.secret.ts
           export const environment = {
-            production: ${{ secrets.PRODUCTION }},
             baseUrl: '${{ secrets.BASE_URL }}'
           };
-          EOF    
+          EOF
           
       - name: Build And Deploy
         id: builddeploy

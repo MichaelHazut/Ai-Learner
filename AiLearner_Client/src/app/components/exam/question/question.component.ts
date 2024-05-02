@@ -1,15 +1,12 @@
 import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
   OnDestroy,
   Output,
-  input,
 } from '@angular/core';
-import { common } from '@mui/material/colors';
 import { QuestionDTO } from '../../../models/QuestionDTO';
 import { AnswerDTO } from '../../../models/AnswerDTO';
 import { ActivatedRoute } from '@angular/router';

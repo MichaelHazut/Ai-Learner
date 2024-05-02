@@ -1,5 +1,4 @@
 const { addDynamicIconSelectors } = require("@iconify/tailwind");
-const { default: shadows } = require("@mui/material/styles/shadows");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

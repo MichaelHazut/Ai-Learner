@@ -39,6 +39,8 @@ jobs:
             baseUrl: '${{ secrets.BASE_URL }}'
           };
           EOF
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
           
       - name: Echo Secrets
         run: |

@@ -44,6 +44,15 @@ jobs:
         run: |
           echo "Base URL: '${{ secrets.BASE_URL }}'"
           echo "Base URL2: ${{ secrets.BASE_URL }}"
+      
+      - name: Debug BASE_URL
+        env:
+          echo "Base URL: ${{ secrets.BASE_URL }}"
+          
+      - name: Debug BASE_URL
+        env:
+          echo "Base URL: '${{ secrets.BASE_URL }}'"
+
 
           
       - name: Build And Deploy

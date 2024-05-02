@@ -24,8 +24,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-      - name: Run Script
-        run: node AiLearner_Client/src/index.js
+          
+      - name: Run index.js
+        run: node index.js
+        working-directory: AiLearner_Client/src
         
       - name: Build And Deploy
         id: builddeploy

@@ -33,13 +33,13 @@ jobs:
       - name: Create Environment File
         run: |
           mkdir -p AiLerner_Client/src/environments
-          cat <<EOF > src/environments/environment.secret.ts
+          cat <<EOF > AiLerner_Client/src/environments/environment.secret.ts
           export const environment = {
             baseUrl: '${{ secrets.BASE_URL  }}'
           };
           EOF
-          echo "Environment file created at: $(pwd)/src/environments/environment.secret.ts"
-          cat src/environments/environment.secret.ts
+          echo "Environment file created at: $(pwd)AiLerner_Client/src/environments/environment.secret.ts"
+          cat AiLerner_Client/src/environments/environment.secret.ts
       - name: Echo Secrets
         run: |
           echo "Base URL: '${{ secrets.BASE_URL  }}'"

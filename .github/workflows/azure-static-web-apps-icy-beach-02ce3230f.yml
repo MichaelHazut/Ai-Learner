@@ -19,16 +19,6 @@ jobs:
         with:
           submodules: true
           lfs: false
-          path: 'AiLearner'
-          
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          
-      - name: Run index.js
-        run: node AiLearner_Client/src/index.js
-        working-directory: AiLearner
         
       - name: Build And Deploy
         id: builddeploy

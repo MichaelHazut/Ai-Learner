@@ -38,8 +38,7 @@ jobs:
             baseUrl: '${{ secrets.BASE_URL  }}'
           };
           EOF
-
-
+          cat src/environments/environment.secret.ts
 
       - name: Echo Secrets
         run: |

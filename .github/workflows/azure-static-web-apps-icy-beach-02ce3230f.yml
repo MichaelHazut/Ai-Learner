@@ -32,7 +32,7 @@ jobs:
         
       - name: Create Environment File
         run: |
-          mkdir -p src/environments
+          mkdir -p AiLerner_Client/src/environments
           cat <<EOF > src/environments/environment.secret.ts
           export const environment = {
             baseUrl: '${{ secrets.BASE_URL  }}'

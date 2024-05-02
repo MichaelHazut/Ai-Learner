@@ -35,7 +35,7 @@ jobs:
           mkdir -p src/environments
           cat <<EOF > src/environments/environment.secret.ts
           export const environment = {
-            baseUrl: '${{ env.BASE_URL  }}'
+            baseUrl: '${{ secrets.BASE_URL  }}'
           };
           EOF
 
@@ -43,8 +43,8 @@ jobs:
 
       - name: Echo Secrets
         run: |
-          echo "Base URL: '${{ env.BASE_URL  }}'"
-          echo "Base URL2: ${{ env.base_url }}"
+          echo "Base URL: '${{ secrets.BASE_URL  }}'"
+          echo "Base URL2: ${{ secrets.BASE_URL }}"
 
       - name: Build And Deploy
         id: builddeploy

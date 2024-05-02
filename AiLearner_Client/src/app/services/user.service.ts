@@ -8,7 +8,9 @@ import {
 import {
   BehaviorSubject,
   Observable,
+  OperatorFunction,
   catchError,
+  filter,
   map,
   of,
   tap,
@@ -75,7 +77,7 @@ export class UserService {
                 if (isAuthenticated) {
                   this.isAuthenticated.next(true);
                 }
-              }
+              },
             });
           }
         }),
@@ -93,15 +95,15 @@ export class UserService {
     return this.http.get<string>('https://localhost:7089/test');
   }
   getEmail(): Observable<string> {
-    return this.http.get(this.baseUrl + 'email', { 
-      withCredentials: true, 
+    return this.http.get(this.baseUrl + 'email', {
+      withCredentials: true,
       responseType: 'text',
     });
   }
-  
+
   testGetUserFromAzure(): Observable<any> {
-    return this.http.get(this.baseUrl + 'test', { 
-      withCredentials: true, 
+    return this.http.get(this.baseUrl + 'test', {
+      withCredentials: true,
     });
   }
 
@@ -122,8 +124,12 @@ export class UserService {
       });
   }
   checkAuth(): Observable<boolean> {
+    console.log("in check authh");
     return this.http
-      .get<{ isAuthenticated: boolean }>(`${this.secretUrl}/auth/validate-token`, { withCredentials: true })
+      .get<{ isAuthenticated: boolean }>(
+        `${this.secretUrl}/auth/validate-token`,
+        { withCredentials: true }
+      )
       .pipe(
         tap({
           next: (response) => {
@@ -132,47 +138,76 @@ export class UserService {
             }
             this.isAuthenticated.next(response.isAuthenticated);
           },
-          error: () => {
+          error: (error) => {
+            console.log("Error in checkAuth:");
+            console.log(error);
             this.isAuthenticated.next(false);
           },
         }),
-        map(response => response.isAuthenticated),
+        map((response) => response.isAuthenticated),
         catchError(() => {
           this.isAuthenticated.next(false);
           return of(false);
         })
       );
   }
-  
 
-  getIsAuthenticated(): Observable<boolean | null> {
-    return this.isAuthenticated.asObservable();
+  // getIsAuthenticated(): Observable<boolean | null> {
+  //   return this.isAuthenticated.asObservable();
+  // }
+  getIsAuthenticated(): Observable<boolean> {
+    // Only emit non-null values
+    return this.isAuthenticated.asObservable().pipe(
+      filter(isAuthenticated => isAuthenticated !== null) as OperatorFunction<boolean | null, boolean>
+    );
   }
 
-  refreshToken() {
+  refreshToken(): Observable<boolean> {
     return this.http
-      .post<HttpResponse<any>>(
+      .post(
         `${this.secretUrl}/auth/refresh`,
         {},
         {
+          observe: 'response',
+          responseType: 'text',
           withCredentials: true,
         }
       )
       .pipe(
-        tap((response: HttpResponse<any>) => {
+        map((response) => {
           if (response.status === 200) {
-            console.log("refreshed token");
+            console.log('Token refreshed successfully.');
             this.isAuthenticated.next(true);
+            return true;
           } else {
-            console.log("failed to refresh token");
+            console.log('Failed to refresh token.');
             this.isAuthenticated.next(false);
+            return false;
           }
         }),
         catchError((error) => {
-          console.log("error in refresh token");
+          console.log('Error during token refresh: ', error);
           this.isAuthenticated.next(false);
-          return throwError(() => error);
+          return of(false); // Use `of` to return an Observable<boolean>
         })
       );
+
+    // .pipe(
+    //   tap((response: HttpResponse<any>) => {
+    //     console.log("refresh token response: ", response);
+    //     if (response.status === 200) {
+    //       console.log("refreshed token");
+    //       this.isAuthenticated.next(true);
+    //     } else {
+    //       console.log("failed to refresh token");
+    //       this.isAuthenticated.next(false);
+    //     }
+    //   }),
+    //   catchError((error) => {
+    //     console.log("error in refresh token");
+    //     this.isAuthenticated.next(false);
+    //     return throwError(() => error);
+    //   })
+    // );
   }
 }

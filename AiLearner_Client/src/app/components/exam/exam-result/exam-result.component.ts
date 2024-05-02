@@ -69,6 +69,10 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
         return;
       }
       this.examData = examData;
+      console.log(this.examData);
+      if(this.examData.userAnswers.length === 0) {
+        this.router.navigate(['../'], { relativeTo: this.route });
+      }
       this.getCorrectAnswers();
       this.getIncorrectAnswers();
     });

@@ -13,7 +13,9 @@
     width: 100%;
     background: currentColor;
 }
-
+.h-93svh{
+    height: 92vh;
+}
 
 
 .custom-drop-shadow:hover {

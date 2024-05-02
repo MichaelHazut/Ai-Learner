@@ -27,7 +27,7 @@ namespace AiLearner_API.Services
             new Claim(ClaimTypes.Email, user.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         }),
-                Expires = DateTime.UtcNow.AddMinutes(5), // Token expiration set to 1 hour
+                Expires = DateTime.UtcNow.AddHours(1), // Token expiration set to 1 hour
                 Issuer = Environment.GetEnvironmentVariable("JWT_ISSUER"),
                 Audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

@@ -22,13 +22,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     if (request.url.includes('/auth/refresh')) {
-      console.log("Request URL includes /auth/refresh");
       return next.handle(request);
     }
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          console.log("Error 401: Unauthorized");
           return this.handle401Error(request, next);
         }
         return throwError(() => new Error(error.message));

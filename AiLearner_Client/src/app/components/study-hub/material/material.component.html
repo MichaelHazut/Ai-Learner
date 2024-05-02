@@ -1,5 +1,5 @@
 <div
-  class="relative max-w-2xl p-3 mx-auto bg-gray-600 rounded-lg min-h-48 animate-scale-up"
+  class="relative max-w-2xl p-3 py-5 mx-auto bg-gray-600 rounded-lg min-h-48 animate-scale-up"
 >
   <div [ngClass]="examData ? 'block' : 'hidden'">
     <div class="flex justify-center">
@@ -7,19 +7,19 @@
         {{ examData?.material?.topic }}
       </h3>
     </div>
-    <p class="text-gray-400 line-clamp-5">
+    <p class="text-gray-400 text-shadow line-clamp-5">
       {{ examData?.material?.content }}
     </p>
     <button
       (click)="showOrHideContent()"
-      class="self-start text-sm text-blue-500 underline cursor-pointer"
+      class="self-start text-sm text-blue-400 underline cursor-pointer"
     >
       Show Content
     </button>
 
     <button
       [routerLink]="['./exam', '1']"
-      class="block px-20 py-2 mx-auto text-xl text-white shadow-2xl text-shadow bg-violet-600 rounded-3xl mt-7"
+      class="block px-20 py-2 mx-auto text-xl text-white shadow-2xl text-shadow  rounded-3xl mt-7 bg-gray-800 hover:bg-gray-400 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-all duration-500 ease-in-out"
     >
       Start Exam
     </button>

@@ -75,12 +75,13 @@ export class ExamRetryComponent {
         .subscribe({
           next: () => {
             this.examDataService.fetchExamData(materialId).subscribe({
-              next: ({ material, questions, answers, userAnswers }) => {
+              next: ({ material, questions, answers, userAnswers ,recommendations }) => {
                 let examObj = new Exam(
                   material,
                   questions,
                   answers,
-                  userAnswers
+                  userAnswers,
+                  recommendations
                 );
                 this.examDataService.examData.next(examObj);
                 this.router.navigate([

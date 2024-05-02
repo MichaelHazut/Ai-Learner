@@ -10,14 +10,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AiLearner_API", "AiLearner_
 		{ED519615-F6EE-40C4-B681-A7DD05D53EFA} = {ED519615-F6EE-40C4-B681-A7DD05D53EFA}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMockService", "TestMockService\TestMockService.csproj", "{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65BF010F-7C82-4F82-BE2E-369B616BA1F0}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiLearner_ClassLibrary", "AiLearner_ClassLibrary\AiLearner_ClassLibrary.csproj", "{AE06AD85-B824-413B-8F3E-1388537B780A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AiLearner_ClassLibrary", "AiLearner_ClassLibrary\AiLearner_ClassLibrary.csproj", "{AE06AD85-B824-413B-8F3E-1388537B780A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +31,6 @@ Global
 		{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A7FD9A4-D148-4B8F-BA1D-F01DB8DD6A8D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1AEE5DC-5EDC-4D57-A1D3-F6EEE5EADFBB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE06AD85-B824-413B-8F3E-1388537B780A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE06AD85-B824-413B-8F3E-1388537B780A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE06AD85-B824-413B-8F3E-1388537B780A}.Release|Any CPU.ActiveCfg = Release|Any CPU

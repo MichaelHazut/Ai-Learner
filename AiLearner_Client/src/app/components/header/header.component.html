@@ -1,12 +1,19 @@
 <!-- This is the main container for the header. It uses flexbox for layout and has a specific height and background color. -->
 <div
+  *ngIf="showSidebar"
+  class="fixed inset-0 bg-gray-500 bg-opacity-50 z-5"
+  (click)="toggleSidebar()"
+></div>
+<div
   class="sticky top-0 z-10 flex items-center justify-between bg-gray-900/[0.4] h-14 animated"
 >
   <!-- This button is for toggling the sidebar. It is only visible on small screens. -->
-  <button class="p-4 sm:hidden mt-1" (click)="toggleSidebar()">
+  <button class="p-4 mt-1 sm:hidden" (click)="toggleSidebar()">
     <span
       [ngClass]="
-        showSidebar ? 'icon-[mingcute--close-line] h-8 w-8 mr-2' : 'icon-[solar--hamburger-menu-broken] h-10 w-10'
+        showSidebar
+          ? 'icon-[mingcute--close-line] h-8 w-8 mr-2'
+          : 'icon-[solar--hamburger-menu-broken] h-10 w-10'
       "
       class="icon-[solar--hamburger-menu-broken] bg-slate-300 shadow-2xl custom-drop-shadow hover:scale-110 transition-all duration-300 ease-in-out hover:bg-slate-600"
     ></span>
@@ -17,7 +24,7 @@
     routerLink="/"
     src="../../../assets/SVG/logo-no-background.svg"
     alt="Logo"
-    class="mr-6 transition duration-300 transform cursor-pointer h-6 sm:g-8 sm:ml-3 hover:scale-105 drop-shadow-lg"
+    class="h-6 mr-6 transition duration-300 transform cursor-pointer sm:g-8 sm:ml-3 hover:scale-105 drop-shadow-lg"
   />
 
   <!-- This is the navigation menu. It is hidden on small screens and becomes visible on larger screens. -->
@@ -35,9 +42,9 @@
   <div class="flex" [class.hidden]="isAuthenticated">
     <div routerLink="/login" class="items-center hidden gap-4 mx-3 sm:flex">
       <p
-        class="text-lg text-white font-medium duration-300 cursor-pointer hover:scale-105 font-zabal text-shadow"
+        class="text-lg font-medium text-white duration-300 cursor-pointer hover:scale-105 font-zabal text-shadow"
       >
-        Login
+        Loginn
       </p>
     </div>
 
@@ -55,27 +62,42 @@
   </div>
   <!-- This is the sidebar for small screens. It is hidden by default and becomes visible when the hamburger button is clicked. -->
   <div
-    class="absolute left-0 transition-transform duration-300 ease-in-out transform border-2 border-gray-900 rounded-lg shadow-2xl w-60 top-14 sm:hidden"
+    class="absolute left-0 transition-transform duration-300 ease-in-out transform border-2 border-gray-900 rounded-r-lg shadow-2xl w-60 top-14 sm:hidden"
     [ngClass]="
-      showSidebar ? 'translate-x-3 translate-y-3' : '-translate-x-full'
+      showSidebar ? 'translate-x-0 translate-y-0' : '-translate-x-full'
     "
   >
-    <div class="flex flex-col h-auto gap-1 p-4 bg-gray-700 rounded-md">
-      <p
-        *ngFor="let item of navArray"
-        routerLink="/{{ item | replaceSpace }}"
-        class="p-2 text-lg font-medium text-white transition-all duration-300 rounded-lg cursor-pointer font-zabal text-shadow hover:bg-gray-600 hover:text-stone-200"
-        (click)="toggleSidebar()"
+    <div class="flex flex-col gap-1 p-4 bg-gray-700 h-93svh rounded-r-md">
+      <div *ngFor="let item of navArray">
+        <p
+          routerLink="/{{ item | replaceSpace }}"
+          class="p-2 text-lg font-medium text-white transition-all duration-300 rounded-lg cursor-pointer font-zabal text-shadow hover:bg-gray-600 hover:text-stone-200"
+          (click)="toggleSidebar()"
+        >
+          {{ item }}
+        </p>
+        <div
+          class="grid pt-4 text-left border-t border-gray-200 md:gap-16 md:grid-cols-2"
+        ></div>
+      </div>
+      <div
+        *ngIf="!isAuthenticated"
+        class="relative p-2 overflow-hidden text-lg font-medium rounded-lg cursor-pointer font-zabal text-shadow hover:bg-slate-700"
       >
-        {{ item }}
-      </p>
-      <p
-        routerLink="/login"
-        class="p-2 text-lg font-medium text-white transition-all duration-300 bg-gray-600 rounded-lg cursor-pointer font-zabal text-shadow animate-pulse hover:bg-gray-600 hover:text-stone-200"
-        (click)="toggleSidebar()"
-      >
-        Login
-      </p>
+        <div
+          class="absolute inset-0 bg-gray-600 rounded-lg animate-pulse"
+        ></div>
+        <p
+          routerLink="/login"
+          (click)="toggleSidebar()"
+          class="relative z-10 text-white transition-all duration-300 hover:text-stone-200"
+        >
+          Login
+        </p>
+      </div>
+      <div
+        class="grid pt-4 text-left border-t border-gray-200 md:gap-16 md:grid-cols-2"
+      ></div>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="relative">
   <div
-    [ngClass]="{ 'bg-slate-300/[.3] ': isLoading }"
+    [ngClass]="{ 'bg-slate-300/[.4] ': isLoading }"
     class="h-96 w-11/12 mx-auto mt-10 md:max-w-2xl md:mx-auto animate-scale-up bg-slate-400/[.1] rounded-3xl shadow-2xl"
   >
     <h3 class="p-5 text-2xl font-bold text-center text-white text-shadow">
@@ -76,6 +76,7 @@
       </div>
       <div class="relative flex flex-col items-center">
         <button
+          [disabled]="loginForm.invalid"
           [ngClass]="
             loginForm.invalid
               ? 'bg-red-600 scale-x-90'
@@ -89,11 +90,11 @@
           type="submit"
           class="px-6 py-2 mt-2 transition-all duration-300 ease-in-out bg-gray-400 shadow-2xl opacity- rounded-3xl"
           [disabled]="loginForm.invalid"
-          [ngClass]="
-            loginForm.invalid
-              ? 'scale-75'
-              : 'cursor-pointer scale-100 opacity-100 hover:text-stone-300 hover:bg-gray-600 hover:scale-105'
-          "
+          [ngClass]="{
+            'bg-gray-600 text-stone-100': isLoading,
+            'scale-75': loginForm.invalid,
+            'cursor-pointer scale-100 opacity-100 hover:text-stone-300 hover:bg-gray-600 hover:scale-105': !loginForm.invalid
+          }"
         >
           Submit
         </button>

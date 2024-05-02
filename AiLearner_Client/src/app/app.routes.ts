@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { TestPageComponent } from './pages/test-page/test-page.component';
 import { StudyHubComponent } from './pages/study-hub/study-hub.component';
 import { MaterialSelectionComponent } from './components/study-hub/material-selection/material-selection.component';
 import { NewMaterialComponent } from './components/study-hub/new-material/new-material.component';
@@ -15,7 +14,8 @@ import { ExamResultComponent } from './components/exam/exam-result/exam-result.c
 import { ExamRetryComponent } from './components/exam/exam-retry/exam-retry.component';
 import { authGuard } from './auth/auth-guard';
 import { LogoutComponent } from './components/logout/logout.component';
-import { AboutPageComponent } from './pages/Aboute-page/about-page/about-page.component';
+import { AboutPageComponent } from './pages/About-page/about-page/about-page.component';
+import { PrivacyPolicyPageComponent } from './pages/privacy-policy-page/privacy-policy-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -23,6 +23,7 @@ export const routes: Routes = [
   { path: 'signup', component: SignupPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'about', component: AboutPageComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyPageComponent },
   { path: 'signout', component: LogoutComponent, canActivate: [authGuard]},
   {
     path: 'study-hub',
@@ -39,6 +40,5 @@ export const routes: Routes = [
       { path: 'materials/:id/exam/retry/:questionIndex', component: ExamRetryComponent },
     ],
   },
-  { path: 'test', component: TestPageComponent },
   { path: '**', component: PageNotFoundComponent },
 ];

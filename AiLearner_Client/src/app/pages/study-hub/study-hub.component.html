@@ -5,15 +5,15 @@
     <button
       (click)="goBack()"
       type="button"
-      class="bg-gray-800 absolute left-4 text-white rounded-md hover:bg-red-700 hover:text-white py-1 px-3 shadow-2xl"
+      class="bg-gray-800 absolute left-4 text-white rounded-md hover:bg-gray-400 hover:text-gray-800 transition-all duration-150 ease-in-out py-1 px-3 shadow-2xl"
     >
       <div class="flex flex-row align-middle">
-        <img
-          src="../../../assets/SVG/arrow2-icon.svg"
-          alt=""
-          class="rotate-180"
-        />
-        <p class="ml-2">Prev</p>
+        <div class="rotate-180 self-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M4.5 11h11.586l-4.5-4.5L13 5.086L19.914 12L13 18.914L11.586 17.5l4.5-4.5H4.5z"/>
+          </svg>
+        </div>
+        <p class="ml-2 mb-0.5">Prev</p>
       </div>
     </button>
     <h3

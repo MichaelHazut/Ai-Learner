@@ -99,6 +99,27 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Recommendations",
+                columns: table => new
+                {
+                    RecommendationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaterialId = table.Column<int>(type: "int", nullable: false),
+                    Topic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Summary = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recommendations", x => x.RecommendationId);
+                    table.ForeignKey(
+                        name: "FK_Recommendations_Materials_MaterialId",
+                        column: x => x.MaterialId,
+                        principalTable: "Materials",
+                        principalColumn: "MaterialId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Answers",
                 columns: table => new
                 {
@@ -165,6 +186,11 @@ namespace DataAccessLayer.Migrations
                 column: "MaterialId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Recommendations_MaterialId",
+                table: "Recommendations",
+                column: "MaterialId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RefreshTokens_ReplacedByTokenId",
                 table: "RefreshTokens",
                 column: "ReplacedByTokenId");
@@ -193,6 +219,9 @@ namespace DataAccessLayer.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Recommendations");
+
             migrationBuilder.DropTable(
                 name: "RefreshTokens");
 

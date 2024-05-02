@@ -3,11 +3,13 @@ import { MaterialService } from './material.service';
 import { QuestionService } from './question.service';
 import { AnswerService } from './answer.service';
 import { UserAnswersService } from './user-answers.service';
+import { RecommendationService } from './recommendation.service';
 import { BehaviorSubject, Observable, forkJoin, switchMap } from 'rxjs';
 import { MaterialDTO } from '../models/MaterialDTO';
 import { QuestionDTO } from '../models/QuestionDTO';
 import { AnswerDTO } from '../models/AnswerDTO';
 import { UserAnswersDTO } from '../models/UserAnswersDTO';
+import { RecommendationDTO } from '../models/RecommendationDTO';
 import { Exam } from '../models/Exam';
 import { QuestionAndAnswers } from '../models/QuestionAndAnswers';
 
@@ -25,7 +27,8 @@ export class ExamDataService {
     private materialService: MaterialService,
     private questionService: QuestionService,
     private answerService: AnswerService,
-    private userAnswersService: UserAnswersService
+    private userAnswersService: UserAnswersService,
+    private RecommendationService : RecommendationService
   ) {}
 
   fetchExamData(
@@ -35,12 +38,14 @@ export class ExamDataService {
     questions: QuestionDTO[];
     answers: AnswerDTO[];
     userAnswers: UserAnswersDTO[];
+    recommendations: RecommendationDTO[];
   }> {
     return forkJoin({
       material: this.materialService.getMaterialById(materialId),
       questions: this.questionService.getQuestions(materialId),
       answers: this.answerService.getAnswers(materialId),
       userAnswers: this.userAnswersService.getUserAnswers(materialId),
+      recommendations: this.RecommendationService.getRecommendations(materialId)
     });
   }
 
@@ -50,8 +55,8 @@ export class ExamDataService {
       return;
     }
     this.fetchExamData(materialId).subscribe({
-      next: ({ material, questions, answers, userAnswers }) => {
-        let examObj = new Exam(material, questions, answers, userAnswers);
+      next: ({ material, questions, answers, userAnswers, recommendations }) => {
+        let examObj = new Exam(material, questions, answers, userAnswers, recommendations);
         this.examData.next(examObj);
       },
       error: (error) => console.error('Error fetching data:', error)

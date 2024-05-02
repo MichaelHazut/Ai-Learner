@@ -11,9 +11,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.Resource;
 
 
 namespace AiLearner_API
@@ -156,12 +153,7 @@ namespace AiLearner_API
 
             app.UseCors("AllowMyOrigin");
 
-            // Configure the HTTP request pipeline.
-            //if (app.Environment.IsDevelopment())
-            //{
-
-            //}
-            //);
+            
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -173,8 +165,6 @@ namespace AiLearner_API
             app.UseMiddleware<ExceptionMiddleware>();
 
             var scopeRequiredByApi = app.Configuration["AzureAd:Scopes"];
-
-            app.MapGet("/test", (HttpContext httpContext) => Results.StatusCode(StatusCodes.Status200OK));
 
             /**/
             app.UseHttpsRedirection();

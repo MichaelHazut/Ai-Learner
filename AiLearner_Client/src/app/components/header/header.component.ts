@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ReplaceSpacePipe } from '../../pipes/replace-space.pipe';
@@ -13,11 +13,11 @@ import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  navArray: string[] = ['Home', 'About', 'Contact'];
+  navArray: string[] = ['Home', 'About', 'privacy policy'];
   showSidebar: boolean = false;
   isAuthenticated: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,private eRef: ElementRef) {}
 
   ngOnInit() {
     this.userService.getIsAuthenticated().subscribe({
@@ -39,6 +39,12 @@ export class HeaderComponent {
     });
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event: Event): void {
+    if (!this.eRef.nativeElement.contains(event.target as Node)) {
+      this.showSidebar = false;
+    }
+  }
   toggleSidebar() {
     this.showSidebar = !this.showSidebar;
   }

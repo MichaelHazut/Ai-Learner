@@ -32,9 +32,6 @@ export class LoginFormComponent {
         if (isAuthenticated) {
           this.router.navigate(['/study-hub']);
         }
-      },
-      error: (error) => {
-        console.error('LoginForm: Error while checking authentication status: ', error);
       }
     });
   }
@@ -42,24 +39,24 @@ export class LoginFormComponent {
   onSubmit(event: Event) {
     event.preventDefault();
     this.isLoading = true;
-
+    console.log(this.isLoading);
     const user: UserDTO = {
       email: this.userEmail,
       password: this.userPassword,
     };
-    this.toastr.info('Logging in...');
     this.userService.loginUser(user).subscribe({
       next: (response) => {
         if (response.status === 200) {
           this.toastr.success('Login successful');
           this.router.navigate(['/study-hub']);
+          this.isLoading = false;
         }
       },
       error: () => {
         this.toastr.error('Invalid email or password');
         this.isError = true;
+        this.isLoading = false;
       },
     });
-    this.isLoading = false;
   }
 }

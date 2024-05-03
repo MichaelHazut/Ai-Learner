@@ -38,13 +38,17 @@ jobs:
             baseUrl: '${{ secrets.BASE_URL  }}'
           };
           EOF
-          echo "Environment file created at: $(pwd)AiLerner_Client/src/environments/environment.secret.ts"
+          echo "Environment file created at: $(pwd)/AiLerner_Client/src/environments/environment.secret.ts"
           cat AiLerner_Client/src/environments/environment.secret.ts
       - name: Echo Secrets
         run: |
           echo "Base URL: '${{ secrets.BASE_URL  }}'"
           echo "Base URL2: ${{ secrets.BASE_URL }}"
 
+      - name: Log Repository Paths
+        run: |
+          find . -type f -or -type d
+        
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1

@@ -82,8 +82,8 @@ namespace AiLearner_API
             {
                 options.AddPolicy("AllowMyOrigin",
                     builder => builder.WithOrigins(
-                        "http://localhost:4200",
                         "https://localhost:4200",
+                        "https://www.ailearner.online",
                         "https://c76rjpx5.euw.devtunnels.ms:4200",
                         "https://c76rjpx5-4200.euw.devtunnels.ms"
                         )

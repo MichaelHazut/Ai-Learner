@@ -14,7 +14,7 @@ import { UserService } from './services/user.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'AiLearner';
+  title = 'Ai Learner';
   isAuthenticated: boolean | null = null;
 
   constructor(private userService: UserService) {}

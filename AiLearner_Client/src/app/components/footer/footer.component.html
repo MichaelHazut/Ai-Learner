@@ -2,13 +2,12 @@
   <div class="w-full max-w-screen-xl p-4 py-6 mx-auto lg:py-8">
     <div class="md:flex md:justify-between">
       <div class="mb-6 md:mb-0">
-        <a href="" class="flex items-center drop-shadow-img-shadow">
           <img
+            (click)="navigateToHome()"
             src="../../../assets/SVG/logo-no-background.svg"
-            class="h-8 me-3"
+            class="flex items-center h-8 cursor-pointer me-3 drop-shadow-img-shadow hover:scale-105"
             alt="Ai Learner logo"
           />
-        </a>
       </div>
       <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
         <div>
@@ -38,7 +37,7 @@
           </h2>
           <ul class="font-medium text-gray-300 text-shadow ">
             <li class="mb-4">
-              <a (click)="navigateToPrivacyPolicy()" class="hover:underline cursor-pointer"
+              <a (click)="navigateToPrivacyPolicy()" class="cursor-pointer hover:underline"
                 >Privacy Policy</a
               >
             </li>

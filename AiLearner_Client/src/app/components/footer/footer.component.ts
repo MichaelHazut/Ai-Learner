@@ -15,5 +15,8 @@ export class FooterComponent {
   navigateToPrivacyPolicy() {
     this.router.navigate(['/privacy-policy']);
   }
+  navigateToHome() {
+    this.router.navigate(['/home']);
+  }
 }
 

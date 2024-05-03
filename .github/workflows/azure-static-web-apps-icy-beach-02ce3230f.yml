@@ -44,9 +44,11 @@ jobs:
         
       - name: Install dependencies
         run: npm install
+        working-directory: AiLearner_Client
 
       - name: Build project
         run: npm run build
+        working-directory: AiLearner_Client
           
       - name: Change directory to Root
         run: cd ../

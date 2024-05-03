@@ -38,6 +38,11 @@ jobs:
             baseUrl: '${{ secrets.BASE_URL  }}'
           };
           EOF
+      
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build
 
       - name: Log Repository Paths
         run: |

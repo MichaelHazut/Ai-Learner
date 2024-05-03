@@ -39,12 +39,26 @@ jobs:
           };
           EOF
       
-      - name: Install dependencies and build
-        run: |
-          npm install
-          npm run build
+      - name: Change directory to AiLearner_Client
+        run: cd AiLearner_Client
+        
+      - name: Install dependencies
+        run: npm install
 
+      - name: Build project
+        run: npm run build
+          
+      - name: Change directory to Root
+        run: cd ../
+        
       - name: Log Repository Paths
+        run: |
+          find . -type f -or -type d
+
+      - name: Change directory to on back
+        run: cd ../
+        
+      - name: Log Repository Paths2
         run: |
           find . -type f -or -type d
         

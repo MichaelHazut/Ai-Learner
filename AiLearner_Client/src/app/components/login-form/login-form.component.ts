@@ -39,7 +39,6 @@ export class LoginFormComponent {
   onSubmit(event: Event) {
     event.preventDefault();
     this.isLoading = true;
-    console.log(this.isLoading);
     const user: UserDTO = {
       email: this.userEmail,
       password: this.userPassword,

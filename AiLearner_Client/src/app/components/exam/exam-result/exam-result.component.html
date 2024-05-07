@@ -63,7 +63,7 @@
     <div
       [ngStyle]="{
         'max-height': answerVisible ? '1000px' : '0px',
-        overflow: 'hidden'
+        overflow: 'scroll'
       }"
       class="transition-all duration-1000 ease-in-out cursor-auto"
     >
@@ -79,24 +79,28 @@
         </button>
         <p class="text-lg text-red-200">Questions you got wrong:</p>
       </div>
-      <div
-        *ngFor="let question of wrongAnswers"
-        class="flex p-2 my-1 transition-colors duration-300 ease-in-out bg-gray-500 border border-red-300 rounded-md cursor-default hover:bg-gray-400 text-stone-200 hover:text-stone-300"
-      >
-        <span> {{ question.questionIndex }}) &nbsp;</span>
-        <p>
-          {{ question.question.text }}
-        </p>
+      <div>
+        <div
+          *ngFor="let question of wrongAnswers"
+          class="flex p-2 my-1 transition-colors duration-300 ease-in-out bg-gray-500 border border-red-300 rounded-md cursor-default hover:bg-gray-400 text-stone-200 hover:text-stone-300"
+        >
+          <span> {{ question.questionIndex }}) &nbsp;</span>
+          <p>
+            {{ question.question.text }}
+          </p>
+        </div>
       </div>
       <p class="mt-4 text-lg text-green-200">Questions you got right:</p>
-      <div
-        *ngFor="let question of currectAnswers"
-        class="flex p-2 my-1 transition-colors duration-300 ease-in-out bg-gray-500 border border-green-300 rounded-md cursor-default hover:bg-gray-400 text-stone-200 hover:text-stone-300"
-      >
-        <span> {{ question.questionIndex }}) &nbsp;</span>
-        <p>
-          {{ question.question.text }}
-        </p>
+      <div>
+        <div
+          *ngFor="let question of currectAnswers"
+          class="flex p-2 my-1 transition-colors duration-300 ease-in-out bg-gray-500 border border-green-300 rounded-md cursor-default hover:bg-gray-400 text-stone-200 hover:text-stone-300"
+        >
+          <span> {{ question.questionIndex }}) &nbsp;</span>
+          <p>
+            {{ question.question.text }}
+          </p>
+        </div>
       </div>
     </div>
   </div>

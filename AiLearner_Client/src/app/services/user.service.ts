@@ -124,7 +124,6 @@ export class UserService {
       });
   }
   checkAuth(): Observable<boolean> {
-    console.log("in check authh");
     return this.http
       .get<{ isAuthenticated: boolean }>(
         `${this.secretUrl}/auth/validate-token`,
@@ -139,8 +138,6 @@ export class UserService {
             this.isAuthenticated.next(response.isAuthenticated);
           },
           error: (error) => {
-            console.log("Error in checkAuth:");
-            console.log(error);
             this.isAuthenticated.next(false);
           },
         }),
@@ -176,38 +173,19 @@ export class UserService {
       .pipe(
         map((response) => {
           if (response.status === 200) {
-            console.log('Token refreshed successfully.');
             this.isAuthenticated.next(true);
             return true;
           } else {
-            console.log('Failed to refresh token.');
             this.isAuthenticated.next(false);
             return false;
           }
         }),
         catchError((error) => {
-          console.log('Error during token refresh: ', error);
           this.isAuthenticated.next(false);
           return of(false); // Use `of` to return an Observable<boolean>
         })
       );
 
-    // .pipe(
-    //   tap((response: HttpResponse<any>) => {
-    //     console.log("refresh token response: ", response);
-    //     if (response.status === 200) {
-    //       console.log("refreshed token");
-    //       this.isAuthenticated.next(true);
-    //     } else {
-    //       console.log("failed to refresh token");
-    //       this.isAuthenticated.next(false);
-    //     }
-    //   }),
-    //   catchError((error) => {
-    //     console.log("error in refresh token");
-    //     this.isAuthenticated.next(false);
-    //     return throwError(() => error);
-    //   })
-    // );
+    
   }
 }

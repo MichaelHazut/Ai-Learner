@@ -22,7 +22,6 @@ export class NewMaterialComponent {
 
   constructor(
     private materialService: MaterialService,
-    private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService,
@@ -43,7 +42,6 @@ export class NewMaterialComponent {
     };
     this.materialService.registerMaterial(dto).subscribe({
       next: (response) => {
-        console.log(response);
         if (response.status === 201) {
           this.loading = false;
           this.toastr.success('Material registered successfully');

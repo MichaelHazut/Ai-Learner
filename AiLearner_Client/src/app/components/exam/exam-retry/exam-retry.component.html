@@ -1,6 +1,15 @@
 <div class="justify-center p-4 mx-auto bg-slate-400 rounded-2xl">
-    <p>exam retry</p>
+    <h3 class="text-xl text-white font-zabal text-shadow">exam retry</h3>
   <div *ngIf="wrongQuestions!.length > currentQuestionIndex ">
+    <div class="w-full rounded-full h-2.5 bg-gray-700">
+      <div
+        class="bg-blue-600 h-2.5 mb-1 rounded-full"
+        [style.width]="
+          (currentQuestionIndex / (wrongQuestions?.length ?? 1)) * 100 +
+          '%'
+        "
+      ></div>
+    </div>
     <app-question
       *ngIf="currentQuestionIndex < wrongQuestions!.length"
       [question]="

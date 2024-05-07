@@ -49,10 +49,8 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
   }
   constructor(
     private examDataService: ExamDataService,
-    private materialService: MaterialService,
     private route: ActivatedRoute,
     private router: Router,
-    private tostar: ToastrService,
     private navigationService: NavigationService
   ) {}
 
@@ -69,7 +67,6 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
         return;
       }
       this.examData = examData;
-      console.log(this.examData);
       if(this.examData.userAnswers.length === 0) {
         this.router.navigate(['../'], { relativeTo: this.route });
       }
@@ -79,20 +76,25 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
   }
 
   getCorrectAnswers() {
-    this.currectAnswers = this.examData!.questions.map((question) => ({
-      question: question.question,
-      answers: question.answers.filter(
+    this.currectAnswers = this.examData!.questions.map(
+      (question, index): QuestionAndAnswers => ({
+        question: question.question,
+        answers: question.answers,
+        questionIndex: index + 1,
+      })
+    ).filter((qa) => {
+      const currectAnswers = qa.answers.filter(
         (answer) =>
           answer.isCorrect &&
           this.examData!.userAnswers.some(
             (ua) =>
-              ua.answerId === answer.id &&
-              ua.questionId === question.question.id
+              ua.answerId === answer.id && ua.questionId === qa.question.id
           )
-      ),
-    })).filter((qa) => qa.answers.length > 0);
+      );
+      return currectAnswers.length > 0;
+    });
   }
-
+  
   getIncorrectAnswers() {
     this.wrongAnswers = this.examData!.questions.map(
       (question, index): QuestionAndAnswers => ({
@@ -111,7 +113,6 @@ export class ExamResultComponent implements OnDestroy, AfterViewInit {
       );
       return wrongAnswers.length > 0;
     });
-    // filter((qa) => qa.answers.length > 0);
   }
 
   getCorrectAnswersPercentage(): number {

@@ -25,9 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.11.0'
-      
-      - name: Check Node.js version
-        run: node --version       
+            
         
       - name: Create Environment File
         run: |

@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { ExamDataService } from '../../../services/exam-data.service';
 import { UserAnswersService } from '../../../services/user-answers.service';
 import { Exam } from '../../../models/Exam';
+import { NavigationService } from '../../../services/navigation.service';
 
 @Component({
   selector: 'app-exam-retry',
@@ -29,10 +30,18 @@ export class ExamRetryComponent {
     private route: ActivatedRoute,
     private userService: UserService,
     private examDataService: ExamDataService,
-    private userAnswersService: UserAnswersService
+    private userAnswersService: UserAnswersService,
+    private navigationService: NavigationService
   ) {}
 
   ngOnInit() {
+    const materialId = this.route.snapshot.paramMap.get('id')!;
+    this.navigationService.setBackRoute([
+      '/study-hub',
+      'materials',
+      materialId,
+      'result',
+    ]);
     this.subscriptions.push(
       this.examDataService.examRetryData$.subscribe((examRetryData) => {
         this.wrongQuestions = examRetryData;
@@ -75,7 +84,13 @@ export class ExamRetryComponent {
         .subscribe({
           next: () => {
             this.examDataService.fetchExamData(materialId).subscribe({
-              next: ({ material, questions, answers, userAnswers ,recommendations }) => {
+              next: ({
+                material,
+                questions,
+                answers,
+                userAnswers,
+                recommendations,
+              }) => {
                 let examObj = new Exam(
                   material,
                   questions,

@@ -9,14 +9,15 @@ import {  Router } from '@angular/router';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
-  // iwant to add afunction to navigate to route /privacy-policy
   constructor(private router: Router) {}
 
   navigateToPrivacyPolicy() {
-    this.router.navigate(['/privacy-policy']);
+    this.router.navigate(['/privacy-policy']).then(() => {
+      window.scrollTo(0, 0)});
   }
   navigateToHome() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home']).then(() => {
+      window.scrollTo(0, 0)});
   }
 }
 

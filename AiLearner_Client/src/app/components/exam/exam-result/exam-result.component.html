@@ -1,6 +1,6 @@
 <div
   *ngIf="examData"
-  class="max-w-2xl p-3 mx-auto mt-4 lg:p-5 bg-gray-600 rounded-t-lg rounded-b-2xl shadow-2xl animate-right-bounce text-shadow-sm"
+  class="max-w-2xl p-3 mx-auto mt-4 bg-gray-600 rounded-t-lg shadow-2xl lg:p-5 rounded-b-2xl animate-right-bounce text-shadow-sm"
 >
   <div class="flex justify-center">
     <h3 class="mb-3 text-lg font-bold text-white font-zabal text-shadow">
@@ -29,7 +29,7 @@
   <div
     (click)="showOrHideAnswers()"
     [ngClass]="wrongAnswers.length > 0 ? 'cursor-pointer' : 'cursor-auto'"
-    class="p-3 my-3 transition-colors duration-300 ease-in-out bg-gray-400 rounded-lg shadow-2xl hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50"
+    class="p-3 my-5 transition-colors duration-300 ease-in-out bg-gray-400 rounded-lg shadow-2xl hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-opacity-50"
   >
     <div>
       <div class="flex items-center justify-between w-full">
@@ -69,32 +69,44 @@
     >
       <div
         *ngIf="wrongAnswers.length > 0"
-        class="flex-row-reverse items-center justify-between mt-2 md:flex"
+        class="flex-row-reverse items-center justify-between mt-5 sm:flex"
       >
         <button
           (click)="navigateToExam()"
-          class="px-2 py-1 transition-colors duration-300 ease-in-out bg-gray-700 border rounded-lg shadow-2xl text-stone-200 hover:bg-gray-800"
+          class="px-2 py-1 transition-colors duration-300 ease-in-out bg-gray-700 border rounded-lg shadow-2xl text-stone-200 hover:bg-gray-400 hover:text-gray-800"
         >
           Retry Wrong Answers
         </button>
-        <p class="text-stone-200">Questions you got wrong:</p>
+        <p class="text-lg text-red-200">Questions you got wrong:</p>
       </div>
       <div
         *ngFor="let question of wrongAnswers"
-        class="p-2 my-1 transition-colors duration-300 ease-in-out bg-gray-500 border rounded-md cursor-default hover:bg-gray-400 text-stone-200 hover:text-stone-300"
+        class="flex p-2 my-1 transition-colors duration-300 ease-in-out bg-gray-500 border border-red-300 rounded-md cursor-default hover:bg-gray-400 text-stone-200 hover:text-stone-300"
       >
-        {{ question.questionIndex }} )
-        {{ question.question.text }}
+        <span> {{ question.questionIndex }}) &nbsp;</span>
+        <p>
+          {{ question.question.text }}
+        </p>
+      </div>
+      <p class="mt-4 text-lg text-green-200">Questions you got right:</p>
+      <div
+        *ngFor="let question of currectAnswers"
+        class="flex p-2 my-1 transition-colors duration-300 ease-in-out bg-gray-500 border border-green-300 rounded-md cursor-default hover:bg-gray-400 text-stone-200 hover:text-stone-300"
+      >
+        <span> {{ question.questionIndex }}) &nbsp;</span>
+        <p>
+          {{ question.question.text }}
+        </p>
       </div>
     </div>
   </div>
 
   <div class="rounded-lg bg-gray-600[0.7] p-3 shadow-2xl">
-    <h4 class="my-5 font-zabal text-slate-300 text-shadow-lg">
-      Keep Exploring
+    <h4 class="text-xl mt-7 font-zabal text-slate-300 text-shadow-lg">
+      Keep Exploring:
     </h4>
-    <hr class="my-2 border-gray-400" />
-    <p class="text-gray-300 font-semibold text-shadow-lg">
+    <hr class="mt-4 border-gray-400" />
+    <p class="font-semibold text-gray-300 text-shadow-lg">
       Well done on completing your exam! To keep the momentum going, we've
       selected some related topics for you to explore next. Dive into these
       areas to deepen your knowledge and uncover new interests.
@@ -102,11 +114,15 @@
 
     <div *ngFor="let recommendation of examData.recommendations" class="my-8">
       <p
-        class="text-stone-300 text-lg underline cursor-pointer hover:scale-105 origin-left hover:text-stone-400 transition-all duration-150 ease-in-out"
+        class="text-lg underline transition-all duration-150 ease-in-out origin-left cursor-pointer text-stone-300 hover:scale-105 hover:text-stone-400"
       >
-        <a href="https://www.google.com/search?q={{recommendation.topic}}" target="_blank">{{ recommendation.topic }}</a>
+        <a
+          href="https://www.google.com/search?q={{ recommendation.topic }}"
+          target="_blank"
+          >{{ recommendation.topic }}</a
+        >
       </p>
-      <p class="text-stone-200 mt-2">{{ recommendation.summary }}</p>
+      <p class="mt-2 text-stone-200">{{ recommendation.summary }}</p>
     </div>
   </div>
 </div>

@@ -29,7 +29,7 @@ import { Router } from '@angular/router';
 export class UserService {
   secretBaseUrl = environment.baseUrl;
   baseUrl = this.secretBaseUrl + '/user/';
-  
+
   dnsUrl = environment.dnsUrl;
 
   private userIdSource = new BehaviorSubject<string | null>(null);
@@ -96,8 +96,8 @@ export class UserService {
   getUsers(): Observable<string> {
     return this.http.get<string>('https://localhost:7089/test');
   }
-  getEmail(): Observable<string> {
-    return this.http.get(this.baseUrl + 'email', {
+  getEmail(userId: string): Observable<string> {
+    return this.http.get(this.baseUrl + 'email/' + userId, {
       withCredentials: true,
       responseType: 'text',
     });
@@ -125,13 +125,12 @@ export class UserService {
         },
       });
   }
-  
+
   checkAuth(): Observable<boolean> {
     return this.http
-      .get<{ isAuthenticated: boolean }>(
-        `${this.dnsUrl}/auth/validate-token`,
-        { withCredentials: true }
-      )
+      .get<{ isAuthenticated: boolean , userId:string}>(`${this.dnsUrl}/auth/validate-token`, {
+        withCredentials: true,
+      })
       .pipe(
         tap({
           next: (response) => {
@@ -139,6 +138,10 @@ export class UserService {
               return;
             }
             this.isAuthenticated.next(response.isAuthenticated);
+            if(response.userId){
+              console.log('response.userId',response.userId);
+              this.userIdSource.next(response.userId);
+            }
           },
           error: (error) => {
             this.isAuthenticated.next(false);
@@ -152,12 +155,15 @@ export class UserService {
       );
   }
 
-
   getIsAuthenticated(): Observable<boolean> {
     // Only emit non-null values
-    return this.isAuthenticated.asObservable().pipe(
-      filter(isAuthenticated => isAuthenticated !== null) as OperatorFunction<boolean | null, boolean>
-    );
+    return this.isAuthenticated
+      .asObservable()
+      .pipe(
+        filter(
+          (isAuthenticated) => isAuthenticated !== null
+        ) as OperatorFunction<boolean | null, boolean>
+      );
   }
 
   refreshToken(): Observable<boolean> {
@@ -186,7 +192,5 @@ export class UserService {
           return of(false); // Use `of` to return an Observable<boolean>
         })
       );
-
-    
   }
 }

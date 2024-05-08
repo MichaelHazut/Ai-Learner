@@ -7,33 +7,34 @@ import {
   HttpEvent,
 } from '@angular/common/http';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthInterceptor implements HttpInterceptor {
   constructor(
-    private router: Router,
     private userService: UserService,
-    private toastr: ToastrService
   ) {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler) {
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     if (request.url.includes('/auth/refresh')) {
       return next.handle(request);
     }
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
+        if (
+          error.status === 401 &&
+          request.url.includes('/auth/validate-token')
+        ) {
           return this.handle401Error(request, next);
         }
         return throwError(() => new Error(error.message));
       })
     );
   }
-
   private handle401Error(
     request: HttpRequest<any>,
     next: HttpHandler

@@ -23,18 +23,24 @@ export class UserDropdownComponent {
   ngOnInit() {
     this.userService.getIsAuthenticated().subscribe({
       next: (isAuthenticated) => {
+        console.log('isAuthenticated:', isAuthenticated);
         if (!isAuthenticated) {
           return;
         }
-        this.userService.getEmail().subscribe({
-          next: (email) => {
-            if (email) {
-              this.userEmail = email;
-            }
-          },
-          error: (err) => {
-            console.error('Error fetching email:', err);
-          },
+        this.userService.userId$.subscribe((userId) => {
+          if (!userId) {
+            return;
+          }
+          this.userService.getEmail(userId).subscribe({
+            next: (email) => {
+              if (email) {
+                this.userEmail = email;
+              }
+            },
+            error: (err) => {
+              console.error('Error fetching email:', err);
+            },
+          });
         });
       },
       error: (err) => {

@@ -25,18 +25,26 @@ export class NewMaterialComponent {
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private userService: UserService
   ) {
     
   }
 
   ngOnInit(){
     this.navigationService.setBackRoute(['study-hub']);
+    this.userService.userId$.subscribe((userId) => {
+      if (!userId) {
+        return;
+      }
+      this.userId = userId;
+    });
   }
   getInput(): void {
     this.loading = true;
+    console.log(this.userId);
     const dto: MaterialRequestDTO = {
-      userId: '',
+      userId: this.userId!,
       content: this.contentInput,
       numOfQuestions: 10,
     };

@@ -28,10 +28,9 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   secretBaseUrl = environment.baseUrl;
-  secretDnsUrl = environment.dnsUrl;
-
-  baseUrl = this.secretBaseUrl + '/User/';
-  dnsUrl = this.secretDnsUrl + '/User';
+  baseUrl = this.secretBaseUrl + '/user/';
+  
+  dnsUrl = environment.dnsUrl;
 
   private userIdSource = new BehaviorSubject<string | null>(null);
   userId$ = this.userIdSource.asObservable();
@@ -66,7 +65,7 @@ export class UserService {
    */
   loginUser(user: UserDTO): Observable<any> {
     return this.http
-      .post<{ userId: string }>(this.dnsUrl + '/login', user, {
+      .post<{ userId: string }>(this.dnsUrl + '/user/login', user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
         observe: 'response',
         withCredentials: true,
@@ -126,6 +125,7 @@ export class UserService {
         },
       });
   }
+  
   checkAuth(): Observable<boolean> {
     return this.http
       .get<{ isAuthenticated: boolean }>(

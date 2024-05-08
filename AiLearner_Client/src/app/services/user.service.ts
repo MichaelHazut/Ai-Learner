@@ -27,8 +27,11 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class UserService {
-  secretUrl = environment.baseUrl;
-  baseUrl = this.secretUrl + '/User/';
+  secretBaseUrl = environment.baseUrl;
+  secretDnsUrl = environment.baseUrl;
+
+  baseUrl = this.secretBaseUrl + '/User/';
+  dnsUrl = this.secretDnsUrl + '/User/';
 
   private userIdSource = new BehaviorSubject<string | null>(null);
   userId$ = this.userIdSource.asObservable();
@@ -63,7 +66,7 @@ export class UserService {
    */
   loginUser(user: UserDTO): Observable<any> {
     return this.http
-      .post<{ userId: string }>(this.baseUrl + 'login', user, {
+      .post<{ userId: string }>(this.dnsUrl + 'login', user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
         observe: 'response',
         withCredentials: true,
@@ -109,7 +112,7 @@ export class UserService {
 
   logout() {
     this.http
-      .delete(`${this.secretUrl}/auth/logout`, { withCredentials: true })
+      .delete(`${this.dnsUrl}/auth/logout`, { withCredentials: true })
       .subscribe({
         next: () => {
           this.userIdSource.next(null);
@@ -126,7 +129,7 @@ export class UserService {
   checkAuth(): Observable<boolean> {
     return this.http
       .get<{ isAuthenticated: boolean }>(
-        `${this.secretUrl}/auth/validate-token`,
+        `${this.dnsUrl}/auth/validate-token`,
         { withCredentials: true }
       )
       .pipe(
@@ -149,9 +152,7 @@ export class UserService {
       );
   }
 
-  // getIsAuthenticated(): Observable<boolean | null> {
-  //   return this.isAuthenticated.asObservable();
-  // }
+
   getIsAuthenticated(): Observable<boolean> {
     // Only emit non-null values
     return this.isAuthenticated.asObservable().pipe(
@@ -162,7 +163,7 @@ export class UserService {
   refreshToken(): Observable<boolean> {
     return this.http
       .post(
-        `${this.secretUrl}/auth/refresh`,
+        `${this.dnsUrl}/auth/refresh`,
         {},
         {
           observe: 'response',

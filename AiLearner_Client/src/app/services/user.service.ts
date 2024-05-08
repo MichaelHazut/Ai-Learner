@@ -28,10 +28,10 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   secretBaseUrl = environment.baseUrl;
-  secretDnsUrl = environment.baseUrl;
+  secretDnsUrl = environment.dnsUrl;
 
   baseUrl = this.secretBaseUrl + '/User/';
-  dnsUrl = this.secretDnsUrl + '/User/';
+  dnsUrl = this.secretDnsUrl + '/User';
 
   private userIdSource = new BehaviorSubject<string | null>(null);
   userId$ = this.userIdSource.asObservable();

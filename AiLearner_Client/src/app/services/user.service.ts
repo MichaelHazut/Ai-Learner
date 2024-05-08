@@ -66,7 +66,7 @@ export class UserService {
    */
   loginUser(user: UserDTO): Observable<any> {
     return this.http
-      .post<{ userId: string }>(this.dnsUrl + 'login', user, {
+      .post<{ userId: string }>(this.dnsUrl + '/login', user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
         observe: 'response',
         withCredentials: true,

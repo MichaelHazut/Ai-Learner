@@ -63,9 +63,9 @@
     <div
       [ngStyle]="{
         'max-height': answerVisible ? '1000px' : '0px',
-        overflow: 'scroll'
+        'overflow-y': 'scroll'
       }"
-      class="transition-all duration-1000 ease-in-out cursor-auto"
+      class="transition-all duration-1000 ease-in-out cursor-auto scrollbar-none scroll"
     >
       <div
         *ngIf="wrongAnswers.length > 0"

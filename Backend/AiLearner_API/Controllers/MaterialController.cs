@@ -92,7 +92,7 @@ namespace AiLearner_API.Controllers
 
                 // Check if the user is authorized to view the material
                 if (material.UserId != userId)
-                    return NotFound("You are not authorized to view this material.");
+                    return Unauthorized("You are not authorized to view this material.");
 
                 _cachingService.CacheItem(materialId.ToString(), material);
             }

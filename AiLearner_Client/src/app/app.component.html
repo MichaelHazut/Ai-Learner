@@ -4,12 +4,11 @@
     alt=""
     class="absolute inset-0 object-cover min-h-full lg:object-left -z-10"
   />
-  <div class="min-h-screen">
-    <app-header></app-header>
-    
-    <router-outlet class="min-h-screen"></router-outlet>
+  <div class="flex flex-col min-h-screen">
+    <div class="flex-grow">
+      <app-header></app-header>
+      <router-outlet class=""></router-outlet>
+    </div>
+    <app-footer></app-footer>
   </div>
-  
-  <app-footer></app-footer>
 </div>
-

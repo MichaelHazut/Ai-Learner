@@ -2,6 +2,8 @@
 using DataAccessLayer.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
+using NuGet.Common;
 using System.Security.Claims;
 
 namespace AiLearner_API.Controllers
@@ -19,6 +21,23 @@ namespace AiLearner_API.Controllers
             var expiredToken = Request.Cookies["AccessToken"];
             var refreshTokenString = Request.Cookies["refreshToken"];
 
+            if (string.IsNullOrEmpty(expiredToken) || string.IsNullOrEmpty(refreshTokenString))
+            {
+                // Extract the token from the Authorization header
+                if (HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
+                {
+                    expiredToken = authorizationHeader.ToString().Split(' ').Last();
+                }
+                // Extract the refresh token from the X-Refresh-Token header
+                if (HttpContext.Request.Headers.TryGetValue("X-Refresh-Token", out var refreshToken))
+                {
+                    refreshTokenString = refreshToken;
+                }
+                else
+                {
+                    return BadRequest("Token is required.");
+                }
+            }
             if (string.IsNullOrEmpty(expiredToken) || string.IsNullOrEmpty(refreshTokenString))
             {
                 return BadRequest("Token is required.");
@@ -39,7 +58,7 @@ namespace AiLearner_API.Controllers
                 _jwtTokenService.AppendCookie(Response, newToken, newRefreshToken);
 
                 // Return only a status code if you're setting HTTP-only cookies
-                return Ok();
+                return Ok(new { NewToken = newToken });
             }
             catch (SecurityTokenException ex)
             {
@@ -56,8 +75,20 @@ namespace AiLearner_API.Controllers
                 var token = Request.Cookies["AccessToken"];
                 if (string.IsNullOrEmpty(token))
                 {
-                    
-                    return Unauthorized(new { message = "No token provided." });
+                    // Extract the token from the Authorization header
+                    if (HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
+                    {
+                        token = authorizationHeader.ToString().Split(' ').Last();
+                    }
+                    else
+                    {
+                        return Unauthorized(new { message = "No token provided." });
+                    }
+                }
+                var token2 = "";
+                if (HttpContext.Request.Headers.TryGetValue("X-Refresh-Token", out var refreshToken))
+                {
+                    token2 = refreshToken;
                 }
 
                 // Validate the token
@@ -69,14 +100,15 @@ namespace AiLearner_API.Controllers
                 }
                 else
                 {
+                    var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value);
                     // The token is valid
-                    return Ok(new { IsAuthenticated = true });
+                    return Ok(new { IsAuthenticated = true, UserId = userId });
                 }
             }
             catch (SecurityTokenException)
             {
                 // The token is invalid or expired
-                return Unauthorized(new { IsAuthenticated = false });
+                return Unauthorized(new { IsAuthenticated = false, UserId = "" });
             }
             catch (Exception ex)
             {
@@ -103,8 +135,8 @@ namespace AiLearner_API.Controllers
                 var cookieOptions = new CookieOptions
                 {
                     Path = "/",
-                    HttpOnly= true,
-                    Secure = true, 
+                    HttpOnly = true,
+                    Secure = true,
                     SameSite = SameSiteMode.None
                 };
 

@@ -1,6 +1,6 @@
 <div
   tabindex="-1"
-  class="absolute -top-8 left-0 right-0 z-50 items-center justify-center w-full overflow-y-auto duration-300 ease-out transform "
+  class="absolute left-0 right-0 z-50 items-center justify-center w-full overflow-y-auto duration-300 ease-out transform -top-8 "
   [ngClass]="{
     'flex opacity-0 scale-95 invisible': !showContent,
     'flex opacity-100 scale-100 visible': showContent
@@ -50,7 +50,7 @@
       </div>
       <!-- Modal body -->
       <div class="p-4 space-y-4 md:p-5">
-        <p class="text-base leading-relaxed text-gray-500 text-shadow-sm dark:text-gray-300">
+        <p class="leading-relaxed text-gray-500 whitespace-pre-wrap text-shadow-sm dark:text-gray-300">
           {{ material?.content }}
         </p>
       </div>

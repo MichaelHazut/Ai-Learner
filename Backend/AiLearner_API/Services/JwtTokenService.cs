@@ -68,8 +68,9 @@ namespace AiLearner_API.Services
                 HttpOnly = true,
                 Expires = DateTime.UtcNow.AddDays(1),
                 Secure = true,
-                Path = "/",
                 SameSite = SameSiteMode.None,
+                Path = "/",
+                Domain = ".ailearner.online",
             });
 
             response.Cookies.Append("refreshToken", refreshToken.Token!, new CookieOptions
@@ -77,8 +78,9 @@ namespace AiLearner_API.Services
                 HttpOnly = true,
                 Expires = refreshToken.Expiration,
                 Secure = true,
-                Path = "/",
                 SameSite = SameSiteMode.None,
+                Path = "/",
+                Domain = ".ailearner.online",
             });
         }
         public ClaimsPrincipal ValidateToken(string token, bool validateLifetime = true)

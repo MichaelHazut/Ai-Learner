@@ -31,8 +31,7 @@ jobs:
           mkdir -p AiLearner_Client/src/environments
           cat <<EOF > AiLearner_Client/src/environments/environment.secret.ts
           export const environment = {
-            baseUrl: '${{ secrets.BASE_URL  }}',
-            dnsUrl: '${{ secrets.DNS_URL  }}'
+            baseUrl: '${{ secrets.BASE_URL  }}'
           };
           EOF
         

@@ -33,6 +33,7 @@ export class MaterialComponent implements OnDestroy {
     this.subsription = this.examDataService.examData$.subscribe((examData) => {
       this.examData = examData;
       if(examData){
+        console.log(this.examData!.material.content);
         if (examData.questions.length <= examData.userAnswers.length) {
           this.router.navigate(['./result'], { relativeTo: this.route });
         }

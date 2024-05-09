@@ -28,7 +28,7 @@ namespace AiLearner_ClassLibrary.OpenAi_Service
             chat.AppendSystemMessage("Additionally, generate three recommendations for further learning based on the text");
             chat.AppendSystemMessage("Youre only response will be a JSON object with six variables:topic string, summary 1-3 sentences describing the text, a questions object that contains: question string, options object with key value pair, answer a letter char, and finally recommendations array with 3 objects that contains: topic string, summery string");
 
-            chat.AppendUserInput(message + $"\n generate {numberOfQuestion} question base on this study material \n and provide 3 recommendations for further learning");
+            chat.AppendUserInput(message + $"\n generate at least 10 question base on this study material \n and provide 3 recommendations for further learning");
 
             return await chat.GetResponseFromChatbotAsync();
         }

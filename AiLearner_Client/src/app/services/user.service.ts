@@ -27,10 +27,10 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class UserService {
-  secretBaseUrl = environment.baseUrl;
-  baseUrl = this.secretBaseUrl + '/user/';
+  baseUrl = environment.baseUrl;
+  baseUrlUser = this.baseUrl + '/user/';
 
-  dnsUrl = environment.dnsUrl;
+  //dnsUrl = environment.dnsUrl;
 
   private userIdSource = new BehaviorSubject<string | null>(null);
   userId$ = this.userIdSource.asObservable();
@@ -46,7 +46,7 @@ export class UserService {
    */
   registerUser(user: UserDTO): Observable<any> {
     return this.http
-      .post(this.baseUrl + 'register', user, {
+      .post(this.baseUrlUser + 'register', user, {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
         observe: 'response',
         withCredentials: true,
@@ -65,11 +65,15 @@ export class UserService {
    */
   loginUser(user: UserDTO): Observable<any> {
     return this.http
-      .post<{ userId: string }>(this.dnsUrl + '/user/login', user, {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-        observe: 'response',
-        withCredentials: true,
-      })
+      .post<{ userId: string; accessToken: string; refreshToken: string }>(
+        this.baseUrlUser + 'login',
+        user,
+        {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+          observe: 'response',
+          withCredentials: true,
+        }
+      )
       .pipe(
         tap((response) => {
           if (response.body?.userId) {
@@ -77,10 +81,17 @@ export class UserService {
             this.checkAuth().subscribe({
               next: (isAuthenticated) => {
                 if (isAuthenticated) {
+                  console.log('isAuthenticated', isAuthenticated);
                   this.isAuthenticated.next(true);
                 }
               },
             });
+            if (response.body.accessToken) {
+              localStorage.setItem('accessToken', response.body.accessToken);
+            }
+            if (response.body.refreshToken) {
+              localStorage.setItem('refreshToken', response.body.refreshToken);
+            }
           }
         }),
         catchError((error) => {
@@ -97,21 +108,16 @@ export class UserService {
     return this.http.get<string>('https://localhost:7089/test');
   }
   getEmail(userId: string): Observable<string> {
-    return this.http.get(this.baseUrl + 'email/' + userId, {
+    return this.http.get(this.baseUrlUser + 'email/' + userId, {
       withCredentials: true,
       responseType: 'text',
     });
   }
 
-  testGetUserFromAzure(): Observable<any> {
-    return this.http.get(this.baseUrl + 'test', {
-      withCredentials: true,
-    });
-  }
 
   logout() {
     this.http
-      .delete(`${this.dnsUrl}/auth/logout`, { withCredentials: true })
+      .delete(`${this.baseUrl}/auth/logout`, { withCredentials: true })
       .subscribe({
         next: () => {
           this.userIdSource.next(null);
@@ -128,9 +134,12 @@ export class UserService {
 
   checkAuth(): Observable<boolean> {
     return this.http
-      .get<{ isAuthenticated: boolean , userId:string}>(`${this.dnsUrl}/auth/validate-token`, {
-        withCredentials: true,
-      })
+      .get<{ isAuthenticated: boolean; userId: string }>(
+        `${this.baseUrl}/auth/validate-token`,
+        {
+          withCredentials: true,
+        }
+      )
       .pipe(
         tap({
           next: (response) => {
@@ -138,8 +147,8 @@ export class UserService {
               return;
             }
             this.isAuthenticated.next(response.isAuthenticated);
-            if(response.userId){
-              console.log('response.userId',response.userId);
+            if (response.userId) {
+              console.log('response.userId', response.userId);
               this.userIdSource.next(response.userId);
             }
           },
@@ -168,12 +177,11 @@ export class UserService {
 
   refreshToken(): Observable<boolean> {
     return this.http
-      .post(
-        `${this.dnsUrl}/auth/refresh`,
+      .post<{newToken: string}>(
+        `${this.baseUrl}/auth/refresh`,
         {},
         {
           observe: 'response',
-          responseType: 'text',
           withCredentials: true,
         }
       )
@@ -181,6 +189,7 @@ export class UserService {
         map((response) => {
           if (response.status === 200) {
             this.isAuthenticated.next(true);
+            localStorage.setItem('accessToken', response.body?.newToken!);
             return true;
           } else {
             this.isAuthenticated.next(false);

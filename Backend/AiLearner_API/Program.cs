@@ -11,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 
 namespace AiLearner_API
@@ -20,7 +22,7 @@ namespace AiLearner_API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
+
             builder.Logging.ClearProviders();
             builder.Logging.AddConsole();
             builder.Services.AddApplicationInsightsTelemetry();
@@ -54,7 +56,8 @@ namespace AiLearner_API
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
+                //options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                //options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(options =>
             {
@@ -72,24 +75,29 @@ namespace AiLearner_API
 
             builder.Services.ConfigureApplicationCookie(options =>
             {
-                options.Cookie.Name = ".MyAppAuth";
                 options.Cookie.HttpOnly = true;
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.Domain = ".ailearner.online";
             });
+            
 
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowMyOrigin",
                     builder => builder.WithOrigins(
                         "https://localhost:4200",
+                        //"ailearner.online",
+                        //"https://ailearner.online",
                         "https://www.ailearner.online",
                         "https://c76rjpx5.euw.devtunnels.ms:4200",
                         "https://c76rjpx5-4200.euw.devtunnels.ms"
                         )
                                         .AllowAnyMethod()
                                         .AllowAnyHeader()
-                                        .AllowCredentials());
+                                        .AllowCredentials()
+                                        //.WithExposedHeaders("X-Custom-Header")
+                                        );
             });
 
 
@@ -153,7 +161,7 @@ namespace AiLearner_API
 
             app.UseCors("AllowMyOrigin");
 
-            
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

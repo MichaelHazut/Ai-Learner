@@ -25,7 +25,21 @@ namespace AiLearner_API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMaterials()
         {
-            var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);
+            var token = Request.Cookies["AccessToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                // Extract the token from the Authorization header
+                if (HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
+                {
+                    token = authorizationHeader.ToString().Split(' ').Last();
+                }
+                else
+                {
+                    return Unauthorized(new { message = "No token provided." });
+                }
+            }
+
+            var principal = _jwtTokenService.ValidateToken(token);
             var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
                                 ?? throw new SecurityTokenException("User ID is missing in the token.");
 
@@ -52,6 +66,23 @@ namespace AiLearner_API.Controllers
         [HttpGet("material/{materialId:int}")]
         public async Task<IActionResult> GetMaterial(int materialId)
         {
+            var token = Request.Cookies["AccessToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                // Extract the token from the Authorization header
+                if (HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
+                {
+                    token = authorizationHeader.ToString().Split(' ').Last();
+                }
+                else
+                {
+                    return Unauthorized(new { message = "No token provided." });
+                }
+            }
+            var principal = _jwtTokenService.ValidateToken(token);
+            var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+                                ?? throw new SecurityTokenException("User ID is missing in the token.");
+
             bool isCached = _cachingService.TryGetCachedItem(materialId.ToString(), out Material? material);
             if (isCached is false)
             {
@@ -59,8 +90,17 @@ namespace AiLearner_API.Controllers
                 if (material == null)
                     return NotFound("Material Not Found");
 
+                // Check if the user is authorized to view the material
+                if (material.UserId != userId)
+                    return NotFound("You are not authorized to view this material.");
+
                 _cachingService.CacheItem(materialId.ToString(), material);
             }
+
+            // Check if the user is authorized to view the material
+            if (material!.UserId != userId)
+                return NotFound("You are not authorized to view this material.");
+
             MaterialDTO materialDTO = MaterialDTO.FromMaterial(material!);
             return Ok(materialDTO);
 
@@ -74,8 +114,20 @@ namespace AiLearner_API.Controllers
                 return BadRequest(ModelState);
             try
             {
-
-                var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);
+                var token = Request.Cookies["AccessToken"];
+                if (string.IsNullOrEmpty(token))
+                {
+                    // Extract the token from the Authorization header
+                    if (HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
+                    {
+                        token = authorizationHeader.ToString().Split(' ').Last();
+                    }
+                    else
+                    {
+                        return Unauthorized(new { message = "No token provided." });
+                    }
+                }
+                var principal = _jwtTokenService.ValidateToken(token);
                 var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
                                     ?? throw new SecurityTokenException("User ID is missing in the token.");
 
@@ -129,7 +181,21 @@ namespace AiLearner_API.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);
+            var token = Request.Cookies["AccessToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                // Extract the token from the Authorization header
+                if (HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
+                {
+                    token = authorizationHeader.ToString().Split(' ').Last();
+                }
+                else
+                {
+                    return Unauthorized(new { message = "No token provided." });
+                }
+            }
+
+            var principal = _jwtTokenService.ValidateToken(token);
             var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
                                 ?? throw new SecurityTokenException("User ID is missing in the token.");
 

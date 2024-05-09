@@ -51,35 +51,27 @@ namespace AiLearner_API.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            _logger.LogInformation("User Login Started");
             //check if user is already cached in memory 
             bool isCached = _cachingService.TryGetCachedItem(userData.Email, out User? user);
             if (isCached is true)
             {
-                _logger.LogInformation("User found in cache");
                 bool isVerified = _unitOfWork.Users.VerifyPassword(user!, userData);
                 if (isVerified is false) return Unauthorized("Invalid credentials");
                 return await GenerateAndAppendTokens(user!);
             }
-            _logger.LogInformation("User not found in cache");
             //get user from db and verify credentials
-            _logger.LogInformation("Attemting to get user from db");
             user = await _unitOfWork.Users.LogIn(userData.Email, userData.Password);
             if (user is null)
                 return Unauthorized("Invalid credentials");
-            _logger.LogInformation("User found in db");
 
             //generate jwtToken and refreshToken
-            _logger.LogInformation("Attemting to generate jwtToken and refreshToken");
             var jwtToken = _jwtTokenService.GenerateJwtToken(user);
             var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id!);
 
             //cache user in memory  
-            _logger.LogInformation("Attemting to cache user in memory");
             _cachingService.CacheItem(user.Email!, user);
 
             //add jwtToken and refreshToken to HttpOnly cookies
-            _logger.LogInformation("Attemting to append jwtToken and refreshToken to HttpOnly cookies");
             _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);
 
 
@@ -90,7 +82,7 @@ namespace AiLearner_API.Controllers
             var jwtToken = _jwtTokenService.GenerateJwtToken(user);
             var refreshToken = await _jwtTokenService.GenerateRefreshTokenAsync(user.Id!);
             _jwtTokenService.AppendCookie(Response, jwtToken, refreshToken);
-            return Ok(new { UserId = user.Id });
+            return Ok(new { UserId = user.Id, AccessToken = jwtToken, RefreshToken = refreshToken.Token });
         }
 
 
@@ -104,13 +96,11 @@ namespace AiLearner_API.Controllers
             return (isDeleted is true) ? Ok("User Deleted Successfully") : NotFound("User Not Found");
         }
 
-        [HttpGet("email")]
+        [HttpGet("email/{userId}")]
         [Authorize]
-        public async Task<IActionResult> GetUserByEmail()
+        public async Task<IActionResult> GetUserByEmail(string userId)
         {
-            var principal = _jwtTokenService.ValidateToken(Request.Cookies["AccessToken"]!);
-            var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
-                                ?? throw new SecurityTokenException("User ID is missing in the token.");
+            if(userId is null || userId.Length == 0) return BadRequest("userId is null");
 
             var user = await _unitOfWork.Users.GetByIdAsync(userId);
 

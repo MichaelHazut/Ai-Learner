@@ -5,7 +5,7 @@
 
   <h4 class="mb-4 text-xl">{{ question.text }}</h4>
   
-  <div class="grid grid-cols-2 gap-2 lg:grid-cols-2">
+  <div class="grid-cols-2 gap-2 lg:grid">
     <div *ngFor="let answer of answers; let i = index" class="flex flex-col">
       <button
         (click)="selectAnswer(answer.id)"

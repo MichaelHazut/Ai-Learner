@@ -123,8 +123,16 @@ namespace AiLearner_API.Controllers
             var refreshTokenString = Request.Cookies["refreshToken"];
             if (string.IsNullOrEmpty(refreshTokenString))
             {
+                if (HttpContext.Request.Headers.TryGetValue("X-Refresh-Token", out var refreshToken))
+                {
+                    refreshTokenString = refreshToken;
+                }
+            }
+            if (string.IsNullOrEmpty(refreshTokenString))
+            {
                 return BadRequest("Refresh token is required.");
             }
+
 
             try
             {

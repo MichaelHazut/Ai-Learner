@@ -19,6 +19,7 @@ import {
 import { UserDTO } from '../models/UserDTO';
 import { environment } from '../../environments/environment.secret';
 import { Router } from '@angular/router';
+import { REMOVE_STYLES_ON_COMPONENT_DESTROY } from '@angular/platform-browser';
 
 /**
  * Service for managing user-related operations.
@@ -78,6 +79,12 @@ export class UserService {
         tap((response) => {
           if (response.body?.userId) {
             this.userIdSource.next(response.body.userId);
+            if (response.body.accessToken) {
+              localStorage.setItem('accessToken', response.body.accessToken);
+            }
+            if (response.body.refreshToken) {
+              localStorage.setItem('refreshToken', response.body.refreshToken);
+            }
             this.checkAuth().subscribe({
               next: (isAuthenticated) => {
                 if (isAuthenticated) {
@@ -86,12 +93,6 @@ export class UserService {
                 }
               },
             });
-            if (response.body.accessToken) {
-              localStorage.setItem('accessToken', response.body.accessToken);
-            }
-            if (response.body.refreshToken) {
-              localStorage.setItem('refreshToken', response.body.refreshToken);
-            }
           }
         }),
         catchError((error) => {
@@ -122,6 +123,9 @@ export class UserService {
         next: () => {
           this.userIdSource.next(null);
           this.isAuthenticated.next(false);
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          console.log("logout");
           this.router.navigate(['/login']);
         },
         error: () => {

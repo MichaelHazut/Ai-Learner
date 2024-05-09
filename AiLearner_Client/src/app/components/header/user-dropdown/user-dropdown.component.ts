@@ -23,7 +23,6 @@ export class UserDropdownComponent {
   ngOnInit() {
     this.userService.getIsAuthenticated().subscribe({
       next: (isAuthenticated) => {
-        console.log('isAuthenticated:', isAuthenticated);
         if (!isAuthenticated) {
           return;
         }

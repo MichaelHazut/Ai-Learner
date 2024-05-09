@@ -29,16 +29,17 @@ export class MaterialComponent implements OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.examData = {} as Exam;
     this.navigationService.setBackRoute(['/study-hub', 'materials']);
     this.subsription = this.examDataService.examData$.subscribe((examData) => {
       this.examData = examData;
       if(examData){
-        console.log(this.examData!.material.content);
         if (examData.questions.length <= examData.userAnswers.length) {
           this.router.navigate(['./result'], { relativeTo: this.route });
         }
       }
     });
+
     
     const materialId = this.route.snapshot.paramMap.get('id');
     this.examDataService.getExamData(parseInt(materialId!));

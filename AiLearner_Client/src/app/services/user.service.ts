@@ -88,7 +88,6 @@ export class UserService {
             this.checkAuth().subscribe({
               next: (isAuthenticated) => {
                 if (isAuthenticated) {
-                  console.log('isAuthenticated', isAuthenticated);
                   this.isAuthenticated.next(true);
                 }
               },
@@ -125,7 +124,6 @@ export class UserService {
           this.isAuthenticated.next(false);
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
-          console.log("logout");
           this.router.navigate(['/login']);
         },
         error: () => {
@@ -152,7 +150,6 @@ export class UserService {
             }
             this.isAuthenticated.next(response.isAuthenticated);
             if (response.userId) {
-              console.log('response.userId', response.userId);
               this.userIdSource.next(response.userId);
             }
           },

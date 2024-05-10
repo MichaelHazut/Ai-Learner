@@ -14,7 +14,10 @@ namespace DataAccessLayer.Models
         public required string Summary { get; set; } = "";
         public required List<Questions> Questions { get; set; }
         public required List<Recommendations> Recommendations { get; set; }
-
+        public StudyMaterial()
+        {
+            
+        }
         public bool ValidateStudyMaterial()
         {
             Type type = typeof(StudyMaterial);

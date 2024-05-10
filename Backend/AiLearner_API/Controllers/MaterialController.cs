@@ -15,9 +15,10 @@ namespace AiLearner_API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class MaterialController(IUnitOfWork unitOfWork, OpenAIService openAIService, CachingService cachingService, JwtTokenService jwtTokenService) : ControllerBase
+    public class MaterialController(IUnitOfWork unitOfWork, OpenAIService openAIService, CachingService cachingService, JwtTokenService jwtTokenService, PdfService pdfService) : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
+        private readonly PdfService _pdfService = pdfService;
         private readonly OpenAIService _openAIService = openAIService;
         private readonly CachingService _cachingService = cachingService;
         private readonly JwtTokenService _jwtTokenService = jwtTokenService;
@@ -212,6 +213,24 @@ namespace AiLearner_API.Controllers
 
 
             return Ok("Material Deleted Successfully");
+        }
+
+        [HttpGet("${materialId}/download-pdf")]
+        public async Task<IActionResult> DownloadPdf(int materialId)
+        {
+            Material material = await _unitOfWork.Materials.GetByIdAsync(materialId);
+            if (material == null)
+                return NotFound("Material Not Found");
+            List<Question> questions = await _unitOfWork.Questions.GetQuestions(materialId);
+            if (questions == null || questions.Count == 0)
+                return NotFound("No Questions Found");
+            List<Answer> answers = questions.SelectMany(question => _unitOfWork.Answers.GetAnswers(question.QuestionId)).ToList();
+            if (answers is null || answers.Count == 0)
+                return NotFound("No answers found");
+
+            byte[] pdf = _pdfService.GeneratePdf(material);
+            return File(pdf, "application/pdf", material.Topic + ".pdf");
+
         }
     }
 }

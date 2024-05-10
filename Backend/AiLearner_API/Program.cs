@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 
+
 namespace AiLearner_API
 {
     public class Program
@@ -51,6 +52,7 @@ namespace AiLearner_API
             builder.Services.AddScoped<JwtTokenService>();
             builder.Services.AddScoped<CachingService>();
             builder.Services.AddSingleton<OpenAIService>();
+            builder.Services.AddSingleton<PdfService>();
 
             builder.Services.AddAuthentication(options =>
             {

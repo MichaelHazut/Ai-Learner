@@ -1,4 +1,5 @@
 ﻿using AiLearner_API.Services;
+using AiLearner_API.Services.PDF_Service;
 using AiLearner_ClassLibrary.OpenAi_Service;
 using DataAccessLayer.DTO;
 using DataAccessLayer.Models;
@@ -14,7 +15,7 @@ namespace AiLearner_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class MaterialController(IUnitOfWork unitOfWork, OpenAIService openAIService, CachingService cachingService, JwtTokenService jwtTokenService, PdfService pdfService) : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;

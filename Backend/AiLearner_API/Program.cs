@@ -99,7 +99,7 @@ namespace AiLearner_API
                                         .AllowAnyMethod()
                                         .AllowAnyHeader()
                                         .AllowCredentials()
-                                        //.WithExposedHeaders("X-Custom-Header")
+                                        .WithExposedHeaders("content-disposition")
                                         );
             });
 

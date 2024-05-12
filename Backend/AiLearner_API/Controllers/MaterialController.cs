@@ -216,7 +216,7 @@ namespace AiLearner_API.Controllers
             return Ok("Material Deleted Successfully");
         }
 
-        [HttpGet("${materialId}/download-pdf")]
+        [HttpGet("{materialId}/download-pdf")]
         public async Task<IActionResult> DownloadPdf(int materialId)
         {
             var token = Request.Cookies["AccessToken"];

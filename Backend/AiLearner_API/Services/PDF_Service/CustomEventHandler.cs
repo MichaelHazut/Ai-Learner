@@ -33,7 +33,7 @@ namespace AiLearner_API.Services.PDF_Service
             pdfCanvas.BeginText()
                      .SetFontAndSize(PdfFontFactory.CreateFont(StandardFonts.HELVETICA), 10)
                      .MoveText(30, footerY - 15)
-                     .ShowText("© 2024 Ai Learner. All rights reserved.")
+                     .ShowText("© 2024 AiLearner.online, All rights reserved.")
                      .EndText();
 
             pdfCanvas.BeginText()

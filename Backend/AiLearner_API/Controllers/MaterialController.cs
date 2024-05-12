@@ -15,7 +15,7 @@ namespace AiLearner_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class MaterialController(IUnitOfWork unitOfWork, OpenAIService openAIService, CachingService cachingService, JwtTokenService jwtTokenService, PdfService pdfService) : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
@@ -219,16 +219,40 @@ namespace AiLearner_API.Controllers
         [HttpGet("${materialId}/download-pdf")]
         public async Task<IActionResult> DownloadPdf(int materialId)
         {
+            var token = Request.Cookies["AccessToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                // Extract the token from the Authorization header
+                if (HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
+                {
+                    token = authorizationHeader.ToString().Split(' ').Last();
+                }
+                else
+                {
+                    return Unauthorized(new { message = "No token provided." });
+                }
+            }
+            var principal = _jwtTokenService.ValidateToken(token);
+            var userId = (principal.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+                                ?? throw new SecurityTokenException("User ID is missing in the token.");
+
+            // Get the material from the database and check user authorization
             Material material = await _unitOfWork.Materials.GetByIdAsync(materialId);
             if (material == null)
                 return NotFound("Material Not Found");
+            if(material.UserId != userId)
+                return Unauthorized("You are not authorized to view this material.");
+
+            // Load the questions and answers onto the material
             List<Question> questions = await _unitOfWork.Questions.GetQuestions(materialId);
             if (questions == null || questions.Count == 0)
                 return NotFound("No Questions Found");
+            
             List<Answer> answers = questions.SelectMany(question => _unitOfWork.Answers.GetAnswers(question.QuestionId)).ToList();
             if (answers is null || answers.Count == 0)
                 return NotFound("No answers found");
 
+            //Generate the PDF and return it
             byte[] pdf = _pdfService.GeneratePdf(material);
             return File(pdf, "application/pdf", material.Topic + ".pdf");
 

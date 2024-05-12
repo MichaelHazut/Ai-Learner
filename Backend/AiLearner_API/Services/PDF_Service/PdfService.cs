@@ -8,21 +8,21 @@ using iText.Layout.Properties;
 using DataAccessLayer.Models.Entities;
 using iText.IO.Font.Constants;
 using iText.Kernel.Font;
-using DataAccessLayer.Models;
 using iText.Kernel.Events;
-using iText.Kernel.Pdf.Canvas;
-using iText.Kernel.Geom;
 using iText.Layout.Renderer;
+
 
 namespace AiLearner_API.Services.PDF_Service
 {
     public class PdfService
     {
+
         public byte[] GeneratePdf(Material material)
         {
             using MemoryStream stream = new();
             using PdfWriter writer = new(stream);
             using PdfDocument pdf = new(writer);
+            using Document document = new(pdf);
 
             // Font definitions
             PdfFont helvetica = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
@@ -30,81 +30,44 @@ namespace AiLearner_API.Services.PDF_Service
 
             pdf.AddEventHandler(PdfDocumentEvent.END_PAGE, new CustomEventHandler());
 
-            // Start a new document instance for the header and potentially other initial content
-            Document headerDocument = new Document(pdf);
-            AddHeader(headerDocument, material.Topic!, helveticaBold);
-            headerDocument.Close();  // Close the header document
+            // Adding Header
+            AddHeader(document, material.Topic!, helveticaBold);
 
-            // Adding content section
-            Document contentDocument = new Document(pdf, pdf.GetDefaultPageSize());
-            AddContentSection(contentDocument, material.Content!, helvetica, helveticaBold);
-            contentDocument.Close(); // Ensure to close the document instance after finishing the content section
+            AddSummary(document, material.Summery!, helvetica, helveticaBold);
+            document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
 
-            // Adding questions section
-            Document questionsDocument = new Document(pdf, pdf.GetDefaultPageSize());
-            AddQuestions(questionsDocument, [..material.Questions], helvetica, helveticaBold);
-            questionsDocument.Close(); // Close the document for questions section
+            // Adding Content Section
+            AddContentSection(document, material.Content!, helvetica, helveticaBold);
+            document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
 
-            // Adding answers section
-            Document answersDocument = new Document(pdf, pdf.GetDefaultPageSize());
-            AddAnswers(answersDocument, [.. material.Questions], helvetica, helveticaBold);
-            answersDocument.Close(); // Close the document for answers section
+            // Adding Questions on new page
+            AddQuestions(document, [.. material.Questions], helvetica, helveticaBold);
+            document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
 
-            // Revisit first page for Table of Contents
-            Document tocDocument = new Document(pdf, pdf.GetDefaultPageSize());
-            AddTableOfContent(tocDocument, helvetica, helveticaBold, material.Summery!, 2, pdf.GetNumberOfPages() - 1, pdf.GetNumberOfPages());
-            tocDocument.Close(); // Close the document for the table of contents
+            AddAnswers(document, [.. material.Questions], helvetica, helveticaBold);
 
+            document.Close();
             return stream.ToArray();
         }
+
 
         private static void AddHeader(Document document, string headerText, PdfFont font)
         {
             Paragraph header = new Paragraph(headerText)
                 .SetFont(font)
-                .SetFontSize(16)
-                .SetTextAlignment(TextAlignment.CENTER);
+                .SetFontSize(50)
+                .SetTextAlignment(TextAlignment.CENTER)
+                .SetUnderline();
             document.Add(header);
-            document.Add(new LineSeparator(new iText.Kernel.Pdf.Canvas.Draw.SolidLine(1)));
         }
-
-        private static void AddTableOfContent(Document document, PdfFont normalFont, PdfFont boldFont, string summary, int contPages, int quesPages, int answPages)
+        private static void AddSummary(Document document, string summary, PdfFont normalFont, PdfFont boldFont)
         {
-            document.Add(new Paragraph("Table of Contents")
-                .SetFont(boldFont)
-                .SetUnderline()
-                .SetFontSize(16));
-
-            document.Add(new Paragraph($"Summary Page: 1")
-                .SetFont(boldFont)
-                .SetFontSize(14))
-                .SetTopMargin(16);
-
-            document.Add(new Paragraph($"Content Pages: 2-{contPages - 2}")
-                .SetFont(boldFont)
-                .SetFontSize(14))
-                .SetTopMargin(16);
-
-            document.Add(new Paragraph($"Questions Pages: {contPages + 1}-{quesPages}")
-                .SetFont(boldFont)
-                .SetFontSize(14))
-                .SetTopMargin(16);
-
-            string answerPages = $"Answers Page: {answPages}";
-            if (quesPages + 1 != answPages )
-            {
-                answerPages = $"Answers Pages: {quesPages + 1}-{answPages} ";
-            }
-            document.Add(new Paragraph(answerPages)
-                .SetFont(boldFont)
-                .SetFontSize(14))
-                .SetTopMargin(16);
-
             document.Add(new Paragraph("Summary")
-                .SetFont(boldFont)
-                .SetFontSize(16)
-                .SetTextAlignment(TextAlignment.CENTER))
-                .SetTopMargin(28);
+               .SetFont(boldFont)
+               .SetFontSize(22)
+               .SetTextAlignment(TextAlignment.CENTER)
+               .SetMarginTop(60));
+
             document.Add(new LineSeparator(new iText.Kernel.Pdf.Canvas.Draw.SolidLine(1)));
 
             document.Add(new Paragraph(summary)
@@ -113,11 +76,17 @@ namespace AiLearner_API.Services.PDF_Service
                 .SetTopMargin(20);
         }
 
+
         private static void AddContentSection(Document document, string content, PdfFont normalFont, PdfFont boldFont)
         {
             document.Add(new Paragraph("Content:")
                 .SetFont(boldFont)
-                .SetFontSize(14));
+                .SetFontSize(22)
+                .SetTextAlignment(TextAlignment.CENTER)
+                .SetMarginTop(12));
+
+            document.Add(new LineSeparator(new iText.Kernel.Pdf.Canvas.Draw.SolidLine(1)));
+
             document.Add(new Paragraph(content)
                 .SetFont(normalFont)
                 .SetFontSize(12));
@@ -127,8 +96,9 @@ namespace AiLearner_API.Services.PDF_Service
         {
             document.Add(new Paragraph("Questions")
                 .SetFont(boldFont)
-                .SetFontSize(14)
-                .SetTextAlignment(TextAlignment.CENTER));
+                .SetFontSize(22)
+                .SetTextAlignment(TextAlignment.CENTER)
+                .SetMarginTop(12));
             document.Add(new LineSeparator(new iText.Kernel.Pdf.Canvas.Draw.SolidLine(1)));
             int questionIndex = 0;
             foreach (var question in questions)
@@ -142,14 +112,13 @@ namespace AiLearner_API.Services.PDF_Service
                 document.Add(questionParagraph);
 
                 List list = new List()
-                    .SetSymbolIndent(12)
+                    .SetListSymbol(ListNumberingType.DECIMAL)
+                    .SetSymbolIndent(8)
                     .SetFont(normalFont);
 
-                int index = 1;
                 foreach (var answer in question.Answers!)
                 {
-                    list.Add(new ListItem($"{index}) {answer.Text}"));
-                    index++;
+                    list.Add(new ListItem(answer.Text));
                 }
                 document.Add(list);
             }
@@ -158,8 +127,9 @@ namespace AiLearner_API.Services.PDF_Service
         {
             document.Add(new Paragraph("Answers")
                 .SetFont(boldFont)
-                .SetFontSize(14)
-                .SetTextAlignment(TextAlignment.CENTER));
+                .SetFontSize(22)
+                .SetTextAlignment(TextAlignment.CENTER)
+                .SetMarginTop(12));
             document.Add(new LineSeparator(new iText.Kernel.Pdf.Canvas.Draw.SolidLine(1)));
 
             int questionIndex = 0;

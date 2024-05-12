@@ -5,13 +5,11 @@ import { Exam } from '../../../models/Exam';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ContentDialogComponent } from '../../study-hub/material/content-dialog/content-dialog.component';
-import { ExamComponent } from '../exam.component';
 import { ExamRetryComponent } from '../exam-retry/exam-retry.component';
 import { QuestionAndAnswers } from '../../../models/QuestionAndAnswers';
-import { MaterialService } from '../../../services/material.service';
-import { ToastrService } from 'ngx-toastr';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { NavigationService } from '../../../services/navigation.service';
+import { DownloadExamComponent } from '../../download-exam/download-exam.component';
 
 @Component({
   selector: 'app-exam-result',
@@ -22,6 +20,7 @@ import { NavigationService } from '../../../services/navigation.service';
     ContentDialogComponent,
     ExamRetryComponent,
     DeleteDialogComponent,
+    DownloadExamComponent,
   ],
   templateUrl: './exam-result.component.html',
   styleUrl: './exam-result.component.css',

@@ -7,11 +7,11 @@ import { Subscription } from 'rxjs';
 import { ExamDataService } from '../../../services/exam-data.service';
 import { Exam } from '../../../models/Exam';
 import { NavigationService } from '../../../services/navigation.service';
-
+import { DownloadExamComponent } from '../../download-exam/download-exam.component';
 @Component({
   selector: 'app-material',
   standalone: true,
-  imports: [CommonModule, RouterLink, ContentDialogComponent],
+  imports: [CommonModule, RouterLink, ContentDialogComponent,DownloadExamComponent],
   templateUrl: './material.component.html',
   styleUrl: './material.component.css',
 })

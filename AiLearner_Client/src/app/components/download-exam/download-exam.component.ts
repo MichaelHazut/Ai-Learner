@@ -18,6 +18,7 @@ export class DownloadExamComponent {
       let fileName = response.headers.get('content-disposition')?.split(';')[1].split('=')[1].slice(0, -1).slice(1);
       console.log(response.headers.get('content-disposition'));
       console.log(response.headers.get('content-disposition')?.split(';')[1].split('=')[1]);
+      
       let blob: Blob = response.body as Blob;
       let a = document.createElement('a');
       console.log(fileName);
